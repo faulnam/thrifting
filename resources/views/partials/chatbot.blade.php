@@ -22,10 +22,10 @@
                 </div>
                 <div>
                     <h3 class="font-sans font-bold text-[13px] tracking-wider uppercase text-white leading-tight">
-                        Asisten fifa
+                        Asisten FIFA Thrift
                     </h3>
                     <p class="text-[11px] text-white/60 mt-0.5">
-                        Layanan Bantuan & Panduan Belanja
+                        Kurasi Vintage & Panduan Ukuran
                     </p>
                 </div>
             </div>
@@ -52,7 +52,7 @@
             <!-- Subtle Badge Header -->
             <div class="text-center my-1">
                 <span class="inline-block bg-[#eae5dc] text-[#554e45] text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full">
-                    Kenyamanan Alami fifa
+                    Kurasi Vintage 1-of-1 FIFA
                 </span>
             </div>
 
@@ -70,7 +70,7 @@
                                     <p x-html="msg.text"></p>
                                 </div>
 
-                                <!-- Action Buttons / Links in Bot Message (Clean Monochrome Outline) -->
+                                <!-- Action Buttons / Links in Bot Message -->
                                 <template x-if="msg.links && msg.links.length > 0">
                                     <div class="flex flex-wrap gap-1.5 pt-0.5">
                                         <template x-for="(link, lIdx) in msg.links" :key="lIdx">
@@ -99,41 +99,44 @@
                 </div>
             </template>
 
-            <!-- Typing Indicator (Minimalist Monochrome) -->
-            <div x-show="isTyping" class="flex items-start gap-2.5 max-w-[85%]">
-                <div class="w-7 h-7 rounded-full bg-[#212121] text-white flex-shrink-0 flex items-center justify-center text-[11px] font-display italic font-bold mt-0.5">
+            <!-- Typing Indicator Animation -->
+            <div x-show="isTyping" class="flex items-center gap-2.5 max-w-[80%]" style="display: none;">
+                <div class="w-7 h-7 rounded-full bg-[#212121] text-white flex-shrink-0 flex items-center justify-center text-[11px] font-display italic font-bold">
                     f
                 </div>
-                <div class="bg-white border border-[#e5e0d8] px-3.5 py-2.5 rounded-2xl rounded-tl-xs flex items-center gap-1.5">
-                    <span class="w-1.5 h-1.5 rounded-full bg-[#737373] animate-bounce"></span>
-                    <span class="w-1.5 h-1.5 rounded-full bg-[#737373] animate-bounce" style="animation-delay: 0.15s"></span>
-                    <span class="w-1.5 h-1.5 rounded-full bg-[#737373] animate-bounce" style="animation-delay: 0.3s"></span>
+                <div class="bg-white border border-[#e5e0d8] px-4 py-3 rounded-2xl rounded-tl-xs flex items-center space-x-1.5 shadow-xs">
+                    <span class="w-1.5 h-1.5 bg-[#8a8073] rounded-full animate-bounce"></span>
+                    <span class="w-1.5 h-1.5 bg-[#8a8073] rounded-full animate-bounce [animation-delay:0.2s]"></span>
+                    <span class="w-1.5 h-1.5 bg-[#8a8073] rounded-full animate-bounce [animation-delay:0.4s]"></span>
                 </div>
             </div>
         </div>
 
-        <!-- Quick Suggestions Chips (Clean Monochrome Pills) -->
-        <div class="px-3 py-2.5 bg-[#f2eee7] border-t border-[#e5e0d8] overflow-x-auto no-scrollbar flex items-center gap-1.5 flex-nowrap">
+        <!-- Quick Prompts Chips -->
+        <div class="px-4 py-2 border-t border-[#ded8cf] bg-white overflow-x-auto no-scrollbar flex items-center gap-1.5">
             <template x-for="(prompt, pIdx) in quickPrompts" :key="pIdx">
-                <button @click="sendUserMessage(prompt.text)" 
-                        class="flex-none bg-white hover:bg-[#212121] text-[#212121] hover:text-white border border-[#d6cfc2] hover:border-[#212121] text-[11px] font-medium px-3 py-1.5 rounded-full transition whitespace-nowrap shadow-2xs">
+                <button type="button"
+                        @click="sendUserMessage(prompt.text)" 
+                        class="flex-none bg-[#f2eee9] hover:bg-[#212121] text-[#333333] hover:text-white text-[11px] font-semibold px-3 py-1 rounded-full transition whitespace-nowrap cursor-pointer">
                     <span x-text="prompt.label"></span>
                 </button>
             </template>
         </div>
 
-        <!-- Input Box -->
-        <div class="p-3 bg-white border-t border-[#e5e0d8]">
+        <!-- Input Bar (Clean Bordered Input) -->
+        <div class="p-3.5 bg-white border-t border-[#ded8cf]">
             <form @submit.prevent="handleSubmit()" class="flex items-center gap-2">
                 <input type="text" 
                        x-model="userInput" 
-                       placeholder="Ketik pertanyaan Anda..." 
-                       class="flex-1 bg-[#f7f6f2] border border-[#dcd7cc] focus:border-[#212121] focus:bg-white text-[13px] text-[#212121] rounded-full px-4 py-2 outline-none transition placeholder:text-[#8c8278]">
+                       placeholder="Tanya seputar ukuran PxL, keaslian, kurasi..."
+                       class="flex-1 bg-[#f9f8f6] border border-[#ded8cf] focus:border-[#212121] focus:bg-white text-[13px] text-[#212121] placeholder-[#8a8073] rounded-full px-4 py-2.5 focus:outline-none transition">
+                
                 <button type="submit" 
                         :disabled="!userInput.trim()"
-                        :class="userInput.trim() ? 'bg-[#212121] text-white hover:bg-black' : 'bg-[#e5e0d8] text-[#a8a095] cursor-not-allowed'"
-                        class="w-9 h-9 rounded-full flex items-center justify-center transition flex-shrink-0">
-                    <svg class="w-3.5 h-3.5 transform rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        :class="userInput.trim() ? 'bg-[#212121] text-white hover:bg-black cursor-pointer' : 'bg-[#e5e0d8] text-[#8a8073] cursor-not-allowed'"
+                        class="w-9 h-9 rounded-full flex items-center justify-center transition flex-shrink-0"
+                        aria-label="Kirim Pesan">
+                    <svg class="w-4 h-4 transform rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
                     </svg>
                 </button>
@@ -141,33 +144,23 @@
         </div>
     </div>
 
-    <!-- Floating Trigger Button (Minimalist Solid Charcoal) -->
-    <div class="flex items-center gap-3 justify-end">
-        <!-- Minimal Tooltip (shows when closed) -->
-        <div x-show="!open && showTooltip" 
-             x-transition:enter="transition ease-out duration-250"
-             x-transition:enter-start="opacity-0 translate-x-2"
-             x-transition:enter-end="opacity-100 translate-x-0"
-             x-transition:leave="transition ease-in duration-150"
-             x-transition:leave-start="opacity-100"
-             x-transition:leave-end="opacity-0"
-             class="hidden sm:flex items-center bg-white text-[#212121] text-[12px] font-medium py-2 px-3.5 rounded-full shadow-md border border-[#ded8cf] gap-2">
-            <span>Butuh bantuan seputar produk fifa?</span>
-            <button @click.stop="showTooltip = false" class="text-stone-400 hover:text-charcoal text-xs">✕</button>
-        </div>
-
-        <button @click="open = !open; if(open) { showTooltip = false; $nextTick(() => scrollBottom()); }"
-                class="group relative w-13 h-13 sm:w-14 sm:h-14 rounded-full bg-[#212121] text-white shadow-lg hover:shadow-xl flex items-center justify-center transition-all duration-200 hover:scale-105 active:scale-95 border border-white/10 hover:bg-black">
-            
-            <!-- Minimalist Chat / Close Icon -->
-            <div class="relative w-5 h-5 flex items-center justify-center">
-                <svg x-show="!open" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/>
+    <!-- Floating Toggle Button with FIFA Icon -->
+    <div class="relative flex items-center justify-end">
+        <button type="button" 
+                @click="open = !open" 
+                class="w-14 h-14 rounded-full bg-[#212121] hover:bg-black text-white shadow-xl hover:shadow-2xl flex items-center justify-center transition-all duration-200 focus:outline-none cursor-pointer group hover:scale-105 active:scale-95"
+                aria-label="Buka Chatbot Bantuan">
+            <template x-if="!open">
+                <div class="flex flex-col items-center justify-center">
+                    <span class="font-display italic font-extrabold text-xl leading-none">f</span>
+                    <span class="text-[8px] font-bold tracking-tighter uppercase mt-0.5">THRIFT</span>
+                </div>
+            </template>
+            <template x-if="open">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
                 </svg>
-                <svg x-show="open" x-cloak class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M6 18L18 6M6 6l12 12"/>
-                </svg>
-            </div>
+            </template>
         </button>
     </div>
 </div>
@@ -176,36 +169,33 @@
 function fifaChatbot() {
     return {
         open: false,
-        showTooltip: true,
         userInput: '',
         isTyping: false,
         messages: [],
         quickPrompts: [
-            { label: 'Rekomendasi Terlaris', text: 'Rekomendasi sepatu paling laris dan favorit' },
-            { label: 'Panduan Ukuran', text: 'Bagaimana cara memilih ukuran sepatu yang tepat?' },
-            { label: 'Material Alami', text: 'Apa saja material alami yang digunakan fifa?' },
-            { label: 'Status Pengiriman', text: 'Berapa lama estimasi pengiriman dan biaya ongkir?' },
-            { label: 'Garansi 30 Hari', text: 'Bagaimana ketentuan garansi uji coba 30 hari?' },
-            { label: 'Koleksi Pria', text: 'Lihat koleksi sepatu untuk pria' },
-            { label: 'Koleksi Wanita', text: 'Lihat koleksi sepatu untuk wanita' }
+            { label: 'Item Paling Diburu', text: 'Rekomendasi item vintage paling langka dan diburu' },
+            { label: 'Panduan Ukuran PxL', text: 'Bagaimana cara mengukur ukuran baju dan celana vintage?' },
+            { label: 'Keaslian & Sanitasi', text: 'Apakah barang vintage dijamin asli dan sudah bersih?' },
+            { label: 'Gratis Ongkir & Kurir', text: 'Berapa minimal belanja untuk gratis ongkir dan kurirnya?' },
+            { label: 'Garansi Retur', text: 'Bagaimana ketentuan garansi jika ukuran tidak pas?' },
+            { label: 'Koleksi Pria', text: 'Lihat koleksi jaket dan kaos vintage pria' },
+            { label: 'Koleksi Wanita', text: 'Lihat koleksi vintage wanita' }
         ],
 
         init() {
             this.resetChat();
-            setTimeout(() => {
-                this.showTooltip = false;
-            }, 7000);
         },
 
         resetChat() {
             this.messages = [
                 {
                     sender: 'bot',
-                    text: 'Halo, selamat datang di <strong>fifa</strong>.<br><br>Saya asisten fifa, siap membantu Anda menemukan model sepatu yang sesuai, panduan ukuran, informasi bahan alami, atau status pesanan. Ada yang bisa dibantu?',
+                    text: 'Halo! Selamat datang di <strong>FIFA Thrifting</strong>.<br><br>Saya asisten virtual FIFA, siap membantu Anda seputar kurasi item vintage 1-of-1, panduan ukuran nyata (PxL), informasi keaslian tag/jahitan, status pengiriman, atau promo drop minggu ini. Ada yang bisa dibantu?',
                     links: [
-                        { label: 'Sepatu Pria', url: '{{ route('categories.men') }}' },
-                        { label: 'Sepatu Wanita', url: '{{ route('categories.women') }}' },
-                        { label: 'Produk Terlaris', url: '{{ route('collections.show', 'best-sellers') }}' }
+                        { label: 'Drop Terbaru', url: '{{ route('collections.show', 'new-arrivals') }}' },
+                        { label: 'Koleksi Pria', url: '{{ route('categories.men') }}' },
+                        { label: 'Koleksi Wanita', url: '{{ route('categories.women') }}' },
+                        { label: 'Paling Diburu', url: '{{ route('collections.show', 'best-sellers') }}' }
                     ]
                 }
             ];
@@ -232,79 +222,79 @@ function fifaChatbot() {
                 this.isTyping = false;
                 this.messages.push(response);
                 this.scrollBottom();
-            }, 450);
+            }, 400);
         },
 
         generateBotResponse(input) {
             const q = input.toLowerCase();
 
-            // 1. Rekomendasi / Terlaris / Best Sellers
-            if (q.includes('terlaris') || q.includes('rekomendasi') || q.includes('favorit') || q.includes('populer') || q.includes('best seller')) {
+            // 1. Rekomendasi / Terlaris / Rare
+            if (q.includes('terlaris') || q.includes('rekomendasi') || q.includes('favorit') || q.includes('populer') || q.includes('best seller') || q.includes('diburu') || q.includes('grail') || q.includes('langka')) {
                 return {
                     sender: 'bot',
-                    text: 'Berikut adalah model sepatu favorit pilihan pelanggan fifa:<br><br>' +
-                          '&bull; <strong>Tree Dasher 2</strong>: Sepatu lari responsif dan sejuk dari serat pohon eukaliptus.<br>' +
-                          '&bull; <strong>Wool Runner 2</strong>: Sneakers kasual harian dari wol ZQ Merino alami.<br>' +
-                          '&bull; <strong>Tree Lounger</strong>: Model slip-on santai yang sangat ringan dan praktis.',
+                    text: 'Berikut adalah item vintage paling dicari di vault FIFA saat ini:<br><br>' +
+                          '&bull; <strong>Carhartt Detroit J97 Tan</strong>: Jaket canvas duck legendaris pudar alami.<br>' +
+                          '&bull; <strong>Nirvana 1993 In Utero</strong>: Kaos band single-stitch tag Giant USA.<br>' +
+                          '&bull; <strong>Nike Center Swoosh Hoodie</strong>: Silver tag 90s boxy fit.<br>' +
+                          '&bull; <strong>Levi\'s 501 USA 1994</strong>: Denim kaku kancing 553 stonewash.',
                     links: [
-                        { label: 'Lihat Semua Terlaris', url: '{{ route('collections.show', 'best-sellers') }}' },
-                        { label: 'Koleksi Terbaru', url: '{{ route('collections.show', 'new-arrivals') }}' }
+                        { label: 'Lihat Semua Item Diburu', url: '{{ route('collections.show', 'best-sellers') }}' },
+                        { label: 'Fresh Drops Minggu Ini', url: '{{ route('collections.show', 'new-arrivals') }}' }
                     ]
                 };
             }
 
-            // 2. Ukuran / Sizing / Size Guide
-            if (q.includes('ukuran') || q.includes('size') || q.includes('sempit') || q.includes('kebesaran') || q.includes('pas')) {
+            // 2. Ukuran / Sizing / PxL
+            if (q.includes('ukuran') || q.includes('size') || q.includes('pxl') || q.includes('lebar') || q.includes('panjang') || q.includes('pas') || q.includes('fitting')) {
                 return {
                     sender: 'bot',
-                    text: '<strong>Panduan Memilih Ukuran fifa:</strong><br><br>' +
-                          '&bull; Sebagian besar sepatu fifa berukuran standar (<em>True to Size</em>).<br>' +
-                          '&bull; Untuk kaki yang lebih lebar atau berada di antara dua ukuran, disarankan untuk <strong>naik 1 ukuran</strong> (misalnya dari 41.5 ke 42).<br>' +
-                          '&bull; Material wol Merino kami akan sedikit menyesuaikan dengan bentuk kaki Anda seiring pemakaian.',
+                    text: '<strong>Panduan Pengukuran PxL FIFA:</strong><br><br>' +
+                          '&bull; Karena potongan pakaian vintage bervariasi (boxy, relaxed, true 90s), kami selalu menyertakan ukuran nyata <strong>Panjang x Lebar (PxL)</strong> dalam cm di setiap produk.<br>' +
+                          '&bull; <strong>Panjang (P):</strong> Diukur dari pundak atas ke ujung bawah.<br>' +
+                          '&bull; <strong>Lebar (L):</strong> Diukur dari ketiak kiri ke ketiak kanan (pit-to-pit).',
                     links: [
                         { label: 'Panduan Ukuran Lengkap', url: '{{ route('pages.show', 'size-guide') }}' }
                     ]
                 };
             }
 
-            // 3. Material / Bahan Alami / Keberlanjutan
-            if (q.includes('material') || q.includes('bahan') || q.includes('alami') || q.includes('wol') || q.includes('pohon') || q.includes('eukaliptus') || q.includes('tebu') || q.includes('ramah lingkungan')) {
+            // 3. Keaslian & Kebersihan / Sanitasi
+            if (q.includes('asli') || q.includes('ori') || q.includes('autentik') || q.includes('cuci') || q.includes('bersih') || q.includes('higienis') || q.includes('wangi') || q.includes('laundry')) {
                 return {
                     sender: 'bot',
-                    text: 'fifa menggunakan material alami terbarukan untuk menggantikan bahan sintetis berbasis plastik:<br><br>' +
-                          '&bull; <strong>ZQ Merino Wool</strong>: Wol alami lembut, nyaman, dan tidak menimbulkan gatal.<br>' +
-                          '&bull; <strong>Tree Fiber (Eukaliptus)</strong>: Serat pohon sejuk bernapas dan halus.<br>' +
-                          '&bull; <strong>SweetFoam™</strong>: Sol empuk berbahan dasar tebu manis ramah lingkungan.',
+                    text: '<strong>Jaminan Keaslian & Kebersihan 100%:</strong><br><br>' +
+                          '&bull; <strong>Kurasi Ahli:</strong> Semua produk diperiksa keaslian tag era, jahitan single-stitch, zipper YKK/Talon, dan kualitas kainnya.<br>' +
+                          '&bull; <strong>Sanitasi Medis:</strong> Seluruh pakaian telah melewati proses pencucian deep clean, anti-bakteri, dan steam suhu tinggi. <em>100% wangi dan siap langsung pakai!</em>',
                     links: [
-                        { label: 'Keberlanjutan fifa', url: '{{ route('pages.show', 'sustainability') }}' }
+                        { label: 'Standar Grading Kondisi', url: '{{ route('pages.show', 'condition-guide') }}' },
+                        { label: 'Kisah Kurasi Kami', url: '{{ route('pages.show', 'our-story') }}' }
                     ]
                 };
             }
 
-            // 4. Pengiriman / Ongkir / Estimasi
-            if (q.includes('ongkir') || q.includes('kirim') || q.includes('pengiriman') || q.includes('gratis') || q.includes('ekspedisi') || q.includes('resi')) {
+            // 4. Pengiriman & Ongkir
+            if (q.includes('ongkir') || q.includes('kirim') || q.includes('pengiriman') || q.includes('gratis') || q.includes('ekspedisi') || q.includes('resi') || q.includes('biteship')) {
                 return {
                     sender: 'bot',
-                    text: '<strong>Informasi Pengiriman fifa:</strong><br><br>' +
-                          '&bull; <strong>Gratis Ongkir</strong> untuk setiap pesanan minimal <strong>Rp 500.000</strong> ke seluruh Indonesia.<br>' +
-                          '&bull; Estimasi pengiriman pulau Jawa: 1-3 hari kerja.<br>' +
-                          '&bull; Luar pulau Jawa: 3-5 hari kerja.<br>' +
-                          '&bull; Resi otomatis tercatat di akun setelah paket diproses.',
+                    text: '<strong>Informasi Pengiriman FIFA:</strong><br><br>' +
+                          '&bull; <strong>Gratis Ongkir</strong> untuk setiap pesanan minimal <strong>Rp 500.000</strong> ke seluruh wilayah Indonesia.<br>' +
+                          '&bull; Terintegrasi resmi dengan <strong>Biteship</strong> (JNE, SiCepat, J&T, GoSend, Grab).<br>' +
+                          '&bull; Estimasi pengiriman reguler: 1-3 hari kerja dengan nomor resi otomatis tercatat di akun.',
                     links: [
                         { label: 'Keranjang Belanja', url: '{{ route('cart.index') }}' },
-                        { label: 'Status Pesanan', url: '{{ auth()->check() ? route('account.orders.index') : route('login') }}' }
+                        { label: 'Status Pesanan Saya', url: '{{ auth()->check() ? route('account.orders') : route('login') }}' }
                     ]
                 };
             }
 
-            // 5. Garansi / Retur / Pengembalian 30 Hari
-            if (q.includes('garansi') || q.includes('retur') || q.includes('kembali') || q.includes('tukar') || q.includes('30 hari') || q.includes('uji coba')) {
+            // 5. Garansi / Retur
+            if (q.includes('garansi') || q.includes('retur') || q.includes('kembali') || q.includes('tukar') || q.includes('uang')) {
                 return {
                     sender: 'bot',
-                    text: '<strong>Garansi Uji Coba 30 Hari:</strong><br><br>' +
-                          'Nikmati garansi uji coba selama <strong>30 hari</strong>. Jika ukuran tidak sesuai atau kurang nyaman, Anda dapat mengajukan penukaran atau pengembalian dengan mudah.',
+                    text: '<strong>Garansi Keaslian & Retur:</strong><br><br>' +
+                          'Kami memberikan <strong>Garansi 100% Uang Kembali</strong> jika produk terbukti tidak asli atau terdapat cacat berat yang tidak dicantumkan pada deskripsi.',
                     links: [
-                        { label: 'Kebijakan Garansi & Retur', url: '{{ route('pages.show', 'faq') }}' }
+                        { label: 'Kebijakan Pengembalian', url: '{{ route('pages.show', 'shipping-returns') }}' }
                     ]
                 };
             }
@@ -313,9 +303,10 @@ function fifaChatbot() {
             if (q.includes('pria') || q.includes('men') || q.includes('cowok')) {
                 return {
                     sender: 'bot',
-                    text: 'Koleksi sepatu pria fifa mencakup sepatu lari (Tree Dasher), kasual wol (Wool Runner), serta model slip-on santai (Tree Lounger).',
+                    text: 'Koleksi pria mencakup jaket workwear Carhartt, kaos band single-stitch, celana denim Levi\'s 501 USA, cargo baggy, dan topi snapback 90s.',
                     links: [
-                        { label: 'Sepatu Pria', url: '{{ route('categories.men') }}' }
+                        { label: 'Semua Koleksi Pria', url: '{{ route('categories.men') }}' },
+                        { label: 'Jaket & Workwear', url: '{{ route('collections.show', 'men-workwear-jackets') }}' }
                     ]
                 };
             }
@@ -324,34 +315,20 @@ function fifaChatbot() {
             if (q.includes('wanita') || q.includes('women') || q.includes('cewek')) {
                 return {
                     sender: 'bot',
-                    text: 'Koleksi sepatu wanita fifa dirancang ringan dan fleksibel dengan palet warna alami elegan: sepatu lari, sneakers wol, dan flat slip-on.',
+                    text: 'Koleksi wanita menghadirkan oversized bomber, graphic baby tees Y2K, vintage knit sweater, high-waist mom jeans, dan tas retro.',
                     links: [
-                        { label: 'Sepatu Wanita', url: '{{ route('categories.women') }}' }
+                        { label: 'Semua Koleksi Wanita', url: '{{ route('categories.women') }}' }
                     ]
                 };
             }
 
-            // 8. Lokasi Toko
-            if (q.includes('toko') || q.includes('outlet') || q.includes('store') || q.includes('lokasi') || q.includes('offline')) {
+            // 8. Lokasi Toko Fisik
+            if (q.includes('toko') || q.includes('outlet') || q.includes('store') || q.includes('lokasi') || q.includes('offline') || q.includes('gerai')) {
                 return {
                     sender: 'bot',
-                    text: 'Kunjungi toko resmi fifa untuk mencoba langsung sepatu berbahan alami kami.',
+                    text: 'Kunjungi gerai fisik FIFA Vintage Vault di Senayan City Jakarta, M Bloc Space Melawai, PVJ Bandung, Tunjungan Plaza Surabaya, dan Canggu Bali.',
                     links: [
-                        { label: 'Lokasi Toko fifa', url: '{{ route('stores.index') }}' }
-                    ]
-                };
-            }
-
-            // 9. Perawatan Sepatu
-            if (q.includes('cuci') || q.includes('rawat') || q.includes('bersih') || q.includes('laundry')) {
-                return {
-                    sender: 'bot',
-                    text: '<strong>Panduan Perawatan Sepatu:</strong><br><br>' +
-                          '&bull; Lepaskan tali dan insole sebelum mencuci.<br>' +
-                          '&bull; Dapat dicuci mesin (siklus lembut air dingin).<br>' +
-                          '&bull; Cukup angin-anginkan di tempat teduh (hindari pengering panas).',
-                    links: [
-                        { label: 'FAQ Perawatan', url: '{{ route('pages.show', 'faq') }}' }
+                        { label: 'Lokasi Toko Fisik', url: '{{ route('stores.index') }}' }
                     ]
                 };
             }
@@ -359,10 +336,11 @@ function fifaChatbot() {
             // Fallback default
             return {
                 sender: 'bot',
-                text: 'Saya dapat membantu Anda seputar rekomendasi sepatu, panduan ukuran, bahan alami, info gratis ongkir, atau garansi 30 hari fifa. Silakan pilih topik di bawah atau ketik pertanyaan Anda.',
+                text: 'Saya dapat membantu Anda seputar kurasi vintage, rekomendasi jaket & kaos band, panduan ukuran PxL, gratis ongkir, dan jaminan keaslian FIFA. Silakan pilih menu di bawah atau tanyakan apapun!',
                 links: [
-                    { label: 'Sepatu Pria', url: '{{ route('categories.men') }}' },
-                    { label: 'Sepatu Wanita', url: '{{ route('categories.women') }}' },
+                    { label: 'Fresh Drops Minggu Ini', url: '{{ route('collections.show', 'new-arrivals') }}' },
+                    { label: 'Koleksi Pria', url: '{{ route('categories.men') }}' },
+                    { label: 'Koleksi Wanita', url: '{{ route('categories.women') }}' },
                     { label: 'FAQ', url: '{{ route('pages.show', 'faq') }}' }
                 ]
             };

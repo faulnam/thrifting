@@ -17,505 +17,638 @@ class ProductSeeder extends Seeder
     public function run(): void
     {
         // 1. Fetch Categories
-        $menSneakers = Category::where('slug', 'men-everyday-sneakers')->first();
-        $menRunning = Category::where('slug', 'men-running-shoes')->first();
-        $menLoungers = Category::where('slug', 'men-slip-ons-loungers')->first();
-        $menMizzles = Category::where('slug', 'men-water-repellent-shoes')->first();
-        $menHiking = Category::where('slug', 'men-hiking-trail-shoes')->first();
-        $menTees = Category::where('slug', 'men-tees-tops')->first();
-        $menHoodies = Category::where('slug', 'men-sweats-hoodies')->first();
-        $menSocks = Category::where('slug', 'men-socks')->first();
-        $bags = Category::where('slug', 'bags-accessories')->first();
+        $menWorkwear = Category::where('slug', 'men-workwear-jackets')->first() ?? Category::where('slug', 'men-jackets-outerwear')->first();
+        $menVarsity = Category::where('slug', 'men-varsity-bomber')->first() ?? Category::where('slug', 'men-jackets-outerwear')->first();
+        $menHoodies = Category::where('slug', 'men-sweats-hoodies')->first() ?? Category::where('slug', 'men-jackets-outerwear')->first();
+        $menLeather = Category::where('slug', 'men-leather-jackets')->first() ?? Category::where('slug', 'men-jackets-outerwear')->first();
+        
+        $menBandTees = Category::where('slug', 'men-vintage-band-tees')->first() ?? Category::where('slug', 'men-tees-tops')->first();
+        $menGraphicTees = Category::where('slug', 'men-graphic-tees')->first() ?? Category::where('slug', 'men-tees-tops')->first();
+        $menFlannel = Category::where('slug', 'men-flannel-shirts')->first() ?? Category::where('slug', 'men-tees-tops')->first();
+        
+        $menDenim = Category::where('slug', 'men-vintage-denim')->first() ?? Category::where('slug', 'men-pants-bottoms')->first();
+        $menCargo = Category::where('slug', 'men-cargo-pants')->first() ?? Category::where('slug', 'men-pants-bottoms')->first();
+        $menCorduroy = Category::where('slug', 'men-corduroy-pants')->first() ?? Category::where('slug', 'men-pants-bottoms')->first();
+        $menWorkPants = Category::where('slug', 'men-work-pants')->first() ?? Category::where('slug', 'men-pants-bottoms')->first();
+        
+        $menSnapback = Category::where('slug', 'men-vintage-snapback')->first() ?? Category::where('slug', 'men-hats-caps')->first();
+        $menBeanie = Category::where('slug', 'men-knit-beanie')->first() ?? Category::where('slug', 'men-hats-caps')->first();
+        
+        $menSneakers = Category::where('slug', 'men-everyday-sneakers')->first() ?? Category::where('slug', 'men-shoes')->first();
+        $menLoafers = Category::where('slug', 'men-slip-ons-loungers')->first() ?? Category::where('slug', 'men-shoes')->first();
+        
+        $menBags = Category::where('slug', 'men-crossbody-bags')->first() ?? Category::where('slug', 'men-bags-accessories')->first();
+        $menSun = Category::where('slug', 'men-retro-sunglasses')->first() ?? Category::where('slug', 'men-bags-accessories')->first();
 
-        $womenSneakers = Category::where('slug', 'women-everyday-sneakers')->first();
-        $womenRunning = Category::where('slug', 'women-running-shoes')->first();
-        $womenFlats = Category::where('slug', 'women-flats-loungers')->first();
-        $womenSlipOns = Category::where('slug', 'women-slip-ons')->first();
-        $womenMizzles = Category::where('slug', 'women-water-repellent-shoes')->first();
-        $womenTees = Category::where('slug', 'women-tees-tops')->first();
-        $womenSocks = Category::where('slug', 'women-socks')->first();
+        $womenBomber = Category::where('slug', 'women-oversized-bomber')->first() ?? Category::where('slug', 'women-jackets-outerwear')->first();
+        $womenDenimJkt = Category::where('slug', 'women-denim-jackets')->first() ?? Category::where('slug', 'women-jackets-outerwear')->first();
+        $womenBabyTees = Category::where('slug', 'women-baby-tees')->first() ?? Category::where('slug', 'women-tees-tops')->first();
+        $womenOversizedTees = Category::where('slug', 'women-oversized-tees')->first() ?? Category::where('slug', 'women-tees-tops')->first();
+        $womenMomJeans = Category::where('slug', 'women-high-waist-denim')->first() ?? Category::where('slug', 'women-pants-bottoms')->first();
+        $womenCargoSkirt = Category::where('slug', 'women-cargo-skirts')->first() ?? Category::where('slug', 'women-pants-bottoms')->first();
+        $womenCaps = Category::where('slug', 'women-vintage-caps')->first() ?? Category::where('slug', 'women-hats-caps')->first();
+        $womenLoafers = Category::where('slug', 'women-flats-loungers')->first() ?? Category::where('slug', 'women-shoes')->first();
+        $womenTotes = Category::where('slug', 'women-vintage-totes')->first() ?? Category::where('slug', 'women-bags-accessories')->first();
 
         // 2. Fetch Collections
         $newArrivalsCol = Collection::where('slug', 'new-arrivals')->first();
         $bestSellersCol = Collection::where('slug', 'best-sellers')->first();
         $saleCol = Collection::where('slug', 'sale')->first();
-        $treeCol = Collection::where('slug', 'tree-runners')->first();
-        $woolCol = Collection::where('slug', 'wool-runners')->first();
+        $vintage90sCol = Collection::where('slug', 'vintage-90s')->first();
+        $workwearCol = Collection::where('slug', 'workwear')->first();
 
-        // 3. Products Master Dataset
+        // 3. Extensive Thrift Products Dataset
         $productsData = [
-            // ----------------------------------------------------
-            // MEN SHOES
-            // ----------------------------------------------------
+            // ==========================================
+            // JAKET & OUTERWEAR
+            // ==========================================
             [
-                'category_id' => $menSneakers?->id ?? 1,
-                'name' => "Sepatu Pria Tree Runner Go",
-                'slug' => 'mens-tree-runner-go',
-                'short_description' => 'Sepatu harian ringan dan sejuk berbahan serat pohon eucalyptus bersertifikasi FSC®.',
-                'description' => '<p>Dirancang untuk jalan santai harian, bepergian, dan aktivitas non-stop. Sepatu Pria Tree Runner Go dilengkapi upper serat pohon eucalyptus yang bernapas, midsole SweetFoam® dari tebu alami yang empuk, serta insole berbahan minyak biji jarak yang super lembut.</p><p>Sangat fleksibel, dapat dicuci dengan mesin cuci, dan dibuat dari 100% material alami terbarukan untuk kenyamanan optimal sepanjang hari.</p>',
-                'material_info' => 'Upper: Serat TENCEL™ Lyocell bersertifikasi FSC (pohon eucalyptus). Midsole: SweetFoam® berbahan tebu alami Brasil. Insole: Campuran minyak biji jarak dengan lapisan wol merino ZQ.',
-                'sustainability_note' => 'Jejak karbon: 4.87 kg CO2e. 100% netral karbon melalui inisiatif iklim terverifikasi.',
-                'base_price' => 1750000,
-                'compare_at_price' => 1950000,
-                'is_active' => true,
-                'is_featured' => true,
-                'weight_grams' => 600,
-                'collections' => array_filter([$newArrivalsCol?->id, $bestSellersCol?->id, $treeCol?->id]),
-                'variants' => [
-                    [
-                        'color_name' => 'Mist Blue (Blizzard Sole)',
-                        'color_hex' => '#5c778a',
-                        'sizes' => ['39' => 8, '40' => 15, '41' => 12, '42' => 20, '43' => 6, '44' => 4],
-                    ],
-                    [
-                        'color_name' => 'Natural White (Blizzard Sole)',
-                        'color_hex' => '#ffffff',
-                        'sizes' => ['39' => 5, '40' => 10, '41' => 14, '42' => 18, '43' => 8, '44' => 3],
-                    ],
-                    [
-                        'color_name' => 'Forest Green',
-                        'color_hex' => '#4e6e58',
-                        'sizes' => ['40' => 6, '41' => 8, '42' => 12, '43' => 4],
-                    ],
-                ],
-                'images' => [
-                    ['url' => '/images/products/tree-runner-blue.png', 'order' => 1, 'is_primary' => true],
-                    ['url' => '/images/products/tree-runner-white.png', 'order' => 2, 'is_primary' => false],
-                    ['url' => '/images/products/tree-runner-forest.png', 'order' => 3, 'is_primary' => false],
-                ],
-            ],
-            [
-                'category_id' => $menRunning?->id ?? 1,
-                'name' => "Sepatu Lari Pria Tree Dasher 2",
-                'slug' => 'mens-tree-dasher-2',
-                'short_description' => 'Sepatu lari performa aktif dengan bantalan alami responsif dan daya cengkeram optimal.',
-                'description' => '<p>Tree Dasher 2 adalah sepatu lari dan latihan harian kami yang terbuat dari bahan alami. Dilengkapi kerah tumit yang diperbarui untuk penopang ekstra, bantalan sol karet alam anti-selip, serta SweetFoam® dengan pengembalian energi tinggi.</p>',
-                'material_info' => 'Upper satu rajutan tanpa sambungan dari serat eucalyptus bersertifikasi FSC. Midsole SweetFoam® dari tebu alami. Bantalan outsole karet alam bersertifikasi FSC.',
-                'sustainability_note' => 'Jejak karbon: 7.21 kg CO2e. Sepenuhnya netral karbon melalui program iklim tersertifikasi.',
-                'base_price' => 2150000,
-                'compare_at_price' => null,
-                'is_active' => true,
-                'is_featured' => true,
-                'weight_grams' => 700,
-                'collections' => array_filter([$newArrivalsCol?->id, $bestSellersCol?->id]),
-                'variants' => [
-                    [
-                        'color_name' => 'Sage Haze',
-                        'color_hex' => '#7d8d7e',
-                        'sizes' => ['39' => 6, '40' => 14, '41' => 10, '42' => 16, '43' => 8, '44' => 5],
-                    ],
-                    [
-                        'color_name' => 'Thunder Navy',
-                        'color_hex' => '#2b3a4a',
-                        'sizes' => ['40' => 8, '41' => 12, '42' => 15, '43' => 7, '44' => 2],
-                    ],
-                    [
-                        'color_name' => 'Mineral Crimson',
-                        'color_hex' => '#9e4747',
-                        'sizes' => ['40' => 4, '41' => 6, '42' => 9, '43' => 3],
-                    ],
-                ],
-                'images' => [
-                    ['url' => '/images/products/tree-dasher-sage.png', 'order' => 1, 'is_primary' => true],
-                    ['url' => '/images/products/tree-dasher-navy.png', 'order' => 2, 'is_primary' => false],
-                    ['url' => '/images/products/tree-dasher-red.png', 'order' => 3, 'is_primary' => false],
-                ],
-            ],
-            [
-                'category_id' => $menSneakers?->id ?? 1,
-                'name' => "Sepatu Pria Wool Runner 2",
-                'slug' => 'mens-wool-runner-2',
-                'short_description' => 'Ikon klasik terlahir kembali: lebih lembut, membal, dan dibuat dari wol merino ZQ alami.',
-                'description' => '<p>Sneaker wol revolusioner yang mengawali segalanya, kini disempurnakan dengan lebih dari 15 peningkatan. Upper wol merino yang nyaman mengatur suhu kaki secara alami dan tahan bau tanpa zat kimia sintetis.</p>',
-                'material_info' => 'Upper wol merino Selandia Baru bersertifikasi ZQ. Sol SweetFoam® berbasis tebu. Tali sepatu dari poliester botol daur ulang.',
-                'sustainability_note' => 'Jejak karbon: 5.42 kg CO2e. 100% material alami terbarukan.',
+                'category_id' => $menWorkwear?->id ?? 1,
+                'name' => "Jaket Vintage Carhartt Detroit Canvas J97 Faded Tan",
+                'slug' => 'vintage-carhartt-detroit-j97-tan',
+                'short_description' => 'Kondisi 9.5/10. Tag Carhartt Made in USA 90s. Heavyweight duck canvas dengan kerah corduroy cokelat.',
+                'description' => '<p>Item grail legendaris! Jaket Carhartt Detroit J97 vintage era 90-an dengan pudar alami (faded patina) yang sangat otentik. Menggunakan material heavyweight duck canvas 12oz dengan lapisan blanket lining bermotif Aztec di bagian dalam untuk kehangatan maksimal.</p><p><strong>Detail Spesifikasi:</strong><br>&bull; Tag: Carhartt Crafted with Pride in USA<br>&bull; Kondisi: 9.5/10 (Sangat terawat, zipper lancar YKK kuningan)<br>&bull; Ukuran: Size L (Panjang 69 cm x Lebar Dada 64 cm)<br>&bull; Sanitasi: Sudah melalui proses dry cleaning & steam higienis siap pakai.</p>',
+                'material_info' => '100% Ring-Spun Cotton Duck Canvas (12oz) dengan kerah 100% katun corduroy dan resleting full brass vintage.',
+                'sustainability_note' => 'Slow Fashion: Mengurangi emisi karbon 18.4 kg CO2e dan menghemat 4.500L air dibanding produksi jaket kanvas baru.',
                 'base_price' => 1850000,
-                'compare_at_price' => 2100000,
+                'compare_at_price' => 2400000,
                 'is_active' => true,
                 'is_featured' => true,
-                'weight_grams' => 650,
-                'collections' => array_filter([$bestSellersCol?->id, $woolCol?->id, $saleCol?->id]),
+                'weight_grams' => 1100,
+                'collections' => array_filter([$newArrivalsCol?->id, $bestSellersCol?->id, $workwearCol?->id]),
                 'variants' => [
                     [
-                        'color_name' => 'Natural Grey (Cream Sole)',
-                        'color_hex' => '#888582',
-                        'sizes' => ['39' => 4, '40' => 12, '41' => 18, '42' => 22, '43' => 10, '44' => 6],
+                        'color_name' => 'Faded Tan Ochre',
+                        'color_hex' => '#c29b61',
+                        'sizes' => ['L (PxL 69x64)' => 1],
                     ],
                     [
-                        'color_name' => 'Natural Black (Dark Sole)',
-                        'color_hex' => '#222222',
-                        'sizes' => ['39' => 7, '40' => 15, '41' => 20, '42' => 25, '43' => 12, '44' => 8],
+                        'color_name' => 'Washed Onyx Black',
+                        'color_hex' => '#2b2927',
+                        'sizes' => ['XL (PxL 72x68)' => 1],
                     ],
                 ],
                 'images' => [
-                    ['url' => '/images/products/wool-runner-grey.png', 'order' => 1, 'is_primary' => true],
-                    ['url' => '/images/products/wool-runner-black.png', 'order' => 2, 'is_primary' => false],
+                    ['url' => '/images/products/vintage-carhartt-tan.png', 'order' => 1, 'is_primary' => true],
+                    ['url' => '/images/products/vintage-carhartt-black.png', 'order' => 2, 'is_primary' => false],
                 ],
             ],
             [
-                'category_id' => $menLoungers?->id ?? 1,
-                'name' => "Sepatu Pria Canvas Cruiser Slip On",
-                'slug' => 'mens-canvas-cruiser-slip-on',
-                'short_description' => 'Slip-on klasik yang mudah dipakai dari kanvas katun organik kuat dan tahan lama.',
-                'description' => '<p>Sepatu slip-on harian yang sangat fleksibel. Mudah dilepas dan dipakai, dilengkapi bantalan penyangga lengkung kaki serta kanvas sejuk yang semakin lembut setiap kali dipakai.</p>',
-                'material_info' => 'Upper 100% kanvas katun organik, sol luar karet alam, insole EVA daur ulang.',
-                'sustainability_note' => 'Jejak karbon: 4.10 kg CO2e.',
-                'base_price' => 1450000,
-                'compare_at_price' => null,
+                'category_id' => $menHoodies?->id ?? 1,
+                'name' => "Hoodie Vintage 90s Nike Center Mini Swoosh Embroidered",
+                'slug' => 'vintage-nike-center-swoosh-hoodie',
+                'short_description' => 'Kondisi 9.5/10. Tag Nike Silver Tag era 1996. Bordir logo Nike di tengah dada, bahan fleece tebal lembut.',
+                'description' => '<p>Salah satu siluet vintage Nike paling diburu di dunia streetwear. Model center embroidered swoosh dengan potongan boxy fit khas 90-an. Karet rib di pinggang dan lengan masih sangat kencang dan tebal.</p><p><strong>Detail Spesifikasi:</strong><br>&bull; Tag: Nike Silver Tag Made in USA<br>&bull; Kondisi: 9.5/10 (No minus, no hole, no stain)<br>&bull; Ukuran: Size XL (Panjang 72 cm x Lebar 66 cm)<br>&bull; 1 of 1 Authentic curated piece.</p>',
+                'material_info' => '80% Premium Heavy Cotton Fleece / 20% Polyester. Bahan tebal 400 GSM.',
+                'sustainability_note' => 'Zero Textile Waste: Menjaga pakaian berkualitas tinggi tetap berputar tanpa limbah ke tempat pembuangan akhir.',
+                'base_price' => 1250000,
+                'compare_at_price' => 1650000,
                 'is_active' => true,
                 'is_featured' => true,
-                'weight_grams' => 580,
-                'collections' => array_filter([$bestSellersCol?->id, $newArrivalsCol?->id]),
-                'variants' => [
-                    [
-                        'color_name' => 'Warm White',
-                        'color_hex' => '#ded7cd',
-                        'sizes' => ['39' => 5, '40' => 10, '41' => 15, '42' => 14, '43' => 8, '44' => 4],
-                    ],
-                    [
-                        'color_name' => 'Blizzard White',
-                        'color_hex' => '#ffffff',
-                        'sizes' => ['39' => 6, '40' => 11, '41' => 16, '42' => 19, '43' => 7, '44' => 3],
-                    ],
-                ],
-                'images' => [
-                    ['url' => '/images/products/canvas-cruiser-white.png', 'order' => 1, 'is_primary' => true],
-                    ['url' => '/images/products/cruiser-slipon-blizzard.png', 'order' => 2, 'is_primary' => false],
-                ],
-            ],
-            [
-                'category_id' => $menLoungers?->id ?? 1,
-                'name' => "Sepatu Pria Runner NZ Slip On",
-                'slug' => 'mens-runner-nz-slip-on',
-                'short_description' => 'Sneaker slip-on rajut bertekstur memadukan kenyamanan kaus kaki dengan bantalan harian.',
-                'description' => '<p>Langsung pakai dan melangkah. Runner NZ Slip On membalut kaki Anda dengan kerah rajut elastis yang pas dan sol tebu alami SweetFoam® untuk kenyamanan jalan tanpa tekanan.</p>',
-                'material_info' => 'Upper rajut ribbed berteknologi tinggi dari serat eucalyptus dan nilon daur ulang.',
-                'sustainability_note' => 'Jejak karbon: 4.60 kg CO2e.',
-                'base_price' => 1650000,
-                'compare_at_price' => 1850000,
-                'is_active' => true,
-                'is_featured' => true,
-                'weight_grams' => 600,
-                'collections' => array_filter([$bestSellersCol?->id, $newArrivalsCol?->id]),
-                'variants' => [
-                    [
-                        'color_name' => 'Mushroom Taupe',
-                        'color_hex' => '#b2a496',
-                        'sizes' => ['39' => 4, '40' => 9, '41' => 12, '42' => 16, '43' => 6, '44' => 2],
-                    ],
-                    [
-                        'color_name' => 'Anthracite Charcoal',
-                        'color_hex' => '#444240',
-                        'sizes' => ['39' => 7, '40' => 14, '41' => 18, '42' => 20, '43' => 9, '44' => 5],
-                    ],
-                    [
-                        'color_name' => 'Oatmeal Natural',
-                        'color_hex' => '#ded4c5',
-                        'sizes' => ['40' => 5, '41' => 8, '42' => 11, '43' => 4],
-                    ],
-                ],
-                'images' => [
-                    ['url' => '/images/products/runner-nz-mushroom.png', 'order' => 1, 'is_primary' => true],
-                    ['url' => '/images/products/runner-nz-anthracite.png', 'order' => 2, 'is_primary' => false],
-                    ['url' => '/images/products/runner-nz-oat.png', 'order' => 3, 'is_primary' => false],
-                ],
-            ],
-            [
-                'category_id' => $menMizzles?->id ?? 1,
-                'name' => "Sepatu Pria Wool Runner-up Mizzle",
-                'slug' => 'mens-wool-runner-up-mizzle',
-                'short_description' => 'Sneaker high-top tahan percikan air dari bahan wol merino ZQ pelindung genangan.',
-                'description' => '<p>Jaga kaki tetap kering dan hangat dalam kondisi cuaca apapun. Dilengkapi teknologi bio-based Puddle Guard® penangkal air dan sol tapak karet alam anti-selip di segala medan.</p>',
-                'material_info' => 'Upper wol merino ZQ dengan perlakuan ECO Puddle Guard®. Outsole karet alam bergerigi untuk segala cuaca.',
-                'sustainability_note' => 'Jejak karbon: 6.80 kg CO2e.',
-                'base_price' => 2350000,
-                'compare_at_price' => null,
-                'is_active' => true,
-                'is_featured' => false,
-                'weight_grams' => 750,
-                'collections' => array_filter([$woolCol?->id]),
-                'variants' => [
-                    [
-                        'color_name' => 'True Black (Black Sole)',
-                        'color_hex' => '#1f1f1f',
-                        'sizes' => ['40' => 8, '41' => 14, '42' => 16, '43' => 7, '44' => 3],
-                    ],
-                    [
-                        'color_name' => 'Dappled Grey',
-                        'color_hex' => '#6b6967',
-                        'sizes' => ['40' => 5, '41' => 9, '42' => 12, '43' => 6],
-                    ],
-                ],
-                'images' => [
-                    ['url' => '/images/products/wool-runner-black.png', 'order' => 1, 'is_primary' => true],
-                    ['url' => '/images/products/wool-runner-grey.png', 'order' => 2, 'is_primary' => false],
-                ],
-            ],
-
-            // ----------------------------------------------------
-            // WOMEN SHOES
-            // ----------------------------------------------------
-            [
-                'category_id' => $womenFlats?->id ?? 1,
-                'name' => "Sepatu Wanita Tree Lounger",
-                'slug' => 'womens-tree-lounger',
-                'short_description' => 'Sepatu slip-on serat eucalyptus yang sejuk, praktis tanpa kaus kaki, dan empuk.',
-                'description' => '<p>Sepatu flat slip-on kasual terbaik untuk bepergian dan santai akhir pekan. Serat pohon eucalyptus yang selembut sutra menjaga kaki tetap sejuk dan segar sepanjang hari.</p>',
-                'material_info' => 'Upper serat eucalyptus bersertifikasi FSC, sol tebu SweetFoam®, insole berlapisan wol merino lembut.',
-                'sustainability_note' => 'Jejak karbon: 3.90 kg CO2e.',
-                'base_price' => 1550000,
-                'compare_at_price' => 1750000,
-                'is_active' => true,
-                'is_featured' => true,
-                'weight_grams' => 450,
-                'collections' => array_filter([$bestSellersCol?->id, $newArrivalsCol?->id, $treeCol?->id]),
-                'variants' => [
-                    [
-                        'color_name' => 'Dusty Mauve',
-                        'color_hex' => '#9d7370',
-                        'sizes' => ['36' => 6, '37' => 14, '38' => 18, '39' => 20, '40' => 12, '41' => 4],
-                    ],
-                    [
-                        'color_name' => 'Warm Terracotta',
-                        'color_hex' => '#b87358',
-                        'sizes' => ['36' => 4, '37' => 10, '38' => 15, '39' => 16, '40' => 8, '41' => 2],
-                    ],
-                ],
-                'images' => [
-                    ['url' => '/images/products/tree-lounger-pink.png', 'order' => 1, 'is_primary' => true],
-                    ['url' => '/images/products/tree-lounger-terracotta.png', 'order' => 2, 'is_primary' => false],
-                ],
-            ],
-            [
-                'category_id' => $womenRunning?->id ?? 1,
-                'name' => "Sepatu Lari Wanita Tree Dasher 2",
-                'slug' => 'womens-tree-dasher-2',
-                'short_description' => 'Sepatu lari performa tinggi dirancang dengan serat alami bernapas yang sejuk.',
-                'description' => '<p>Dibuat untuk lari pagi, olahraga 5K, dan rutinitas aktif di perkotaan. Dilengkapi upper anatomis tanpa jahitan, bantalan tumit empuk, dan midsole SweetFoam® alami untuk daya pantul maksimal.</p>',
-                'material_info' => 'Upper rajut serat pohon eucalyptus, midsole SweetFoam® berbahan tebu, outsole karet alam FSC.',
-                'sustainability_note' => 'Jejak karbon: 6.90 kg CO2e.',
-                'base_price' => 2150000,
-                'compare_at_price' => null,
-                'is_active' => true,
-                'is_featured' => true,
-                'weight_grams' => 620,
-                'collections' => array_filter([$newArrivalsCol?->id, $bestSellersCol?->id]),
-                'variants' => [
-                    [
-                        'color_name' => 'Sage Frost',
-                        'color_hex' => '#7d8d7e',
-                        'sizes' => ['36' => 5, '37' => 12, '38' => 20, '39' => 18, '40' => 10, '41' => 3],
-                    ],
-                    [
-                        'color_name' => 'Ocean Navy',
-                        'color_hex' => '#324a5e',
-                        'sizes' => ['36' => 4, '37' => 9, '38' => 14, '39' => 15, '40' => 7],
-                    ],
-                ],
-                'images' => [
-                    ['url' => '/images/products/tree-dasher-sage.png', 'order' => 1, 'is_primary' => true],
-                    ['url' => '/images/products/tree-dasher-navy.png', 'order' => 2, 'is_primary' => false],
-                ],
-            ],
-            [
-                'category_id' => $womenSneakers?->id ?? 1,
-                'name' => "Sepatu Wanita Tree Runner Go",
-                'slug' => 'womens-tree-runner-go',
-                'short_description' => 'Sepatu jalan santai ringan harian dengan serat pohon eucalyptus yang sejuk bernapas.',
-                'description' => '<p>Sepatu andalan untuk segala aktivitas. Empuk, selembut awan, dapat dicuci dengan mesin, dan dibuat secara berkelanjutan untuk kenyamanan kerja hingga akhir pekan.</p>',
-                'material_info' => 'Serat eucalyptus FSC, midsole tebu alami SweetFoam®.',
-                'sustainability_note' => 'Jejak karbon: 4.40 kg CO2e.',
-                'base_price' => 1750000,
-                'compare_at_price' => 1950000,
-                'is_active' => true,
-                'is_featured' => true,
-                'weight_grams' => 540,
-                'collections' => array_filter([$bestSellersCol?->id, $treeCol?->id]),
-                'variants' => [
-                    [
-                        'color_name' => 'Sky Blue (White Sole)',
-                        'color_hex' => '#5c778a',
-                        'sizes' => ['36' => 8, '37' => 16, '38' => 22, '39' => 20, '40' => 14, '41' => 6],
-                    ],
-                    [
-                        'color_name' => 'Pure Blizzard White',
-                        'color_hex' => '#ffffff',
-                        'sizes' => ['36' => 6, '37' => 12, '38' => 19, '39' => 18, '40' => 10, '41' => 4],
-                    ],
-                ],
-                'images' => [
-                    ['url' => '/images/products/tree-runner-blue.png', 'order' => 1, 'is_primary' => true],
-                    ['url' => '/images/products/tree-runner-white.png', 'order' => 2, 'is_primary' => false],
-                ],
-            ],
-            [
-                'category_id' => $womenSlipOns?->id ?? 1,
-                'name' => "Sepatu Wanita Canvas Cruiser Slip On",
-                'slug' => 'womens-canvas-cruiser-slip-on',
-                'short_description' => 'Slip-on kanvas katun organik bersih dan minimalis dengan bantalan penopang kaki.',
-                'description' => '<p>Siluet slip-on klasik yang tampil modern dengan 100% kanvas katun organik, nyaman dipakai langsung tanpa masa penyesuaian. Kasual, bersih, dan membal.</p>',
-                'material_info' => 'Upper 100% kanvas katun organik, insole SweetFoam®.',
-                'sustainability_note' => 'Jejak karbon: 3.85 kg CO2e.',
-                'base_price' => 1450000,
-                'compare_at_price' => null,
-                'is_active' => true,
-                'is_featured' => true,
-                'weight_grams' => 520,
-                'collections' => array_filter([$bestSellersCol?->id, $newArrivalsCol?->id]),
-                'variants' => [
-                    [
-                        'color_name' => 'Warm White',
-                        'color_hex' => '#ded7cd',
-                        'sizes' => ['36' => 6, '37' => 14, '38' => 20, '39' => 18, '40' => 12, '41' => 5],
-                    ],
-                ],
-                'images' => [
-                    ['url' => '/images/products/canvas-cruiser-white.png', 'order' => 1, 'is_primary' => true],
-                ],
-            ],
-            [
-                'category_id' => $womenSlipOns?->id ?? 1,
-                'name' => "Sepatu Wanita Cruiser Slip On",
-                'slug' => 'womens-cruiser-slip-on',
-                'short_description' => 'Sneaker slip-on rajut tanpa jahitan untuk kemudahan pemakaian dan kenyamanan ringan.',
-                'description' => '<p>Siluet slip-on abadi dalam balutan warna putih Blizzard. Ringan, lentur, dan siap menemani langkah Anda ke mana pun hari membawa.</p>',
-                'material_info' => 'Upper rajut engineered dengan sol tebu SweetFoam®.',
-                'sustainability_note' => 'Jejak karbon: 4.15 kg CO2e.',
-                'base_price' => 1650000,
-                'compare_at_price' => null,
-                'is_active' => true,
-                'is_featured' => true,
-                'weight_grams' => 530,
-                'collections' => array_filter([$bestSellersCol?->id, $newArrivalsCol?->id]),
-                'variants' => [
-                    [
-                        'color_name' => 'Blizzard White',
-                        'color_hex' => '#ffffff',
-                        'sizes' => ['36' => 5, '37' => 12, '38' => 18, '39' => 16, '40' => 9, '41' => 3],
-                    ],
-                ],
-                'images' => [
-                    ['url' => '/images/products/cruiser-slipon-blizzard.png', 'order' => 1, 'is_primary' => true],
-                ],
-            ],
-            [
-                'category_id' => $womenSlipOns?->id ?? 1,
-                'name' => "Sepatu Wanita Runner NZ Slip On",
-                'slug' => 'womens-runner-nz-slip-on',
-                'short_description' => 'Sneaker slip-on rajut bergaris dengan peredam kejut benturan premium.',
-                'description' => '<p>Rasakan sensasi berjalan di atas awan dengan Runner NZ Slip On. Kerah rajut elastis yang fleksibel pas seperti kulit kedua sementara SweetFoam® meredam getaran langkah dengan mudah.</p>',
-                'material_info' => 'Upper rajut bergaris dari serat pohon eucalyptus FSC.',
-                'sustainability_note' => 'Jejak karbon: 4.50 kg CO2e.',
-                'base_price' => 1750000,
-                'compare_at_price' => null,
-                'is_active' => true,
-                'is_featured' => true,
-                'weight_grams' => 560,
-                'collections' => array_filter([$bestSellersCol?->id, $newArrivalsCol?->id]),
-                'variants' => [
-                    [
-                        'color_name' => 'Mushroom Taupe',
-                        'color_hex' => '#b2a496',
-                        'sizes' => ['36' => 7, '37' => 15, '38' => 20, '39' => 18, '40' => 11, '41' => 4],
-                    ],
-                    [
-                        'color_name' => 'Anthracite Charcoal',
-                        'color_hex' => '#444240',
-                        'sizes' => ['36' => 6, '37' => 12, '38' => 17, '39' => 15, '40' => 10, '41' => 3],
-                    ],
-                ],
-                'images' => [
-                    ['url' => '/images/products/runner-nz-mushroom.png', 'order' => 1, 'is_primary' => true],
-                    ['url' => '/images/products/runner-nz-anthracite.png', 'order' => 2, 'is_primary' => false],
-                ],
-            ],
-
-            // ----------------------------------------------------
-            // APPAREL & ACCESSORIES
-            // ----------------------------------------------------
-            [
-                'category_id' => $menTees?->id ?? 1,
-                'name' => "Kaos Pria Sea Tee Classic",
-                'slug' => 'mens-sea-tee-classic',
-                'short_description' => 'Kaos harian lembut dan sejuk dari perpaduan katun organik dan serat alami cangkang kepiting.',
-                'description' => '<p>Kenalkan kaos alami paling inovatif di dunia. Dipadukan dengan Kitosan (serat terbarukan dari cangkang kepiting) dan katun Pima Peru organik agar tetap segar lebih lama secara alami.</p>',
-                'material_info' => '65% Katun Pima Peru Organik, 35% SeaCell™ Lyocell dengan Kitosan.',
-                'sustainability_note' => 'Jejak karbon: 6.30 kg CO2e. 100% alami dan bebas mikroplastik.',
-                'base_price' => 650000,
-                'compare_at_price' => 750000,
-                'is_active' => true,
-                'is_featured' => false,
-                'weight_grams' => 250,
-                'collections' => array_filter([$newArrivalsCol?->id, $saleCol?->id]),
-                'variants' => [
-                    [
-                        'color_name' => 'Natural White',
-                        'color_hex' => '#ffffff',
-                        'sizes' => ['S' => 10, 'M' => 20, 'L' => 25, 'XL' => 15],
-                    ],
-                    [
-                        'color_name' => 'Classic Charcoal',
-                        'color_hex' => '#2b2b2b',
-                        'sizes' => ['S' => 8, 'M' => 18, 'L' => 20, 'XL' => 12],
-                    ],
-                ],
-                'images' => [
-                    ['url' => '/images/products/wool-runner-black.png', 'order' => 1, 'is_primary' => true],
-                ],
-            ],
-            [
-                'category_id' => $menSocks?->id ?? 1,
-                'name' => "Kaos Kaki Trino™ Tubers Crew",
-                'slug' => 'trino-tubers-crew-socks',
-                'short_description' => 'Kaos kaki crew harian yang bernapas dari perpaduan serat pohon eucalyptus dan wol merino.',
-                'description' => '<p>Kaos kaki ternyaman di dunia. Dirancang dengan benang Trino™ eksklusif kami yang memadukan serat pohon eucalyptus sejuk dan wol merino ZQ lembut.</p>',
-                'material_info' => '50% TENCEL™ Lyocell, 35% Wol Merino ZQ, 12% Nilon Daur Ulang, 3% Spandex.',
-                'sustainability_note' => 'Jejak karbon: 1.20 kg CO2e.',
-                'base_price' => 250000,
-                'compare_at_price' => null,
-                'is_active' => true,
-                'is_featured' => false,
-                'weight_grams' => 100,
-                'collections' => array_filter([$bestSellersCol?->id]),
+                'weight_grams' => 850,
+                'collections' => array_filter([$newArrivalsCol?->id, $bestSellersCol?->id, $vintage90sCol?->id]),
                 'variants' => [
                     [
                         'color_name' => 'Heather Grey',
-                        'color_hex' => '#888582',
-                        'sizes' => ['S/M' => 30, 'L/XL' => 40],
+                        'color_hex' => '#a8a8a8',
+                        'sizes' => ['XL (PxL 72x66)' => 1],
                     ],
                     [
-                        'color_name' => 'Natural Black',
-                        'color_hex' => '#212121',
-                        'sizes' => ['S/M' => 25, 'L/XL' => 35],
+                        'color_name' => 'Faded Charcoal Black',
+                        'color_hex' => '#222222',
+                        'sizes' => ['L (PxL 70x63)' => 1],
                     ],
                 ],
                 'images' => [
-                    ['url' => '/images/products/wool-runner-grey.png', 'order' => 1, 'is_primary' => true],
+                    ['url' => '/images/products/vintage-nike-hoodie-grey.png', 'order' => 1, 'is_primary' => true],
+                    ['url' => '/images/products/vintage-nike-hoodie-black.png', 'order' => 2, 'is_primary' => false],
                 ],
             ],
             [
-                'category_id' => $bags?->id ?? 1,
-                'name' => "Tas fifa Anytime Tote Bag",
-                'slug' => 'fifa-anytime-tote-bag',
-                'short_description' => 'Tote bag kanvas katun organik kokoh untuk belanja, pantai, dan perjalanan harian.',
-                'description' => '<p>Kapasitas lapang, tali bahu diperkuat, dan kantong internal untuk barang esensial Anda. Dibuat dari 100% kanvas katun organik tebal untuk menggantikan plastik sekali pakai selamanya.</p>',
-                'material_info' => '100% Kanvas Katun Organik Tebal (14oz).',
-                'sustainability_note' => 'Jejak karbon: 2.10 kg CO2e.',
-                'base_price' => 450000,
-                'compare_at_price' => 550000,
+                'category_id' => $menLeather?->id ?? 1,
+                'name' => "Jaket Vintage Leather Racing Moto Biker 90s Multi-Patch",
+                'slug' => 'vintage-racing-jacket-leather',
+                'short_description' => 'Kondisi 9/10. Kulit sapi asli (genuine cowhide) dengan detail bordir patch balap retro dan zipper YKK.',
+                'description' => '<p>Jaket motor balap vintage era 90-an dengan konstruksi kulit asli premium bertekstur tebal. Dihiasi patch sponsor balap klasik, padding bahu berkarakter, dan kancing snap leher khas pembalap sirkuit.</p><p><strong>Detail Spesifikasi:</strong><br>&bull; Material: 100% Genuine Heavy Cowhide Leather<br>&bull; Kondisi: 9/10 (Patina kulit alami sangat gagah, zipper lancar)<br>&bull; Ukuran: Size L (Panjang 66 cm x Lebar 58 cm x Panjang Lengan 62 cm).</p>',
+                'material_info' => '100% Kulit Sapi Asli (Genuine Leather) dengan furing satin berlapis dakron tipis.',
+                'sustainability_note' => 'Circular Vintage: Menghidupkan kembali karya kerajinan kulit asli legendaris yang tahan hingga puluhan tahun.',
+                'base_price' => 2450000,
+                'compare_at_price' => 3500000,
                 'is_active' => true,
-                'is_featured' => false,
-                'weight_grams' => 350,
-                'collections' => array_filter([$newArrivalsCol?->id]),
+                'is_featured' => true,
+                'weight_grams' => 1600,
+                'collections' => array_filter([$bestSellersCol?->id, $vintage90sCol?->id]),
                 'variants' => [
                     [
-                        'color_name' => 'Natural Canvas',
-                        'color_hex' => '#e8e2d5',
-                        'sizes' => ['One Size' => 50],
+                        'color_name' => 'Vintage Racing Tri-Tone (Black/Red/White)',
+                        'color_hex' => '#9e2a2b',
+                        'sizes' => ['L (PxL 66x58)' => 1],
                     ],
                 ],
                 'images' => [
-                    ['url' => '/images/products/canvas-cruiser-white.png', 'order' => 1, 'is_primary' => true],
+                    ['url' => '/images/products/vintage-racing-jacket-leather.png', 'order' => 1, 'is_primary' => true],
+                ],
+            ],
+            [
+                'category_id' => $menVarsity?->id ?? 1,
+                'name' => "Jaket Vintage 90s Forest Green Wool & Leather Varsity Letterman",
+                'slug' => 'vintage-varsity-jacket-green',
+                'short_description' => 'Kondisi 9.5/10. Bodi wol tebal dengan lengan kulit asli krem dan chenille patch bordir tim rugby 1994.',
+                'description' => '<p>Varsity letterman jacket otentik tahun 1994 buatan Amerika Serikat. Memadukan bodi wol Melton warna hijau botol dengan lengan kulit asli yang lentur. Sangat hangat, berbobot, dan memberikan aura Ivy League / American College vintage.</p>',
+                'material_info' => 'Bodi: 80% Melton Wool / 20% Nylon. Lengan: 100% Genuine Leather. Furing: Quilted Satin.',
+                'sustainability_note' => 'Mencegah pembuangan serat wol murni ke limbah lingkungan.',
+                'base_price' => 1950000,
+                'compare_at_price' => 2700000,
+                'is_active' => true,
+                'is_featured' => false,
+                'weight_grams' => 1400,
+                'collections' => array_filter([$newArrivalsCol?->id, $vintage90sCol?->id]),
+                'variants' => [
+                    [
+                        'color_name' => 'Forest Green & Cream Leather',
+                        'color_hex' => '#2d4a3e',
+                        'sizes' => ['XL (PxL 71x65)' => 1],
+                    ],
+                ],
+                'images' => [
+                    ['url' => '/images/products/vintage-varsity-jacket-green.png', 'order' => 1, 'is_primary' => true],
+                ],
+            ],
+            [
+                'category_id' => $menWorkwear?->id ?? 1,
+                'name' => "Jaket Vintage Ralph Lauren Harrington Chino Windbreaker",
+                'slug' => 'vintage-ralph-harrington-beige',
+                'short_description' => 'Kondisi 9.5/10. Tag Polo Ralph Lauren era 90s, furing tartan plaid klasik dengan bordir Pony logo di dada.',
+                'description' => '<p>Jaket Harrington klasik paling ikonik dari Ralph Lauren. Potongan relaxed fit dengan bahan katun twill chino tahan angin, kerah double button, saku samping berpenutup, dan furing bermotif tartan khas Polo.</p>',
+                'material_info' => '100% Cotton Chino Twill dengan furing 100% Cotton Tartan Plaid.',
+                'sustainability_note' => 'Vintage Timeless: Desain abadi yang tidak pernah ketinggalan zaman.',
+                'base_price' => 950000,
+                'compare_at_price' => 1800000,
+                'is_active' => true,
+                'is_featured' => false,
+                'weight_grams' => 700,
+                'collections' => array_filter([$newArrivalsCol?->id]),
+                'variants' => [
+                    [
+                        'color_name' => 'Classic Khaki Beige',
+                        'color_hex' => '#d4be9c',
+                        'sizes' => ['L (PxL 68x62)' => 1],
+                    ],
+                ],
+                'images' => [
+                    ['url' => '/images/products/vintage-ralph-harrington-beige.png', 'order' => 1, 'is_primary' => true],
+                ],
+            ],
+            [
+                'category_id' => $menWorkwear?->id ?? 1,
+                'name' => "Jaket Vintage Patagonia Retro-X Deep Pile Fleece Zip",
+                'slug' => 'vintage-patagonia-fleece-cream',
+                'short_description' => 'Kondisi 9.5/10. Bulu fleece tebal shaggy dengan kantong dada nilon kontras biru tua, made in USA.',
+                'description' => '<p>Jaket outdoor vintage paling diburu dari Patagonia. Dibuat dengan konstruksi deep pile fleece penahan angin berteknologi windproof membrane. Sangat hangat, stylish untuk gorpcore maupun streetwear harian.</p>',
+                'material_info' => '100% Recycled Polyester Deep-Pile Sherpa Fleece (6mm pile) dengan nilon pocket.',
+                'sustainability_note' => 'Patagonia Heritage: Pelopor keberlanjutan daur ulang tekstil sejak era 90-an.',
+                'base_price' => 1650000,
+                'compare_at_price' => 2400000,
+                'is_active' => true,
+                'is_featured' => true,
+                'weight_grams' => 750,
+                'collections' => array_filter([$bestSellersCol?->id, $newArrivalsCol?->id]),
+                'variants' => [
+                    [
+                        'color_name' => 'Natural Cream & Navy Pocket',
+                        'color_hex' => '#ede6d8',
+                        'sizes' => ['M (PxL 67x57)' => 1],
+                    ],
+                ],
+                'images' => [
+                    ['url' => '/images/products/vintage-patagonia-fleece-cream.png', 'order' => 1, 'is_primary' => true],
+                ],
+            ],
+
+            // ==========================================
+            // BAJU, KAOS & KEMEJA (BAND TEES & SHIRTS)
+            // ==========================================
+            [
+                'category_id' => $menBandTees?->id ?? 2,
+                'name' => "Kaos Vintage 1993 Nirvana In Utero Single Stitch Band Tee",
+                'slug' => 'vintage-nirvana-in-utero-tee-1993',
+                'short_description' => 'Kondisi 9/10. Tag Giant by Anvil Made in USA 1993. Jahitan Single Stitch atas bawah, pudar abu tua alami.',
+                'description' => '<p>Holy grail t-shirt vintage rock dunia! Kaos original tur Nirvana In Utero tahun 1993 berlisensi resmi Nirvana Under License to Brockum. Jahitan single stitch utuh pada bagian lengan dan ujung bawah kaos. Sablon crackle alami yang sangat estetik tanpa bolong.</p><p><strong>Detail Spesifikasi:</strong><br>&bull; Tag: Giant by Anvil Made in USA (100% Cotton Pre-Shrunk)<br>&bull; Stitching: Single Stitch Sleeve & Hem<br>&bull; Ukuran: Size L fit XL (Panjang 74 cm x Lebar 58 cm)<br>&bull; Koleksi kurasi super rare.</p>',
+                'material_info' => '100% Heavyweight Cotton Single-Stitch Konstruksi Vintage 90s.',
+                'sustainability_note' => 'Koleksi seni busana bersejarah berumur lebih dari 30 tahun yang nilainya terus meningkat.',
+                'base_price' => 2250000,
+                'compare_at_price' => 3200000,
+                'is_active' => true,
+                'is_featured' => true,
+                'weight_grams' => 300,
+                'collections' => array_filter([$newArrivalsCol?->id, $bestSellersCol?->id, $vintage90sCol?->id]),
+                'variants' => [
+                    [
+                        'color_name' => 'Faded Vintage Charcoal Black',
+                        'color_hex' => '#363434',
+                        'sizes' => ['L (PxL 74x58)' => 1],
+                    ],
+                ],
+                'images' => [
+                    ['url' => '/images/products/vintage-band-tee-nirvana.png', 'order' => 1, 'is_primary' => true],
+                    ['url' => '/images/products/vintage-band-tee-metallica.png', 'order' => 2, 'is_primary' => false],
+                ],
+            ],
+            [
+                'category_id' => $menBandTees?->id ?? 2,
+                'name' => "Kaos Vintage 1991 Metallica Pushead Damage Inc Band Tee",
+                'slug' => 'vintage-metallica-damage-inc-tee',
+                'short_description' => 'Kondisi 9.5/10. Tag Brockum Worldwide Made in USA. Jahitan Single Stitch, sablon artwork Pushead super detail.',
+                'description' => '<p>Kaos vintage original rilisan tur Metallica era 1991 dengan ilustrasi karya seniman legendaris Brian Pushead Schroeder. Bahan katun vintage tebal berbulu halus khas 90-an dengan pudar warna sun-faded merata.</p>',
+                'material_info' => '100% Combed Cotton Single Stitch 90s.',
+                'sustainability_note' => 'Menghemat ribuan liter air dibanding membeli kaos grafis fast fashion modern.',
+                'base_price' => 1850000,
+                'compare_at_price' => 2500000,
+                'is_active' => true,
+                'is_featured' => false,
+                'weight_grams' => 300,
+                'collections' => array_filter([$vintage90sCol?->id, $newArrivalsCol?->id]),
+                'variants' => [
+                    [
+                        'color_name' => 'Sun Faded Black',
+                        'color_hex' => '#282726',
+                        'sizes' => ['XL (PxL 76x60)' => 1],
+                    ],
+                ],
+                'images' => [
+                    ['url' => '/images/products/vintage-band-tee-metallica.png', 'order' => 1, 'is_primary' => true],
+                ],
+            ],
+            [
+                'category_id' => $menGraphicTees?->id ?? 2,
+                'name' => "Kaos Vintage Harley Davidson 3D Emblem Eagle 90s Graphic Tee",
+                'slug' => 'vintage-harley-davidson-3d-emblem-tee',
+                'short_description' => 'Kondisi 9.5/10. Tag Holoubek / Harley Davidson Made in USA. Grafis elang 3D emblem gagah, pudar washed black.',
+                'description' => '<p>Kaos Harley Davidson legendaris dengan cetakan grafis 3D Emblem Fort Worth Texas. Efek pudar washed black alami dengan fitting boxy santai yang sangat disukai para pecinta vintage biker look.</p>',
+                'material_info' => '100% Pre-Shrunk Heavy Cotton.',
+                'sustainability_note' => 'Autentik 100% tanpa bahan sintetis plastik mikro.',
+                'base_price' => 1100000,
+                'compare_at_price' => 1500000,
+                'is_active' => true,
+                'is_featured' => true,
+                'weight_grams' => 320,
+                'collections' => array_filter([$bestSellersCol?->id, $workwearCol?->id]),
+                'variants' => [
+                    [
+                        'color_name' => 'Washed Acid Black',
+                        'color_hex' => '#383634',
+                        'sizes' => ['L (PxL 71x57)' => 1],
+                    ],
+                ],
+                'images' => [
+                    ['url' => '/images/products/vintage-harley-tee-eagle.png', 'order' => 1, 'is_primary' => true],
+                ],
+            ],
+            [
+                'category_id' => $menGraphicTees?->id ?? 2,
+                'name' => "Kaos Vintage Stussy 8-Ball World Tour Heavyweight Streetwear Tee",
+                'slug' => 'vintage-stussy-8ball-world-tour-tee',
+                'short_description' => 'Kondisi 9.5/10. Tag Stussy Made in USA era awal 2000-an. Grafis bola 8 ikonik di punggung dan dada kiri.',
+                'description' => '<p>Kaos grafis streetwear paling ikonik dari Shawn Stussy. Menampilkan artwork bola 8 legendaris dengan daftar kota dunia (London, Paris, Los Angeles, New York, Tokyo). Kain tebal kokoh dengan kerah rib lebar.</p>',
+                'material_info' => '100% Heavyweight Cotton 220 GSM.',
+                'sustainability_note' => 'Pre-loved authentic piece.',
+                'base_price' => 850000,
+                'compare_at_price' => 1200000,
+                'is_active' => true,
+                'is_featured' => true,
+                'weight_grams' => 310,
+                'collections' => array_filter([$bestSellersCol?->id, $newArrivalsCol?->id, $workwearCol?->id]),
+                'variants' => [
+                    [
+                        'color_name' => 'Off-White Cream',
+                        'color_hex' => '#f2ece1',
+                        'sizes' => ['L (PxL 72x56)' => 1],
+                    ],
+                    [
+                        'color_name' => 'Pitch Black',
+                        'color_hex' => '#1a1a1a',
+                        'sizes' => ['XL (PxL 75x61)' => 1],
+                    ],
+                ],
+                'images' => [
+                    ['url' => '/images/products/vintage-stussy-8ball-white.png', 'order' => 1, 'is_primary' => true],
+                    ['url' => '/images/products/vintage-stussy-8ball-black.png', 'order' => 2, 'is_primary' => false],
+                ],
+            ],
+            [
+                'category_id' => $menFlannel?->id ?? 2,
+                'name' => "Kemeja Vintage Heavy Flannel Plaid Overshirt Green/Navy",
+                'slug' => 'vintage-flannel-shirt-green-navy',
+                'short_description' => 'Kondisi 9.5/10. Tag Five Brother / Big Mac Made in USA. Katun flannel tebal berbulu lembut, kancing mutiara.',
+                'description' => '<p>Kemeja flannel tebal vintage era 80-90an dari brand workwear Amerika Serikat. Jahitan double needle super kuat dengan dua kantong dada berkancing. Sangat cocok dipakai sebagai luaran (overshirt) dengan kaos polos di dalam.</p>',
+                'material_info' => '100% Heavy Brushed Cotton Flannel.',
+                'sustainability_note' => 'Daya tahan bahan katun murni yang awet hingga puluhan tahun.',
+                'base_price' => 480000,
+                'compare_at_price' => 750000,
+                'is_active' => true,
+                'is_featured' => false,
+                'weight_grams' => 600,
+                'collections' => array_filter([$newArrivalsCol?->id, $saleCol?->id]),
+                'variants' => [
+                    [
+                        'color_name' => 'Forest Hunter Plaid',
+                        'color_hex' => '#2e473b',
+                        'sizes' => ['L (PxL 73x58)' => 1],
+                    ],
+                    [
+                        'color_name' => 'Rustic Red & Black Check',
+                        'color_hex' => '#8b263e',
+                        'sizes' => ['M (PxL 70x54)' => 1],
+                    ],
+                ],
+                'images' => [
+                    ['url' => '/images/products/vintage-flannel-shirt-green.png', 'order' => 1, 'is_primary' => true],
+                    ['url' => '/images/products/vintage-flannel-shirt-red.png', 'order' => 2, 'is_primary' => false],
+                ],
+            ],
+
+            // ==========================================
+            // CELANA & DENIM (JEANS, CARGO, CORDUROY)
+            // ==========================================
+            [
+                'category_id' => $menDenim?->id ?? 3,
+                'name' => "Celana Jeans Vintage 90s Levi's 501 Made in USA Light Wash",
+                'slug' => 'vintage-levis-501-usa-light-wash',
+                'short_description' => 'Kondisi 9.5/10. Tag Red Tab Batwing Made in USA 1994, Button Fly 553, pudar kumis (whiskers) alami.',
+                'description' => '<p>Celana jeans paling ikonik dalam sejarah busana dunia: Levi\'s 501 original buatan Amerika Serikat pabrik nomor 553 tahun 1994. Menggunakan denim 100% katun kaku non-stretch yang menghasilkan potongan lurus klasik sempurna.</p><p><strong>Detail Spesifikasi:</strong><br>&bull; Tag: Care tag putih Levi Strauss & Co San Francisco Made in USA<br>&bull; Kancing: 5-Button Fly stamp 553<br>&bull; Ukuran di Tag: W32 L32 (Lingkar Pinggang 82 cm x Panjang 104 cm x Leg Opening 20 cm)<br>&bull; Kondisi: 9.5/10 (Hem rapi, selangkangan aman no sobek).</p>',
+                'material_info' => '100% Rigid Heavy Cotton Denim (14.5oz Cone Mills Denim).',
+                'sustainability_note' => 'Menghemat 10.000 liter air yang biasanya dihabiskan untuk pewarnaan celana denim baru.',
+                'base_price' => 1150000,
+                'compare_at_price' => 1650000,
+                'is_active' => true,
+                'is_featured' => true,
+                'weight_grams' => 850,
+                'collections' => array_filter([$newArrivalsCol?->id, $bestSellersCol?->id, $vintage90sCol?->id]),
+                'variants' => [
+                    [
+                        'color_name' => 'Vintage Light Stonewash',
+                        'color_hex' => '#7b9bb6',
+                        'sizes' => ['W32 L32 (LP 82cm)' => 1],
+                    ],
+                    [
+                        'color_name' => 'Medium Indigo Wash',
+                        'color_hex' => '#415e78',
+                        'sizes' => ['W34 L32 (LP 86cm)' => 1],
+                    ],
+                ],
+                'images' => [
+                    ['url' => '/images/products/vintage-levis-501-stonewash.png', 'order' => 1, 'is_primary' => true],
+                    ['url' => '/images/products/vintage-levis-501-light.png', 'order' => 2, 'is_primary' => false],
+                ],
+            ],
+            [
+                'category_id' => $menCargo?->id ?? 3,
+                'name' => "Celana Cargo Vintage Y2K Woodland Camo Multi-Pocket Baggy Pants",
+                'slug' => 'vintage-camo-cargo-pants-woodland',
+                'short_description' => 'Kondisi 9.5/10. Tag Propper Military Specification. 6 saku kancing ekspansi, tali serut ankle bawah.',
+                'description' => '<p>Celana kargo motif loreng militer Woodland US Army dengan siluet potongan baggy santai yang sangat populer di kultur streetwear Y2K dan skater. Dilengkapi pengatur pinggang samping dan tali serut di ujung kaki.</p>',
+                'material_info' => '50% Cotton / 50% Nylon Ripstop Tahan Robek Mil-Spec.',
+                'sustainability_note' => 'Material ripstop militer autentik yang dirancang tahan puluhan tahun.',
+                'base_price' => 650000,
+                'compare_at_price' => 950000,
+                'is_active' => true,
+                'is_featured' => true,
+                'weight_grams' => 750,
+                'collections' => array_filter([$newArrivalsCol?->id, $workwearCol?->id]),
+                'variants' => [
+                    [
+                        'color_name' => 'Woodland Green Camo',
+                        'color_hex' => '#4f583e',
+                        'sizes' => ['Size 32 (LP 83cm)' => 1],
+                    ],
+                    [
+                        'color_name' => 'Desert Sand Camo',
+                        'color_hex' => '#bda27e',
+                        'sizes' => ['Size 34 (LP 87cm)' => 1],
+                    ],
+                ],
+                'images' => [
+                    ['url' => '/images/products/vintage-camo-cargo-green.png', 'order' => 1, 'is_primary' => true],
+                    ['url' => '/images/products/vintage-camo-cargo-desert.png', 'order' => 2, 'is_primary' => false],
+                ],
+            ],
+            [
+                'category_id' => $menCorduroy?->id ?? 3,
+                'name' => "Celana Vintage Wide-Wale Corduroy Loose Trousers Chocolate Brown",
+                'slug' => 'vintage-corduroy-trousers-brown',
+                'short_description' => 'Kondisi 9.5/10. Tag L.L. Bean Vintage. Bahan korduroi garis tebal lembut warna cokelat moka, potongan loose fit.',
+                'description' => '<p>Celana panjang bahan corduroy tebal dengan tekstur garis lebar (wide wale). Sangat nyaman, lembut, dan memberikan aksen retro 70-80s yang hangat saat dipadukan dengan hoodie atau jaket denim.</p>',
+                'material_info' => '100% Cotton Wide-Wale Corduroy.',
+                'sustainability_note' => 'Serat katun alami yang nyaman tanpa plastik poliester murah.',
+                'base_price' => 550000,
+                'compare_at_price' => 850000,
+                'is_active' => true,
+                'is_featured' => false,
+                'weight_grams' => 700,
+                'collections' => array_filter([$newArrivalsCol?->id, $saleCol?->id]),
+                'variants' => [
+                    [
+                        'color_name' => 'Chocolate Espresso',
+                        'color_hex' => '#4a3528',
+                        'sizes' => ['Size 32 (LP 82cm)' => 1],
+                    ],
+                ],
+                'images' => [
+                    ['url' => '/images/products/vintage-corduroy-pants-brown.png', 'order' => 1, 'is_primary' => true],
+                ],
+            ],
+            [
+                'category_id' => $menWorkPants?->id ?? 3,
+                'name' => "Celana Vintage Dickies 874 Original Fit Work Pants Olive Green",
+                'slug' => 'vintage-dickies-874-olive-green',
+                'short_description' => 'Kondisi 9.5/10. Tag Dickies Made in USA / Mexico. Bahan twill tahan noda dan kerut, potongan lurus kokoh.',
+                'description' => '<p>Celana kerja skate klasik paling terkenal di dunia. Dikenal karena kekuatannya yang tak tertandingi dan lipatan garis tengah celana yang permanen. Pilihan wajib para pekerja kreatif, musisi, dan skater.</p>',
+                'material_info' => '65% Polyester / 35% Cotton Twill Heavy 8.5oz.',
+                'sustainability_note' => 'Konstruksi tangguh tahan bertahun-tahun.',
+                'base_price' => 450000,
+                'compare_at_price' => 700000,
+                'is_active' => true,
+                'is_featured' => false,
+                'weight_grams' => 600,
+                'collections' => array_filter([$workwearCol?->id, $saleCol?->id]),
+                'variants' => [
+                    [
+                        'color_name' => 'Olive Military Green',
+                        'color_hex' => '#4b5338',
+                        'sizes' => ['Size 32 (LP 82cm)' => 1],
+                    ],
+                ],
+                'images' => [
+                    ['url' => '/images/products/vintage-dickies-874-olive.png', 'order' => 1, 'is_primary' => true],
+                ],
+            ],
+
+            // ==========================================
+            // TOPI & HEADWEAR (HATS, CAPS, BEANIES)
+            // ==========================================
+            [
+                'category_id' => $menSnapback?->id ?? 4,
+                'name' => "Topi Vintage 90s New York Yankees MLB Pro-Model Snapback Cap",
+                'slug' => 'vintage-yankees-90s-snapback-cap',
+                'short_description' => 'Kondisi 9.5/10. Tag The Game / Sports Specialties Made in USA. Lidah hijau (green underbrim) klasik 90-an.',
+                'description' => '<p>Topi snapback baseball original era 1990-an dengan logo NY Yankees bordir timbul 3D tebal. Menggunakan lidah bagian bawah berwarna hijau zamrud (green underbrim) yang menjadi ciri khas topi pro model vintage sejati.</p><p><strong>Detail Spesifikasi:</strong><br>&bull; Tag: Official Major League Baseball Genuine Merchandise<br>&bull; Pengatur: Snapback plastik 7-lubang utuh fleksibel<br>&bull; Bahan: 100% Wool Twill tebal berkualitas tinggi<br>&bull; Kondisi: 9.5/10 (Crown tegak kokoh, no minus keringat).</p>',
+                'material_info' => '100% Wool Twill dengan bordir timbul benang rayon dan lidah green underbrim.',
+                'sustainability_note' => 'Koleksi headwear vintage langka yang tidak diproduksi lagi dengan spek yang sama.',
+                'base_price' => 650000,
+                'compare_at_price' => 900000,
+                'is_active' => true,
+                'is_featured' => true,
+                'weight_grams' => 200,
+                'collections' => array_filter([$newArrivalsCol?->id, $bestSellersCol?->id, $vintage90sCol?->id]),
+                'variants' => [
+                    [
+                        'color_name' => 'Navy Blue & White Logo',
+                        'color_hex' => '#1d273c',
+                        'sizes' => ['One Size Fits All (Adjustable)' => 1],
+                    ],
+                    [
+                        'color_name' => 'Forest Green & Gold',
+                        'color_hex' => '#21402e',
+                        'sizes' => ['One Size Fits All (Adjustable)' => 1],
+                    ],
+                ],
+                'images' => [
+                    ['url' => '/images/products/vintage-yankees-snapback-navy.png', 'order' => 1, 'is_primary' => true],
+                    ['url' => '/images/products/vintage-yankees-snapback-green.png', 'order' => 2, 'is_primary' => false],
+                ],
+            ],
+            [
+                'category_id' => $menBeanie?->id ?? 4,
+                'name' => "Topi Kupluk Vintage Ribbed Knit Fisherman Beanie Mustard Yellow",
+                'slug' => 'vintage-ribbed-knit-fisherman-beanie',
+                'short_description' => 'Kondisi 10/10. Rajutan benang wol akrilik tebal elastis dengan lipatan brim ganda, warna mustard hangat.',
+                'description' => '<p>Beanie rajut model nelayan klasik dengan kedalaman sedang yang pas di atas daun telinga. Sangat hangat, tidak gatal, dan memberikan sentuhan warna pop cerah untuk outfit streetwear monokrom.</p>',
+                'material_info' => '100% High-Grade Soft Acrylic Ribbed Knit.',
+                'sustainability_note' => 'Serat awet yang tidak mudah melar.',
+                'base_price' => 185000,
+                'compare_at_price' => 290000,
+                'is_active' => true,
+                'is_featured' => false,
+                'weight_grams' => 120,
+                'collections' => array_filter([$newArrivalsCol?->id, $saleCol?->id]),
+                'variants' => [
+                    [
+                        'color_name' => 'Mustard Ochre',
+                        'color_hex' => '#d99b26',
+                        'sizes' => ['One Size (Stretch)' => 1],
+                    ],
+                ],
+                'images' => [
+                    ['url' => '/images/products/vintage-knit-beanie-mustard.png', 'order' => 1, 'is_primary' => true],
+                ],
+            ],
+
+            // ==========================================
+            // SEPATU & FOOTWEAR (SNEAKERS, LOAFERS)
+            // ==========================================
+            [
+                'category_id' => $menSneakers?->id ?? 5,
+                'name' => "Sepatu Vintage 90s Low-Top Retro Skate Sneakers Navy/White",
+                'slug' => 'vintage-retro-skate-sneakers-dunk',
+                'short_description' => 'Kondisi 9/10. Upper kombinasi kulit suede & leather asli, midsole kuning vintage alami, sol karet tebal.',
+                'description' => '<p>Sneaker siluet skate 90-an dengan perpaduan suede lembut dan kulit asli warna biru navy kontras putih. Midsole telah mengalami penuaan warna kuning alami (vintage yellowing) yang sangat dicari para penggemar retro style.</p>',
+                'material_info' => 'Upper: Genuine Suede & Cowhide Leather. Sol: Vulkanisir Karet Alam Mentah.',
+                'sustainability_note' => 'Sepatu pre-loved yang sudah dibersihkan dan disanitasi menyeluruh menggunakan formula anti-bakteri.',
+                'base_price' => 1350000,
+                'compare_at_price' => 1950000,
+                'is_active' => true,
+                'is_featured' => true,
+                'weight_grams' => 950,
+                'collections' => array_filter([$newArrivalsCol?->id, $bestSellersCol?->id]),
+                'variants' => [
+                    [
+                        'color_name' => 'Midnight Navy & Vintage White',
+                        'color_hex' => '#1e2b3c',
+                        'sizes' => ['41 (Insole 26.5cm)' => 1, '42 (Insole 27cm)' => 1, '43 (Insole 28cm)' => 1],
+                    ],
+                ],
+                'images' => [
+                    ['url' => '/images/products/vintage-retro-sneaker-dunk.png', 'order' => 1, 'is_primary' => true],
+                    ['url' => '/images/products/vintage-retro-sneaker-skate.png', 'order' => 2, 'is_primary' => false],
+                ],
+            ],
+            [
+                'category_id' => $menLoafers?->id ?? 5,
+                'name' => "Sepatu Vintage Chunky Leather Penny Loafers Lug Sole Black",
+                'slug' => 'vintage-chunky-penny-loafers-black',
+                'short_description' => 'Kondisi 9/10. Kulit sapi asli tebal polished black dengan sol gerigi commando lug sole yang kokoh.',
+                'description' => '<p>Penny loafers berkarakter kuat dengan sol komando bergerigi tebal. Memberikan siluet modern preppy sekaligus edgy yang sangat cocok dipadukan dengan celana denim baggy atau celana bahan corduroy.</p>',
+                'material_info' => '100% Polished Full-Grain Leather & Heavy Rubber Commando Sole.',
+                'sustainability_note' => 'Kualitas konstruksi Goodyear welt yang dapat disol ulang seumur hidup.',
+                'base_price' => 1450000,
+                'compare_at_price' => 2100000,
+                'is_active' => true,
+                'is_featured' => false,
+                'weight_grams' => 1100,
+                'collections' => array_filter([$newArrivalsCol?->id]),
+                'variants' => [
+                    [
+                        'color_name' => 'Polished Jet Black',
+                        'color_hex' => '#181818',
+                        'sizes' => ['41 (Insole 26.5cm)' => 1, '42 (Insole 27cm)' => 1],
+                    ],
+                ],
+                'images' => [
+                    ['url' => '/images/products/vintage-chunky-loafer-black.png', 'order' => 1, 'is_primary' => true],
+                ],
+            ],
+
+            // ==========================================
+            // TAS & AKSESORIS (BAGS, SUNGLASSES)
+            // ==========================================
+            [
+                'category_id' => $menBags?->id ?? 6,
+                'name' => "Tas Vintage Distressed Leather Crossbody Messenger Bag Brown",
+                'slug' => 'vintage-leather-crossbody-messenger-bag',
+                'short_description' => 'Kondisi 9.5/10. Kulit asli bertekstur patina alami dengan gesper kuningan vintage dan tali selempang kokoh.',
+                'description' => '<p>Tas selempang kulit vintage serbaguna untuk membawa tablet, buku catatan, dompet, dan kamera saku. Semakin lama dipakai, karakter kulitnya akan semakin berkilau dan mewah.</p>',
+                'material_info' => '100% Genuine Full-Grain Leather & Solid Brass Hardware.',
+                'sustainability_note' => 'Menghindari pembelian tas sintetis berbahan kulit PU plastik yang cepat terkelupas.',
+                'base_price' => 750000,
+                'compare_at_price' => 1250000,
+                'is_active' => true,
+                'is_featured' => false,
+                'weight_grams' => 650,
+                'collections' => array_filter([$newArrivalsCol?->id, $saleCol?->id]),
+                'variants' => [
+                    [
+                        'color_name' => 'Rustic Saddle Brown',
+                        'color_hex' => '#6e4529',
+                        'sizes' => ['One Size (28 x 22 x 8 cm)' => 1],
+                    ],
+                ],
+                'images' => [
+                    ['url' => '/images/products/vintage-leather-crossbody-bag.png', 'order' => 1, 'is_primary' => true],
+                ],
+            ],
+            [
+                'category_id' => $menSun?->id ?? 6,
+                'name' => "Kacamata Vintage 90s Oval Wire Frame Sunglasses Dark Tint",
+                'slug' => 'vintage-oval-wire-sunglasses-90s',
+                'short_description' => 'Kondisi 10/10 (Deadstock). Bingkai kawat metal tipis warna gunmetal dengan lensa UV400 gelap.',
+                'description' => '<p>Kacamata hitam vintage model oval wire frame khas musisi britpop dan aktor film 90-an. Sangat ringan, elegan, dan melindungi mata 100% dari radiasi sinar UV.</p>',
+                'material_info' => 'Stainless Steel Wire Alloy Frame & Polycarbonate UV400 Lenses.',
+                'sustainability_note' => 'Item deadstock terawat dalam kondisi prima.',
+                'base_price' => 290000,
+                'compare_at_price' => 450000,
+                'is_active' => true,
+                'is_featured' => false,
+                'weight_grams' => 90,
+                'collections' => array_filter([$saleCol?->id]),
+                'variants' => [
+                    [
+                        'color_name' => 'Gunmetal Silver & Dark Smoke',
+                        'color_hex' => '#444444',
+                        'sizes' => ['One Size' => 1],
+                    ],
+                ],
+                'images' => [
+                    ['url' => '/images/products/vintage-retro-sunglasses.png', 'order' => 1, 'is_primary' => true],
                 ],
             ],
         ];
@@ -560,7 +693,7 @@ class ProductSeeder extends Seeder
             $varIndex = 1;
             foreach ($data['variants'] as $varGroup) {
                 foreach ($varGroup['sizes'] as $size => $stock) {
-                    $sku = 'FIF-' . str_pad($product->id, 3, '0', STR_PAD_LEFT) . '-' . strtoupper(substr(Str::slug($varGroup['color_name']), 0, 4)) . '-' . $size . '-' . $varIndex;
+                    $sku = 'FIF-THF-' . str_pad($product->id, 3, '0', STR_PAD_LEFT) . '-' . strtoupper(substr(Str::slug($varGroup['color_name']), 0, 4)) . '-' . $varIndex;
                     ProductVariant::create([
                         'product_id' => $product->id,
                         'sku' => $sku,
@@ -582,21 +715,21 @@ class ProductSeeder extends Seeder
                     'product_id' => $product->id,
                     'user_id' => $user->id,
                     'rating' => 5,
-                    'title' => 'Sepatu paling nyaman yang pernah saya pakai!',
-                    'comment' => 'Materialnya sangat sejuk di kaki dan solnya empuk luar biasa. Dipakai jalan seharian tidak membuat pegal sama sekali.',
+                    'title' => 'Kondisi barang luar biasa mulus & wangi laundry!',
+                    'comment' => 'Barang vintage 1-of-1 asli sesuai deskripsi. Pengukurannya sangat akurat pas di badan dan sudah wangi siap pakai.',
                     'is_approved' => true,
                 ]);
                 Review::create([
                     'product_id' => $product->id,
                     'user_id' => $user->id,
                     'rating' => 5,
-                    'title' => 'Sangat berkualitas dan ramah lingkungan',
-                    'comment' => 'Desainnya clean, minimalis, dan sangat cocok dipadukan dengan celana apapun. Worth every penny!',
+                    'title' => 'Pelayanan cepat dan kurasi itemnya juara',
+                    'comment' => 'Packing aman, dapat sertifikat keaslian dan sticker pack. Rekomendasi thrift store terbaik!',
                     'is_approved' => true,
                 ]);
             }
         }
 
-        echo "ProductSeeder completed: " . count($productsData) . " rich products with transparent PNGs and variants seeded.\n";
+        echo "ProductSeeder completed: " . count($productsData) . " rich curated thrift products with transparent PNGs and variants seeded.\n";
     }
 }

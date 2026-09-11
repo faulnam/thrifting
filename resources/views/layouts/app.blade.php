@@ -3,23 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@hasSection('title')@yield('title') - fifa@else{{ $title ?? 'fifa — Material Alami, Kenyamanan Berkelanjutan' }}@endif</title>
-    <meta name="description" content="@hasSection('description')@yield('description')@else{{ $metaDescription ?? 'Temukan kenyamanan luar biasa dari sepatu dan pakaian berbahan alami ramah lingkungan seperti wol ZQ Merino dan serat pohon eukaliptus.' }}@endif">
+    <title>@hasSection('title')@yield('title') - FIFA Thrifting@else{{ $title ?? 'FIFA — Kurasi Vintage & Thrifting Otentik 1-of-1' }}@endif</title>
+    <meta name="description" content="@hasSection('description')@yield('description')@else{{ $metaDescription ?? 'FIFA Thrifting — Kurasi busana vintage 1-of-1, jaket workwear Carhartt, band tees 90s, denim Levi 501, dan streetwear bersih higienis siap pakai.' }}@endif">
     <link rel="canonical" href="{{ url()->current() }}">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="@yield('og_type', 'website')">
     <meta property="og:url" content="{{ url()->current() }}">
-    <meta property="og:title" content="@hasSection('title')@yield('title') - fifa@else{{ $title ?? 'fifa — Material Alami, Kenyamanan Berkelanjutan' }}@endif">
-    <meta property="og:description" content="@hasSection('description')@yield('description')@else{{ $metaDescription ?? 'Temukan kenyamanan luar biasa dari sepatu dan pakaian berbahan alami ramah lingkungan seperti wol ZQ Merino dan serat pohon eukaliptus.' }}@endif">
-    <meta property="og:image" content="@yield('og_image', asset('images/og-default.jpg'))">
+    <meta property="og:title" content="@hasSection('title')@yield('title') - FIFA Thrifting@else{{ $title ?? 'FIFA — Kurasi Vintage & Thrifting Otentik 1-of-1' }}@endif">
+    <meta property="og:description" content="@hasSection('description')@yield('description')@else{{ $metaDescription ?? 'FIFA Thrifting — Kurasi busana vintage 1-of-1, jaket workwear Carhartt, band tees 90s, denim Levi 501, dan streetwear bersih higienis siap pakai.' }}@endif">
+    <meta property="og:image" content="@yield('og_image', asset('images/home/hero-dasher.jpg'))">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="{{ url()->current() }}">
-    <meta name="twitter:title" content="@hasSection('title')@yield('title') - fifa@else{{ $title ?? 'fifa — Material Alami, Kenyamanan Berkelanjutan' }}@endif">
-    <meta name="twitter:description" content="@hasSection('description')@yield('description')@else{{ $metaDescription ?? 'Temukan kenyamanan luar biasa dari sepatu dan pakaian berbahan alami ramah lingkungan seperti wol ZQ Merino dan serat pohon eukaliptus.' }}@endif">
-    <meta name="twitter:image" content="@yield('og_image', asset('images/og-default.jpg'))">
+    <meta name="twitter:title" content="@hasSection('title')@yield('title') - FIFA Thrifting@else{{ $title ?? 'FIFA — Kurasi Vintage & Thrifting Otentik 1-of-1' }}@endif">
+    <meta name="twitter:description" content="@hasSection('description')@yield('description')@else{{ $metaDescription ?? 'FIFA Thrifting — Kurasi busana vintage 1-of-1, jaket workwear Carhartt, band tees 90s, denim Levi 501, dan streetwear bersih higienis siap pakai.' }}@endif">
+    <meta name="twitter:image" content="@yield('og_image', asset('images/home/hero-dasher.jpg'))">
 
     <!-- Google Fonts: Dancing Script, Caveat, Inter & Playfair Display -->
     <link rel="preconnect" href="https://fonts.googleapis.com">

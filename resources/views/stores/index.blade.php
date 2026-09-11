@@ -11,7 +11,7 @@
             Temukan Toko fifa
         </h1>
         <p class="text-body text-iron max-w-xl mx-auto mt-4 leading-relaxed">
-            Rasakan langsung kelembutan material wol merino dan coba ukuran yang paling pas di kaki Anda di gerai fisik kami.
+            Kunjungi langsung gerai fisik FIFA Vintage Vault untuk melihat koleksi grail 1-of-1, mencoba fitting ukuran PxL nyata, dan merasakan kualitas bahan vintage otentik.
         </p>
     </div>
 </div>

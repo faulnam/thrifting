@@ -10,37 +10,173 @@ class CategorySeeder extends Seeder
 {
     public function run(): void
     {
-        // 1. Men Main Categories & Subcategories
+        // ----------------------------------------------------
+        // 1. MEN MAIN CATEGORY & SUBCATEGORIES
+        // ----------------------------------------------------
         $men = Category::updateOrCreate(
             ['slug' => 'men'],
             [
                 'parent_id' => null,
                 'gender' => 'men',
                 'name' => 'Pria',
-                'description' => 'Sepatu dan pakaian pria yang nyaman untuk aktivitas harian dari bahan alami ramah lingkungan.',
+                'description' => 'Koleksi busana vintage, jaket workwear, kaos band langka, denim, dan streetwear pria 1-of-1 terkurasi.',
                 'order' => 1,
                 'is_active' => true,
             ]
         );
 
+        // Men Jackets & Outerwear
+        $menJackets = Category::updateOrCreate(
+            ['slug' => 'men-jackets-outerwear'],
+            [
+                'parent_id' => $men->id,
+                'gender' => 'men',
+                'name' => 'Jaket & Outerwear',
+                'description' => 'Koleksi jaket workwear, bomber, varsity, tracktop, dan kulit vintage.',
+                'order' => 1,
+                'is_active' => true,
+            ]
+        );
+
+        $menJacketTypes = [
+            'Jaket Workwear & Canvas' => 'men-workwear-jackets',
+            'Varsity & Bomber 90s' => 'men-varsity-bomber',
+            'Hoodie & Crewneck Vintage' => 'men-sweats-hoodies',
+            'Tracktop & Windbreaker' => 'men-tracktop-windbreaker',
+            'Jaket Kulit & Moto Vintage' => 'men-leather-jackets',
+        ];
+
+        foreach ($menJacketTypes as $name => $slug) {
+            Category::updateOrCreate(
+                ['slug' => $slug],
+                [
+                    'parent_id' => $menJackets->id,
+                    'gender' => 'men',
+                    'name' => $name,
+                    'order' => 0,
+                    'is_active' => true,
+                ]
+            );
+        }
+
+        // Men Tops & Tees
+        $menApparel = Category::updateOrCreate(
+            ['slug' => 'men-tees-tops'],
+            [
+                'parent_id' => $men->id,
+                'gender' => 'men',
+                'name' => 'Baju & Kaos',
+                'description' => 'Kaos band single-stitch 90s, graphic tee vintage, kemeja flannel, dan polo retro.',
+                'order' => 2,
+                'is_active' => true,
+            ]
+        );
+
+        $menTeeTypes = [
+            'Vintage Band Tees' => 'men-vintage-band-tees',
+            'Graphic Tees 90s & Y2K' => 'men-graphic-tees',
+            'Kemeja Flannel & Plaid' => 'men-flannel-shirts',
+            'Kemeja Vintage Motif' => 'men-vintage-shirts',
+            'Polo Shirt Retro' => 'men-polo-shirts',
+        ];
+
+        foreach ($menTeeTypes as $name => $slug) {
+            Category::updateOrCreate(
+                ['slug' => $slug],
+                [
+                    'parent_id' => $menApparel->id,
+                    'gender' => 'men',
+                    'name' => $name,
+                    'order' => 0,
+                    'is_active' => true,
+                ]
+            );
+        }
+
+        // Men Pants & Denim
+        $menPants = Category::updateOrCreate(
+            ['slug' => 'men-pants-bottoms'],
+            [
+                'parent_id' => $men->id,
+                'gender' => 'men',
+                'name' => 'Celana & Denim',
+                'description' => 'Denim vintage Levi\'s, cargo pants multi-pocket, corduroy, dan work pants.',
+                'order' => 3,
+                'is_active' => true,
+            ]
+        );
+
+        $menPantTypes = [
+            'Denim & Jeans Vintage' => 'men-vintage-denim',
+            'Cargo Pants & Baggy' => 'men-cargo-pants',
+            'Celana Corduroy' => 'men-corduroy-pants',
+            'Workwear Pants (Dickies/Carhartt)' => 'men-work-pants',
+        ];
+
+        foreach ($menPantTypes as $name => $slug) {
+            Category::updateOrCreate(
+                ['slug' => $slug],
+                [
+                    'parent_id' => $menPants->id,
+                    'gender' => 'men',
+                    'name' => $name,
+                    'order' => 0,
+                    'is_active' => true,
+                ]
+            );
+        }
+
+        // Men Hats & Headwear
+        $menHats = Category::updateOrCreate(
+            ['slug' => 'men-hats-caps'],
+            [
+                'parent_id' => $men->id,
+                'gender' => 'men',
+                'name' => 'Topi & Headwear',
+                'description' => 'Snapback MLB 90s, beanie knit, 5-panel cap, dan washed dad cap.',
+                'order' => 4,
+                'is_active' => true,
+            ]
+        );
+
+        $menHatTypes = [
+            'Snapback Vintage 90s' => 'men-vintage-snapback',
+            'Beanie & Knit Hat' => 'men-knit-beanie',
+            'Bucket Hat Retro' => 'men-bucket-hats',
+            'Washed Dad Cap' => 'men-dad-caps',
+        ];
+
+        foreach ($menHatTypes as $name => $slug) {
+            Category::updateOrCreate(
+                ['slug' => $slug],
+                [
+                    'parent_id' => $menHats->id,
+                    'gender' => 'men',
+                    'name' => $name,
+                    'order' => 0,
+                    'is_active' => true,
+                ]
+            );
+        }
+
+        // Men Shoes & Retro Footwear
         $menShoes = Category::updateOrCreate(
             ['slug' => 'men-shoes'],
             [
                 'parent_id' => $men->id,
                 'gender' => 'men',
-                'name' => 'Sepatu',
-                'description' => 'Koleksi sepatu pria berbahan material alami',
-                'order' => 1,
+                'name' => 'Sepatu & Sneakers',
+                'description' => 'Sneakers retro, vintage skate shoes, boots kulit, dan chunky loafers.',
+                'order' => 5,
                 'is_active' => true,
             ]
         );
 
         $menShoeTypes = [
-            'Sneaker Sehari-hari' => 'men-everyday-sneakers',
-            'Sepatu Lari' => 'men-running-shoes',
-            'Slip-On & Santai' => 'men-slip-ons-loungers',
-            'Sepatu Tahan Air' => 'men-water-repellent-shoes',
-            'Sepatu Hiking & Trail' => 'men-hiking-trail-shoes',
+            'Retro & Skate Sneakers' => 'men-everyday-sneakers',
+            'Vintage Running Shoes' => 'men-running-shoes',
+            'Chunky Loafers & Derby' => 'men-slip-ons-loungers',
+            'Boots Kulit Vintage' => 'men-hiking-trail-shoes',
         ];
 
         foreach ($menShoeTypes as $name => $slug) {
@@ -56,23 +192,30 @@ class CategorySeeder extends Seeder
             );
         }
 
-        $menApparel = Category::updateOrCreate(
-            ['slug' => 'men-apparel'],
+        // Men Bags & Accessories
+        $menBags = Category::updateOrCreate(
+            ['slug' => 'men-bags-accessories'],
             [
                 'parent_id' => $men->id,
                 'gender' => 'men',
-                'name' => 'Pakaian',
-                'description' => 'Pakaian ramah lingkungan dan kaos pria',
-                'order' => 2,
+                'name' => 'Tas & Aksesoris',
+                'description' => 'Tas selempang kulit vintage, belt kulit retro, dan kacamata vintage.',
+                'order' => 6,
                 'is_active' => true,
             ]
         );
 
-        foreach (['Kaos & Atasan' => 'men-tees-tops', 'Kaos Kaki' => 'men-socks', 'Jaket & Hoodie' => 'men-sweats-hoodies'] as $name => $slug) {
+        $menBagTypes = [
+            'Crossbody & Sling Bag' => 'men-crossbody-bags',
+            'Ikat Pinggang Kulit' => 'men-leather-belts',
+            'Kacamata Vintage' => 'men-retro-sunglasses',
+        ];
+
+        foreach ($menBagTypes as $name => $slug) {
             Category::updateOrCreate(
                 ['slug' => $slug],
                 [
-                    'parent_id' => $menApparel->id,
+                    'parent_id' => $menBags->id,
                     'gender' => 'men',
                     'name' => $name,
                     'order' => 0,
@@ -81,37 +224,167 @@ class CategorySeeder extends Seeder
             );
         }
 
-        // 2. Women Main Categories & Subcategories
+        // ----------------------------------------------------
+        // 2. WOMEN MAIN CATEGORY & SUBCATEGORIES
+        // ----------------------------------------------------
         $women = Category::updateOrCreate(
             ['slug' => 'women'],
             [
                 'parent_id' => null,
                 'gender' => 'women',
                 'name' => 'Wanita',
-                'description' => 'Sepatu dan pakaian wanita yang nyaman untuk aktivitas harian dari bahan alami ramah lingkungan.',
+                'description' => 'Koleksi busana vintage wanita, baby tees 90s, oversized streetwear, denim high-waist, dan knitwear.',
                 'order' => 2,
                 'is_active' => true,
             ]
         );
 
+        // Women Jackets & Outerwear
+        $womenJackets = Category::updateOrCreate(
+            ['slug' => 'women-jackets-outerwear'],
+            [
+                'parent_id' => $women->id,
+                'gender' => 'women',
+                'name' => 'Jaket & Outerwear',
+                'description' => 'Oversized bomber, jaket denim vintage, varsity, dan knit cardigan.',
+                'order' => 1,
+                'is_active' => true,
+            ]
+        );
+
+        $womenJacketTypes = [
+            'Oversized Bomber & Varsity' => 'women-oversized-bomber',
+            'Jaket Denim Vintage' => 'women-denim-jackets',
+            'Knit Sweater & Cardigan' => 'women-knit-sweaters',
+            'Leather Jacket Vintage' => 'women-leather-jackets',
+        ];
+
+        foreach ($womenJacketTypes as $name => $slug) {
+            Category::updateOrCreate(
+                ['slug' => $slug],
+                [
+                    'parent_id' => $womenJackets->id,
+                    'gender' => 'women',
+                    'name' => $name,
+                    'order' => 0,
+                    'is_active' => true,
+                ]
+            );
+        }
+
+        // Women Tops & Tees
+        $womenApparel = Category::updateOrCreate(
+            ['slug' => 'women-tees-tops'],
+            [
+                'parent_id' => $women->id,
+                'gender' => 'women',
+                'name' => 'Baju & Atasan',
+                'description' => 'Graphic baby tees Y2K, oversized band tees, kemeja retro, dan blus vintage.',
+                'order' => 2,
+                'is_active' => true,
+            ]
+        );
+
+        $womenTeeTypes = [
+            'Graphic Baby Tees Y2K' => 'women-baby-tees',
+            'Oversized Graphic Tees' => 'women-oversized-tees',
+            'Blouse & Kemeja Vintage' => 'women-vintage-blouse',
+        ];
+
+        foreach ($womenTeeTypes as $name => $slug) {
+            Category::updateOrCreate(
+                ['slug' => $slug],
+                [
+                    'parent_id' => $womenApparel->id,
+                    'gender' => 'women',
+                    'name' => $name,
+                    'order' => 0,
+                    'is_active' => true,
+                ]
+            );
+        }
+
+        // Women Pants & Skirts
+        $womenPants = Category::updateOrCreate(
+            ['slug' => 'women-pants-bottoms'],
+            [
+                'parent_id' => $women->id,
+                'gender' => 'women',
+                'name' => 'Celana & Bawahan',
+                'description' => 'High-waist mom jeans, cargo skirt, celana corduroy, dan baggy denim.',
+                'order' => 3,
+                'is_active' => true,
+            ]
+        );
+
+        $womenPantTypes = [
+            'High-Waist Mom Jeans' => 'women-high-waist-denim',
+            'Cargo Skirt & Baggy Pants' => 'women-cargo-skirts',
+            'Corduroy Trousers' => 'women-corduroy-pants',
+        ];
+
+        foreach ($womenPantTypes as $name => $slug) {
+            Category::updateOrCreate(
+                ['slug' => $slug],
+                [
+                    'parent_id' => $womenPants->id,
+                    'gender' => 'women',
+                    'name' => $name,
+                    'order' => 0,
+                    'is_active' => true,
+                ]
+            );
+        }
+
+        // Women Hats & Headwear
+        $womenHats = Category::updateOrCreate(
+            ['slug' => 'women-hats-caps'],
+            [
+                'parent_id' => $women->id,
+                'gender' => 'women',
+                'name' => 'Topi & Headwear',
+                'description' => 'Vintage caps, beret retro, bucket hat, dan knit beanie.',
+                'order' => 4,
+                'is_active' => true,
+            ]
+        );
+
+        $womenHatTypes = [
+            'Vintage Caps & Beret' => 'women-vintage-caps',
+            'Knit Beanie' => 'women-knit-beanies',
+        ];
+
+        foreach ($womenHatTypes as $name => $slug) {
+            Category::updateOrCreate(
+                ['slug' => $slug],
+                [
+                    'parent_id' => $womenHats->id,
+                    'gender' => 'women',
+                    'name' => $name,
+                    'order' => 0,
+                    'is_active' => true,
+                ]
+            );
+        }
+
+        // Women Shoes & Bags
         $womenShoes = Category::updateOrCreate(
             ['slug' => 'women-shoes'],
             [
                 'parent_id' => $women->id,
                 'gender' => 'women',
                 'name' => 'Sepatu',
-                'description' => 'Koleksi sepatu wanita berbahan material alami',
-                'order' => 1,
+                'description' => 'Sneakers retro, platform loafers, dan vintage boots.',
+                'order' => 5,
                 'is_active' => true,
             ]
         );
 
         $womenShoeTypes = [
-            'Sneaker Sehari-hari' => 'women-everyday-sneakers',
-            'Sepatu Lari' => 'women-running-shoes',
-            'Flat & Santai' => 'women-flats-loungers',
-            'Sepatu Tahan Air' => 'women-water-repellent-shoes',
-            'Slip-On' => 'women-slip-ons',
+            'Sneaker Retro Sehari-hari' => 'women-everyday-sneakers',
+            'Platform Loafers & Mary Jane' => 'women-flats-loungers',
+            'Retro Running Shoes' => 'women-running-shoes',
+            'Slip-On Vintage' => 'women-slip-ons',
         ];
 
         foreach ($womenShoeTypes as $name => $slug) {
@@ -127,61 +400,50 @@ class CategorySeeder extends Seeder
             );
         }
 
-        $womenApparel = Category::updateOrCreate(
-            ['slug' => 'women-apparel'],
+        $womenBags = Category::updateOrCreate(
+            ['slug' => 'women-bags-accessories'],
             [
                 'parent_id' => $women->id,
                 'gender' => 'women',
-                'name' => 'Pakaian',
-                'description' => 'Pakaian wanita ramah lingkungan',
-                'order' => 2,
+                'name' => 'Tas & Aksesoris',
+                'description' => 'Vintage tote bag, shoulder bag kulit, dan syal retro.',
+                'order' => 6,
                 'is_active' => true,
             ]
         );
 
-        foreach (['Kaos & Atasan' => 'women-tees-tops', 'Kaos Kaki' => 'women-socks', 'Tas & Aksesori' => 'women-bags-accessories'] as $name => $slug) {
-            Category::updateOrCreate(
-                ['slug' => $slug],
-                [
-                    'parent_id' => $womenApparel->id,
-                    'gender' => 'women',
-                    'name' => $name,
-                    'order' => 0,
-                    'is_active' => true,
-                ]
-            );
-        }
-
-        // 3. Collections
+        // ----------------------------------------------------
+        // 3. CURATED COLLECTIONS
+        // ----------------------------------------------------
         $collections = [
             [
-                'title' => 'Produk Terbaru',
+                'title' => 'Drop Terbaru (Fresh Drops)',
                 'slug' => 'new-arrivals',
-                'description' => 'Pilihan gaya terbaru dan warna musiman berbahan wol merino premium dan serat pohon eukaliptus.',
+                'description' => 'Koleksi thrift 1-of-1 pilihan terbaru minggu ini. Semua item sudah dicuci bersih dan siap pakai.',
                 'order' => 1,
             ],
             [
-                'title' => 'Produk Terlaris',
+                'title' => 'Paling Diburu (Rare & Vault)',
                 'slug' => 'best-sellers',
-                'description' => 'Koleksi sepatu paling favorit yang dirancang untuk kenyamanan tak tertandingi sepanjang hari.',
+                'description' => 'Item vintage paling langka dan banyak dicari — mulai dari Carhartt Detroit, Nike Center Swoosh, hingga Band Tees 90s.',
                 'order' => 2,
             ],
             [
-                'title' => 'Diskon Spesial',
+                'title' => 'Steal Deals & Cuci Gudang',
                 'slug' => 'sale',
-                'description' => 'Penawaran harga spesial terbatas untuk koleksi produk berkelanjutan pilihan.',
+                'description' => 'Penawaran harga terbaik untuk item vintage terkurasi dengan potongan spesial.',
                 'order' => 3,
             ],
             [
-                'title' => 'Koleksi Tree Runners',
-                'slug' => 'tree-runners',
-                'description' => 'Sepatu ringan dan sejuk dari serat pohon eukaliptus alami terbarukan.',
+                'title' => 'Koleksi 90s & Y2K Aesthetic',
+                'slug' => 'vintage-90s',
+                'description' => 'Pilihan busana era 90-an dan Y2K: single-stitch tees, baggy denim, dan oversized windbreaker.',
                 'order' => 4,
             ],
             [
-                'title' => 'Koleksi Wool Runners',
-                'slug' => 'wool-runners',
-                'description' => 'Sneaker empuk, hangat, dan bernapas dari wol merino bersertifikat ZQ.',
+                'title' => 'Workwear & Streetwear Vault',
+                'slug' => 'workwear',
+                'description' => 'Koleksi workwear tangguh (Carhartt, Dickies) dan streetwear legendaris (Stussy, Supreme, Champion).',
                 'order' => 5,
             ],
         ];

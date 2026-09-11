@@ -28,3 +28,5 @@ Thumbs.db
 tailwindcss.exe
 *.exe
 node_modules/
+/scratch
+database/database.sqlite

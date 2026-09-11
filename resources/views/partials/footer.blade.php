@@ -128,9 +128,11 @@
                         </svg>
                     </button>
                     <div :class="openAccordion.help ? 'block' : 'hidden md:block'" class="space-y-2 pt-2 md:pt-0">
-                        <a href="mailto:help@fifa.com" class="block text-[12px] sm:text-[13px] text-[#cccccc] hover:text-white transition py-0.5">help@fifa.com</a>
-                        <a href="{{ route('pages.show', 'faq') }}" class="block text-[12px] sm:text-[13px] text-[#cccccc] hover:text-white transition py-0.5">FAQ & Kontak Bantuan</a>
-                        <a href="{{ route('pages.show', 'shipping-returns') }}" class="block text-[12px] sm:text-[13px] text-[#cccccc] hover:text-white transition py-0.5">Pengembalian & Penukaran</a>
+                        <a href="mailto:support@fifa.co.id" class="block text-[12px] sm:text-[13px] text-[#cccccc] hover:text-white transition py-0.5">support@fifa.co.id</a>
+                        <a href="{{ route('pages.show', 'faq') }}" class="block text-[12px] sm:text-[13px] text-[#cccccc] hover:text-white transition py-0.5">FAQ & Autentisitas</a>
+                        <a href="{{ route('pages.show', 'size-guide') }}" class="block text-[12px] sm:text-[13px] text-[#cccccc] hover:text-white transition py-0.5">Panduan Ukuran PxL</a>
+                        <a href="{{ route('pages.show', 'condition-guide') }}" class="block text-[12px] sm:text-[13px] text-[#cccccc] hover:text-white transition py-0.5">Standar Grading Kondisi</a>
+                        <a href="{{ route('pages.show', 'shipping-returns') }}" class="block text-[12px] sm:text-[13px] text-[#cccccc] hover:text-white transition py-0.5">Pengiriman & Garansi</a>
                     </div>
                 </div>
 
@@ -139,16 +141,17 @@
                     <button type="button" 
                             @click="openAccordion.shop = !openAccordion.shop"
                             class="w-full flex items-center justify-between md:justify-start font-sans font-bold text-[11px] sm:text-[12px] uppercase tracking-widest text-[#dcdcdc] mb-0 md:mb-4 min-h-[44px] md:min-h-0">
-                        <span>BELANJA</span>
+                        <span>BELANJA VINTAGE</span>
                         <svg class="w-4 h-4 md:hidden transform transition-transform text-white/70" :class="openAccordion.shop ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                         </svg>
                     </button>
                     <div :class="openAccordion.shop ? 'block' : 'hidden md:block'" class="space-y-2 pt-2 md:pt-0">
-                        <a href="{{ route('categories.men') }}" class="block text-[12px] sm:text-[13px] text-[#cccccc] hover:text-white transition py-0.5">Sepatu Pria</a>
-                        <a href="{{ route('categories.women') }}" class="block text-[12px] sm:text-[13px] text-[#cccccc] hover:text-white transition py-0.5">Sepatu Wanita</a>
-                        <a href="{{ route('collections.show', 'men-tees-tops') }}" class="block text-[12px] sm:text-[13px] text-[#cccccc] hover:text-white transition py-0.5">Pakaian Pria</a>
-                        <a href="{{ route('collections.show', 'women-tees-tops') }}" class="block text-[12px] sm:text-[13px] text-[#cccccc] hover:text-white transition py-0.5">Pakaian Wanita</a>
+                        <a href="{{ route('collections.show', 'new-arrivals') }}" class="block text-[12px] sm:text-[13px] text-[#cccccc] hover:text-white transition py-0.5">Fresh Drops Terbaru</a>
+                        <a href="{{ route('collections.show', 'best-sellers') }}" class="block text-[12px] sm:text-[13px] text-[#cccccc] hover:text-white transition py-0.5">Paling Diburu (Vault)</a>
+                        <a href="{{ route('categories.men') }}" class="block text-[12px] sm:text-[13px] text-[#cccccc] hover:text-white transition py-0.5">Koleksi Pria</a>
+                        <a href="{{ route('categories.women') }}" class="block text-[12px] sm:text-[13px] text-[#cccccc] hover:text-white transition py-0.5">Koleksi Wanita</a>
+                        <a href="{{ route('collections.show', 'vintage-90s') }}" class="block text-[12px] sm:text-[13px] text-[#cccccc] hover:text-white transition py-0.5">90s & Y2K Aesthetic</a>
                     </div>
                 </div>
 
@@ -166,19 +169,15 @@
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2">
                             <!-- Left Sub-column -->
                             <div class="space-y-2">
-                                <a href="{{ route('pages.show', 'our-story') }}" class="block text-[12px] sm:text-[13px] text-[#cccccc] hover:text-white transition py-0.5">Kisah Kami</a>
-                                <a href="{{ route('pages.show', 'sustainability') }}" class="block text-[12px] sm:text-[13px] text-[#cccccc] hover:text-white transition py-0.5">Material Alami</a>
-                                <a href="{{ route('pages.show', 'materials-and-making') }}" class="block text-[12px] sm:text-[13px] text-[#cccccc] hover:text-white transition py-0.5">Bahan & Pembuatan</a>
-                                <a href="{{ route('pages.show', 'shoe-care') }}" class="block text-[12px] sm:text-[13px] text-[#cccccc] hover:text-white transition py-0.5">Perawatan Sepatu</a>
-                                <a href="{{ route('pages.show', 'press') }}" class="block text-[12px] sm:text-[13px] text-[#cccccc] hover:text-white transition py-0.5">Pers & Media</a>
-                                <a href="{{ route('pages.show', 'responsible-disclosure') }}" class="block text-[12px] sm:text-[13px] text-[#cccccc] hover:text-white transition py-0.5 leading-snug">Program Keterbukaan fifa</a>
-                                <a href="{{ route('pages.show', 'california-transparency') }}" class="block text-[12px] sm:text-[13px] text-[#cccccc] hover:text-white transition py-0.5">Transparansi Rantai Pasok</a>
-                                <a href="{{ route('pages.show', 'community-offers') }}" class="block text-[12px] sm:text-[13px] text-[#cccccc] hover:text-white transition py-0.5">Penawaran Komunitas</a>
+                                <a href="{{ route('pages.show', 'our-story') }}" class="block text-[12px] sm:text-[13px] text-[#cccccc] hover:text-white transition py-0.5">Kisah FIFA</a>
+                                <a href="{{ route('pages.show', 'sustainability') }}" class="block text-[12px] sm:text-[13px] text-[#cccccc] hover:text-white transition py-0.5">Slow Fashion & Daur Ulang</a>
+                                <a href="{{ route('stores.index') }}" class="block text-[12px] sm:text-[13px] text-[#cccccc] hover:text-white transition py-0.5">Gerai Fisik</a>
+                                <a href="{{ route('pages.show', 'contact') }}" class="block text-[12px] sm:text-[13px] text-[#cccccc] hover:text-white transition py-0.5">Hubungi Kami</a>
                             </div>
                             <!-- Right Sub-column -->
                             <div class="space-y-2 pt-2 sm:pt-0">
-                                <a href="{{ route('blog.index') }}" class="block text-[12px] sm:text-[13px] text-[#cccccc] hover:text-white transition py-0.5">Blog & Jurnal</a>
-                                <a href="{{ route('pages.show', 'patents') }}" class="block text-[12px] sm:text-[13px] text-[#cccccc] hover:text-white transition py-0.5">Paten & Inovasi</a>
+                                <a href="{{ route('blog.index') }}" class="block text-[12px] sm:text-[13px] text-[#cccccc] hover:text-white transition py-0.5">Jurnal & Panduan Vintage</a>
+                                <a href="{{ route('collections.sale') }}" class="block text-[12px] sm:text-[13px] text-[#cccccc] hover:text-white transition py-0.5">Steal Deals & Cuci Gudang</a>
                             </div>
                         </div>
                     </div>

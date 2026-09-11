@@ -200,7 +200,7 @@
                         </div>
                         <div class="flex items-center gap-2">
                             <span class="text-charcoal font-bold">✓</span>
-                            <span>Bahan 100% alami & tersertifikasi ZQ Merino Wool</span>
+                            <span>100% Autentik 1-of-1 & Sudah Dicuci Higienis Siap Pakai</span>
                         </div>
                     </div>
 

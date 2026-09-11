@@ -14,7 +14,7 @@ return new class extends Migration
             $table->string('sku')->unique();
             $table->string('color_name');
             $table->string('color_hex', 20)->default('#000000');
-            $table->string('size', 20);
+            $table->string('size', 60);
             $table->integer('stock')->default(0);
             $table->decimal('price_override', 12, 2)->nullable();
             $table->boolean('is_active')->default(true);
