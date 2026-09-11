@@ -111,8 +111,8 @@
                 <!-- Size Filter -->
                 @if ($availableSizes->isNotEmpty())
                     <div class="py-4 border-b border-sand space-y-2">
-                        <span class="text-caption font-bold uppercase tracking-wide10 text-charcoal block mb-2">Ukuran Sepatu</span>
-                        <div class="grid grid-cols-4 gap-1.5">
+                        <span class="text-caption font-bold uppercase tracking-wide10 text-charcoal block mb-2">Ukuran</span>
+                        <div class="grid grid-cols-3 sm:grid-cols-4 gap-1.5">
                             @foreach ($availableSizes as $sz)
                                 <label class="cursor-pointer">
                                     <input type="radio" 
@@ -121,7 +121,7 @@
                                            {{ request('size') == $sz ? 'checked' : '' }}
                                            onchange="this.form.submit()"
                                            class="peer sr-only">
-                                    <span class="flex items-center justify-center text-caption font-medium border border-sand rounded-input py-2 peer-checked:bg-charcoal peer-checked:text-canvas peer-checked:border-charcoal hover:border-charcoal transition">
+                                    <span class="flex items-center justify-center text-caption font-semibold border border-sand rounded-xl py-2 px-1 peer-checked:bg-charcoal peer-checked:text-canvas peer-checked:border-charcoal hover:border-charcoal transition text-center truncate">
                                         {{ $sz }}
                                     </span>
                                 </label>
@@ -253,12 +253,12 @@
             <!-- Size Filter -->
             @if ($availableSizes->isNotEmpty())
                 <div class="border-t border-sand pt-4 space-y-2">
-                    <span class="text-caption font-bold uppercase tracking-wide10 text-charcoal block">Ukuran Sepatu</span>
+                    <span class="text-caption font-bold uppercase tracking-wide10 text-charcoal block">Ukuran</span>
                     <div class="grid grid-cols-4 gap-2">
                         @foreach ($availableSizes as $sz)
                             <label class="cursor-pointer min-h-[44px]">
                                 <input type="radio" name="size" value="{{ $sz }}" {{ request('size') == $sz ? 'checked' : '' }} class="peer sr-only">
-                                <span class="flex items-center justify-center text-caption font-medium border border-sand rounded-input py-2 min-h-[44px] peer-checked:bg-charcoal peer-checked:text-canvas peer-checked:border-charcoal transition">
+                                <span class="flex items-center justify-center text-caption font-semibold border border-sand rounded-xl py-2 min-h-[44px] peer-checked:bg-charcoal peer-checked:text-canvas peer-checked:border-charcoal transition">
                                     {{ $sz }}
                                 </span>
                             </label>

@@ -22,10 +22,10 @@
                 </div>
                 <div>
                     <h3 class="font-sans font-bold text-[13px] tracking-wider uppercase text-white leading-tight">
-                        Asisten FIFA Thrift
+                        Asisten fifa
                     </h3>
                     <p class="text-[11px] text-white/60 mt-0.5">
-                        Kurasi Vintage & Panduan Ukuran
+                        Layanan Bantuan & Panduan Belanja
                     </p>
                 </div>
             </div>
@@ -52,7 +52,7 @@
             <!-- Subtle Badge Header -->
             <div class="text-center my-1">
                 <span class="inline-block bg-[#eae5dc] text-[#554e45] text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full">
-                    Kurasi Vintage 1-of-1 FIFA
+                    Kurasi Vintage 1-of-1 fifa
                 </span>
             </div>
 
@@ -123,7 +123,7 @@
             </template>
         </div>
 
-        <!-- Input Bar (Clean Bordered Input) -->
+        <!-- Input Bar -->
         <div class="p-3.5 bg-white border-t border-[#ded8cf]">
             <form @submit.prevent="handleSubmit()" class="flex items-center gap-2">
                 <input type="text" 
@@ -144,23 +144,34 @@
         </div>
     </div>
 
-    <!-- Floating Toggle Button with FIFA Icon -->
-    <div class="relative flex items-center justify-end">
-        <button type="button" 
-                @click="open = !open" 
-                class="w-14 h-14 rounded-full bg-[#212121] hover:bg-black text-white shadow-xl hover:shadow-2xl flex items-center justify-center transition-all duration-200 focus:outline-none cursor-pointer group hover:scale-105 active:scale-95"
-                aria-label="Buka Chatbot Bantuan">
-            <template x-if="!open">
-                <div class="flex flex-col items-center justify-center">
-                    <span class="font-display italic font-extrabold text-xl leading-none">f</span>
-                    <span class="text-[8px] font-bold tracking-tighter uppercase mt-0.5">THRIFT</span>
-                </div>
-            </template>
-            <template x-if="open">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+    <!-- Floating Trigger Button (Minimalist Solid Charcoal with Sleek Chat Icon & Tooltip) -->
+    <div class="flex items-center gap-3 justify-end">
+        <!-- Minimal Tooltip (shows when closed) -->
+        <div x-show="!open && showTooltip" 
+             x-transition:enter="transition ease-out duration-250"
+             x-transition:enter-start="opacity-0 translate-x-2"
+             x-transition:enter-end="opacity-100 translate-x-0"
+             x-transition:leave="transition ease-in duration-150"
+             x-transition:leave-start="opacity-100"
+             x-transition:leave-end="opacity-0"
+             class="hidden sm:flex items-center bg-white text-[#212121] text-[12px] font-medium py-2 px-3.5 rounded-full shadow-md border border-[#ded8cf] gap-2">
+            <span>Butuh bantuan seputar produk fifa?</span>
+            <button @click.stop="showTooltip = false" class="text-stone-400 hover:text-charcoal text-xs">✕</button>
+        </div>
+
+        <button @click="open = !open; if(open) { showTooltip = false; $nextTick(() => scrollBottom()); }"
+                class="group relative w-13 h-13 sm:w-14 sm:h-14 rounded-full bg-[#212121] text-white shadow-lg hover:shadow-xl flex items-center justify-center transition-all duration-200 hover:scale-105 active:scale-95 border border-white/10 hover:bg-black cursor-pointer"
+                aria-label="Buka Chatbot Bantuan fifa">
+            
+            <!-- Minimalist Chat / Close Icon -->
+            <div class="relative w-5 h-5 flex items-center justify-center">
+                <svg x-show="!open" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/>
                 </svg>
-            </template>
+                <svg x-show="open" x-cloak class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </div>
         </button>
     </div>
 </div>
@@ -169,6 +180,7 @@
 function fifaChatbot() {
     return {
         open: false,
+        showTooltip: true,
         userInput: '',
         isTyping: false,
         messages: [],
@@ -184,13 +196,16 @@ function fifaChatbot() {
 
         init() {
             this.resetChat();
+            setTimeout(() => {
+                this.showTooltip = false;
+            }, 7000);
         },
 
         resetChat() {
             this.messages = [
                 {
                     sender: 'bot',
-                    text: 'Halo! Selamat datang di <strong>FIFA Thrifting</strong>.<br><br>Saya asisten virtual FIFA, siap membantu Anda seputar kurasi item vintage 1-of-1, panduan ukuran nyata (PxL), informasi keaslian tag/jahitan, status pengiriman, atau promo drop minggu ini. Ada yang bisa dibantu?',
+                    text: 'Halo! Selamat datang di <strong>fifa</strong>.<br><br>Saya asisten fifa, siap membantu Anda seputar kurasi item vintage 1-of-1, panduan ukuran nyata (PxL), informasi keaslian tag/jahitan, status pengiriman, atau promo drop minggu ini. Ada yang bisa dibantu?',
                     links: [
                         { label: 'Drop Terbaru', url: '{{ route('collections.show', 'new-arrivals') }}' },
                         { label: 'Koleksi Pria', url: '{{ route('categories.men') }}' },
@@ -232,7 +247,7 @@ function fifaChatbot() {
             if (q.includes('terlaris') || q.includes('rekomendasi') || q.includes('favorit') || q.includes('populer') || q.includes('best seller') || q.includes('diburu') || q.includes('grail') || q.includes('langka')) {
                 return {
                     sender: 'bot',
-                    text: 'Berikut adalah item vintage paling dicari di vault FIFA saat ini:<br><br>' +
+                    text: 'Berikut adalah item vintage paling dicari di vault fifa saat ini:<br><br>' +
                           '&bull; <strong>Carhartt Detroit J97 Tan</strong>: Jaket canvas duck legendaris pudar alami.<br>' +
                           '&bull; <strong>Nirvana 1993 In Utero</strong>: Kaos band single-stitch tag Giant USA.<br>' +
                           '&bull; <strong>Nike Center Swoosh Hoodie</strong>: Silver tag 90s boxy fit.<br>' +
@@ -248,7 +263,7 @@ function fifaChatbot() {
             if (q.includes('ukuran') || q.includes('size') || q.includes('pxl') || q.includes('lebar') || q.includes('panjang') || q.includes('pas') || q.includes('fitting')) {
                 return {
                     sender: 'bot',
-                    text: '<strong>Panduan Pengukuran PxL FIFA:</strong><br><br>' +
+                    text: '<strong>Panduan Pengukuran PxL fifa:</strong><br><br>' +
                           '&bull; Karena potongan pakaian vintage bervariasi (boxy, relaxed, true 90s), kami selalu menyertakan ukuran nyata <strong>Panjang x Lebar (PxL)</strong> dalam cm di setiap produk.<br>' +
                           '&bull; <strong>Panjang (P):</strong> Diukur dari pundak atas ke ujung bawah.<br>' +
                           '&bull; <strong>Lebar (L):</strong> Diukur dari ketiak kiri ke ketiak kanan (pit-to-pit).',
@@ -276,7 +291,7 @@ function fifaChatbot() {
             if (q.includes('ongkir') || q.includes('kirim') || q.includes('pengiriman') || q.includes('gratis') || q.includes('ekspedisi') || q.includes('resi') || q.includes('biteship')) {
                 return {
                     sender: 'bot',
-                    text: '<strong>Informasi Pengiriman FIFA:</strong><br><br>' +
+                    text: '<strong>Informasi Pengiriman fifa:</strong><br><br>' +
                           '&bull; <strong>Gratis Ongkir</strong> untuk setiap pesanan minimal <strong>Rp 500.000</strong> ke seluruh wilayah Indonesia.<br>' +
                           '&bull; Terintegrasi resmi dengan <strong>Biteship</strong> (JNE, SiCepat, J&T, GoSend, Grab).<br>' +
                           '&bull; Estimasi pengiriman reguler: 1-3 hari kerja dengan nomor resi otomatis tercatat di akun.',
@@ -326,7 +341,7 @@ function fifaChatbot() {
             if (q.includes('toko') || q.includes('outlet') || q.includes('store') || q.includes('lokasi') || q.includes('offline') || q.includes('gerai')) {
                 return {
                     sender: 'bot',
-                    text: 'Kunjungi gerai fisik FIFA Vintage Vault di Senayan City Jakarta, M Bloc Space Melawai, PVJ Bandung, Tunjungan Plaza Surabaya, dan Canggu Bali.',
+                    text: 'Kunjungi gerai fisik fifa di Senayan City Jakarta, M Bloc Space Melawai, PVJ Bandung, Tunjungan Plaza Surabaya, dan Canggu Bali.',
                     links: [
                         { label: 'Lokasi Toko Fisik', url: '{{ route('stores.index') }}' }
                     ]
@@ -336,7 +351,7 @@ function fifaChatbot() {
             // Fallback default
             return {
                 sender: 'bot',
-                text: 'Saya dapat membantu Anda seputar kurasi vintage, rekomendasi jaket & kaos band, panduan ukuran PxL, gratis ongkir, dan jaminan keaslian FIFA. Silakan pilih menu di bawah atau tanyakan apapun!',
+                text: 'Saya dapat membantu Anda seputar kurasi vintage, rekomendasi jaket & kaos band, panduan ukuran PxL, gratis ongkir, dan jaminan keaslian fifa. Silakan pilih menu di bawah atau tanyakan apapun!',
                 links: [
                     { label: 'Fresh Drops Minggu Ini', url: '{{ route('collections.show', 'new-arrivals') }}' },
                     { label: 'Koleksi Pria', url: '{{ route('categories.men') }}' },

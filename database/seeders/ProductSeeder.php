@@ -40,16 +40,6 @@ class ProductSeeder extends Seeder
         $menBags = Category::where('slug', 'men-crossbody-bags')->first() ?? Category::where('slug', 'men-bags-accessories')->first();
         $menSun = Category::where('slug', 'men-retro-sunglasses')->first() ?? Category::where('slug', 'men-bags-accessories')->first();
 
-        $womenBomber = Category::where('slug', 'women-oversized-bomber')->first() ?? Category::where('slug', 'women-jackets-outerwear')->first();
-        $womenDenimJkt = Category::where('slug', 'women-denim-jackets')->first() ?? Category::where('slug', 'women-jackets-outerwear')->first();
-        $womenBabyTees = Category::where('slug', 'women-baby-tees')->first() ?? Category::where('slug', 'women-tees-tops')->first();
-        $womenOversizedTees = Category::where('slug', 'women-oversized-tees')->first() ?? Category::where('slug', 'women-tees-tops')->first();
-        $womenMomJeans = Category::where('slug', 'women-high-waist-denim')->first() ?? Category::where('slug', 'women-pants-bottoms')->first();
-        $womenCargoSkirt = Category::where('slug', 'women-cargo-skirts')->first() ?? Category::where('slug', 'women-pants-bottoms')->first();
-        $womenCaps = Category::where('slug', 'women-vintage-caps')->first() ?? Category::where('slug', 'women-hats-caps')->first();
-        $womenLoafers = Category::where('slug', 'women-flats-loungers')->first() ?? Category::where('slug', 'women-shoes')->first();
-        $womenTotes = Category::where('slug', 'women-vintage-totes')->first() ?? Category::where('slug', 'women-bags-accessories')->first();
-
         // 2. Fetch Collections
         $newArrivalsCol = Collection::where('slug', 'new-arrivals')->first();
         $bestSellersCol = Collection::where('slug', 'best-sellers')->first();
@@ -57,7 +47,7 @@ class ProductSeeder extends Seeder
         $vintage90sCol = Collection::where('slug', 'vintage-90s')->first();
         $workwearCol = Collection::where('slug', 'workwear')->first();
 
-        // 3. Extensive Thrift Products Dataset
+        // 3. Extensive Thrift Products Dataset (Clean Standard Sizes)
         $productsData = [
             // ==========================================
             // JAKET & OUTERWEAR
@@ -66,7 +56,7 @@ class ProductSeeder extends Seeder
                 'category_id' => $menWorkwear?->id ?? 1,
                 'name' => "Jaket Vintage Carhartt Detroit Canvas J97 Faded Tan",
                 'slug' => 'vintage-carhartt-detroit-j97-tan',
-                'short_description' => 'Kondisi 9.5/10. Tag Carhartt Made in USA 90s. Heavyweight duck canvas dengan kerah corduroy cokelat.',
+                'short_description' => 'Kondisi 9.5/10. Tag Carhartt Made in USA 90s. Heavyweight duck canvas dengan kerah corduroy cokelat (PxL: 69 x 64 cm).',
                 'description' => '<p>Item grail legendaris! Jaket Carhartt Detroit J97 vintage era 90-an dengan pudar alami (faded patina) yang sangat otentik. Menggunakan material heavyweight duck canvas 12oz dengan lapisan blanket lining bermotif Aztec di bagian dalam untuk kehangatan maksimal.</p><p><strong>Detail Spesifikasi:</strong><br>&bull; Tag: Carhartt Crafted with Pride in USA<br>&bull; Kondisi: 9.5/10 (Sangat terawat, zipper lancar YKK kuningan)<br>&bull; Ukuran: Size L (Panjang 69 cm x Lebar Dada 64 cm)<br>&bull; Sanitasi: Sudah melalui proses dry cleaning & steam higienis siap pakai.</p>',
                 'material_info' => '100% Ring-Spun Cotton Duck Canvas (12oz) dengan kerah 100% katun corduroy dan resleting full brass vintage.',
                 'sustainability_note' => 'Slow Fashion: Mengurangi emisi karbon 18.4 kg CO2e dan menghemat 4.500L air dibanding produksi jaket kanvas baru.',
@@ -80,12 +70,12 @@ class ProductSeeder extends Seeder
                     [
                         'color_name' => 'Faded Tan Ochre',
                         'color_hex' => '#c29b61',
-                        'sizes' => ['L (PxL 69x64)' => 1],
+                        'sizes' => ['L' => 1],
                     ],
                     [
                         'color_name' => 'Washed Onyx Black',
                         'color_hex' => '#2b2927',
-                        'sizes' => ['XL (PxL 72x68)' => 1],
+                        'sizes' => ['XL' => 1],
                     ],
                 ],
                 'images' => [
@@ -97,7 +87,7 @@ class ProductSeeder extends Seeder
                 'category_id' => $menHoodies?->id ?? 1,
                 'name' => "Hoodie Vintage 90s Nike Center Mini Swoosh Embroidered",
                 'slug' => 'vintage-nike-center-swoosh-hoodie',
-                'short_description' => 'Kondisi 9.5/10. Tag Nike Silver Tag era 1996. Bordir logo Nike di tengah dada, bahan fleece tebal lembut.',
+                'short_description' => 'Kondisi 9.5/10. Tag Nike Silver Tag era 1996. Bordir logo Nike di tengah dada, bahan fleece tebal lembut (PxL: 72 x 66 cm).',
                 'description' => '<p>Salah satu siluet vintage Nike paling diburu di dunia streetwear. Model center embroidered swoosh dengan potongan boxy fit khas 90-an. Karet rib di pinggang dan lengan masih sangat kencang dan tebal.</p><p><strong>Detail Spesifikasi:</strong><br>&bull; Tag: Nike Silver Tag Made in USA<br>&bull; Kondisi: 9.5/10 (No minus, no hole, no stain)<br>&bull; Ukuran: Size XL (Panjang 72 cm x Lebar 66 cm)<br>&bull; 1 of 1 Authentic curated piece.</p>',
                 'material_info' => '80% Premium Heavy Cotton Fleece / 20% Polyester. Bahan tebal 400 GSM.',
                 'sustainability_note' => 'Zero Textile Waste: Menjaga pakaian berkualitas tinggi tetap berputar tanpa limbah ke tempat pembuangan akhir.',
@@ -111,12 +101,12 @@ class ProductSeeder extends Seeder
                     [
                         'color_name' => 'Heather Grey',
                         'color_hex' => '#a8a8a8',
-                        'sizes' => ['XL (PxL 72x66)' => 1],
+                        'sizes' => ['XL' => 1],
                     ],
                     [
                         'color_name' => 'Faded Charcoal Black',
                         'color_hex' => '#222222',
-                        'sizes' => ['L (PxL 70x63)' => 1],
+                        'sizes' => ['L' => 1],
                     ],
                 ],
                 'images' => [
@@ -128,7 +118,7 @@ class ProductSeeder extends Seeder
                 'category_id' => $menLeather?->id ?? 1,
                 'name' => "Jaket Vintage Leather Racing Moto Biker 90s Multi-Patch",
                 'slug' => 'vintage-racing-jacket-leather',
-                'short_description' => 'Kondisi 9/10. Kulit sapi asli (genuine cowhide) dengan detail bordir patch balap retro dan zipper YKK.',
+                'short_description' => 'Kondisi 9/10. Kulit sapi asli (genuine cowhide) dengan detail bordir patch balap retro dan zipper YKK (PxL: 66 x 58 cm).',
                 'description' => '<p>Jaket motor balap vintage era 90-an dengan konstruksi kulit asli premium bertekstur tebal. Dihiasi patch sponsor balap klasik, padding bahu berkarakter, dan kancing snap leher khas pembalap sirkuit.</p><p><strong>Detail Spesifikasi:</strong><br>&bull; Material: 100% Genuine Heavy Cowhide Leather<br>&bull; Kondisi: 9/10 (Patina kulit alami sangat gagah, zipper lancar)<br>&bull; Ukuran: Size L (Panjang 66 cm x Lebar 58 cm x Panjang Lengan 62 cm).</p>',
                 'material_info' => '100% Kulit Sapi Asli (Genuine Leather) dengan furing satin berlapis dakron tipis.',
                 'sustainability_note' => 'Circular Vintage: Menghidupkan kembali karya kerajinan kulit asli legendaris yang tahan hingga puluhan tahun.',
@@ -140,9 +130,9 @@ class ProductSeeder extends Seeder
                 'collections' => array_filter([$bestSellersCol?->id, $vintage90sCol?->id]),
                 'variants' => [
                     [
-                        'color_name' => 'Vintage Racing Tri-Tone (Black/Red/White)',
+                        'color_name' => 'Vintage Racing Tri-Tone',
                         'color_hex' => '#9e2a2b',
-                        'sizes' => ['L (PxL 66x58)' => 1],
+                        'sizes' => ['L' => 1],
                     ],
                 ],
                 'images' => [
@@ -153,8 +143,8 @@ class ProductSeeder extends Seeder
                 'category_id' => $menVarsity?->id ?? 1,
                 'name' => "Jaket Vintage 90s Forest Green Wool & Leather Varsity Letterman",
                 'slug' => 'vintage-varsity-jacket-green',
-                'short_description' => 'Kondisi 9.5/10. Bodi wol tebal dengan lengan kulit asli krem dan chenille patch bordir tim rugby 1994.',
-                'description' => '<p>Varsity letterman jacket otentik tahun 1994 buatan Amerika Serikat. Memadukan bodi wol Melton warna hijau botol dengan lengan kulit asli yang lentur. Sangat hangat, berbobot, dan memberikan aura Ivy League / American College vintage.</p>',
+                'short_description' => 'Kondisi 9.5/10. Bodi wol tebal dengan lengan kulit asli krem dan chenille patch bordir tim rugby 1994 (PxL: 71 x 65 cm).',
+                'description' => '<p>Varsity letterman jacket otentik tahun 1994 buatan Amerika Serikat. Memadukan bodi wol Melton warna hijau botol dengan lengan kulit asli yang lentur.</p>',
                 'material_info' => 'Bodi: 80% Melton Wool / 20% Nylon. Lengan: 100% Genuine Leather. Furing: Quilted Satin.',
                 'sustainability_note' => 'Mencegah pembuangan serat wol murni ke limbah lingkungan.',
                 'base_price' => 1950000,
@@ -165,9 +155,9 @@ class ProductSeeder extends Seeder
                 'collections' => array_filter([$newArrivalsCol?->id, $vintage90sCol?->id]),
                 'variants' => [
                     [
-                        'color_name' => 'Forest Green & Cream Leather',
+                        'color_name' => 'Forest Green & Cream',
                         'color_hex' => '#2d4a3e',
-                        'sizes' => ['XL (PxL 71x65)' => 1],
+                        'sizes' => ['XL' => 1],
                     ],
                 ],
                 'images' => [
@@ -178,7 +168,7 @@ class ProductSeeder extends Seeder
                 'category_id' => $menWorkwear?->id ?? 1,
                 'name' => "Jaket Vintage Ralph Lauren Harrington Chino Windbreaker",
                 'slug' => 'vintage-ralph-harrington-beige',
-                'short_description' => 'Kondisi 9.5/10. Tag Polo Ralph Lauren era 90s, furing tartan plaid klasik dengan bordir Pony logo di dada.',
+                'short_description' => 'Kondisi 9.5/10. Tag Polo Ralph Lauren era 90s, furing tartan plaid klasik dengan bordir Pony logo (PxL: 68 x 62 cm).',
                 'description' => '<p>Jaket Harrington klasik paling ikonik dari Ralph Lauren. Potongan relaxed fit dengan bahan katun twill chino tahan angin, kerah double button, saku samping berpenutup, dan furing bermotif tartan khas Polo.</p>',
                 'material_info' => '100% Cotton Chino Twill dengan furing 100% Cotton Tartan Plaid.',
                 'sustainability_note' => 'Vintage Timeless: Desain abadi yang tidak pernah ketinggalan zaman.',
@@ -192,7 +182,7 @@ class ProductSeeder extends Seeder
                     [
                         'color_name' => 'Classic Khaki Beige',
                         'color_hex' => '#d4be9c',
-                        'sizes' => ['L (PxL 68x62)' => 1],
+                        'sizes' => ['L' => 1],
                     ],
                 ],
                 'images' => [
@@ -203,8 +193,8 @@ class ProductSeeder extends Seeder
                 'category_id' => $menWorkwear?->id ?? 1,
                 'name' => "Jaket Vintage Patagonia Retro-X Deep Pile Fleece Zip",
                 'slug' => 'vintage-patagonia-fleece-cream',
-                'short_description' => 'Kondisi 9.5/10. Bulu fleece tebal shaggy dengan kantong dada nilon kontras biru tua, made in USA.',
-                'description' => '<p>Jaket outdoor vintage paling diburu dari Patagonia. Dibuat dengan konstruksi deep pile fleece penahan angin berteknologi windproof membrane. Sangat hangat, stylish untuk gorpcore maupun streetwear harian.</p>',
+                'short_description' => 'Kondisi 9.5/10. Bulu fleece tebal shaggy dengan kantong dada nilon kontras biru tua (PxL: 67 x 57 cm).',
+                'description' => '<p>Jaket outdoor vintage paling diburu dari Patagonia. Dibuat dengan konstruksi deep pile fleece penahan angin berteknologi windproof membrane.</p>',
                 'material_info' => '100% Recycled Polyester Deep-Pile Sherpa Fleece (6mm pile) dengan nilon pocket.',
                 'sustainability_note' => 'Patagonia Heritage: Pelopor keberlanjutan daur ulang tekstil sejak era 90-an.',
                 'base_price' => 1650000,
@@ -215,9 +205,9 @@ class ProductSeeder extends Seeder
                 'collections' => array_filter([$bestSellersCol?->id, $newArrivalsCol?->id]),
                 'variants' => [
                     [
-                        'color_name' => 'Natural Cream & Navy Pocket',
+                        'color_name' => 'Natural Cream & Navy',
                         'color_hex' => '#ede6d8',
-                        'sizes' => ['M (PxL 67x57)' => 1],
+                        'sizes' => ['M' => 1],
                     ],
                 ],
                 'images' => [
@@ -232,8 +222,8 @@ class ProductSeeder extends Seeder
                 'category_id' => $menBandTees?->id ?? 2,
                 'name' => "Kaos Vintage 1993 Nirvana In Utero Single Stitch Band Tee",
                 'slug' => 'vintage-nirvana-in-utero-tee-1993',
-                'short_description' => 'Kondisi 9/10. Tag Giant by Anvil Made in USA 1993. Jahitan Single Stitch atas bawah, pudar abu tua alami.',
-                'description' => '<p>Holy grail t-shirt vintage rock dunia! Kaos original tur Nirvana In Utero tahun 1993 berlisensi resmi Nirvana Under License to Brockum. Jahitan single stitch utuh pada bagian lengan dan ujung bawah kaos. Sablon crackle alami yang sangat estetik tanpa bolong.</p><p><strong>Detail Spesifikasi:</strong><br>&bull; Tag: Giant by Anvil Made in USA (100% Cotton Pre-Shrunk)<br>&bull; Stitching: Single Stitch Sleeve & Hem<br>&bull; Ukuran: Size L fit XL (Panjang 74 cm x Lebar 58 cm)<br>&bull; Koleksi kurasi super rare.</p>',
+                'short_description' => 'Kondisi 9/10. Tag Giant by Anvil Made in USA 1993. Jahitan Single Stitch atas bawah, pudar abu tua alami (PxL: 74 x 58 cm).',
+                'description' => '<p>Holy grail t-shirt vintage rock dunia! Kaos original tur Nirvana In Utero tahun 1993 berlisensi resmi Nirvana Under License to Brockum. Jahitan single stitch utuh pada bagian lengan dan ujung bawah kaos. Sablon crackle alami yang sangat estetik tanpa bolong.</p><p><strong>Detail Spesifikasi:</strong><br>&bull; Tag: Giant by Anvil Made in USA (100% Cotton Pre-Shrunk)<br>&bull; Stitching: Single Stitch Sleeve & Hem<br>&bull; Ukuran: Size L (Panjang 74 cm x Lebar 58 cm)<br>&bull; Koleksi kurasi super rare.</p>',
                 'material_info' => '100% Heavyweight Cotton Single-Stitch Konstruksi Vintage 90s.',
                 'sustainability_note' => 'Koleksi seni busana bersejarah berumur lebih dari 30 tahun yang nilainya terus meningkat.',
                 'base_price' => 2250000,
@@ -244,9 +234,9 @@ class ProductSeeder extends Seeder
                 'collections' => array_filter([$newArrivalsCol?->id, $bestSellersCol?->id, $vintage90sCol?->id]),
                 'variants' => [
                     [
-                        'color_name' => 'Faded Vintage Charcoal Black',
+                        'color_name' => 'Faded Charcoal Black',
                         'color_hex' => '#363434',
-                        'sizes' => ['L (PxL 74x58)' => 1],
+                        'sizes' => ['L' => 1],
                     ],
                 ],
                 'images' => [
@@ -258,7 +248,7 @@ class ProductSeeder extends Seeder
                 'category_id' => $menBandTees?->id ?? 2,
                 'name' => "Kaos Vintage 1991 Metallica Pushead Damage Inc Band Tee",
                 'slug' => 'vintage-metallica-damage-inc-tee',
-                'short_description' => 'Kondisi 9.5/10. Tag Brockum Worldwide Made in USA. Jahitan Single Stitch, sablon artwork Pushead super detail.',
+                'short_description' => 'Kondisi 9.5/10. Tag Brockum Worldwide Made in USA. Jahitan Single Stitch, sablon artwork Pushead super detail (PxL: 76 x 60 cm).',
                 'description' => '<p>Kaos vintage original rilisan tur Metallica era 1991 dengan ilustrasi karya seniman legendaris Brian Pushead Schroeder. Bahan katun vintage tebal berbulu halus khas 90-an dengan pudar warna sun-faded merata.</p>',
                 'material_info' => '100% Combed Cotton Single Stitch 90s.',
                 'sustainability_note' => 'Menghemat ribuan liter air dibanding membeli kaos grafis fast fashion modern.',
@@ -272,7 +262,7 @@ class ProductSeeder extends Seeder
                     [
                         'color_name' => 'Sun Faded Black',
                         'color_hex' => '#282726',
-                        'sizes' => ['XL (PxL 76x60)' => 1],
+                        'sizes' => ['XL' => 1],
                     ],
                 ],
                 'images' => [
@@ -283,8 +273,8 @@ class ProductSeeder extends Seeder
                 'category_id' => $menGraphicTees?->id ?? 2,
                 'name' => "Kaos Vintage Harley Davidson 3D Emblem Eagle 90s Graphic Tee",
                 'slug' => 'vintage-harley-davidson-3d-emblem-tee',
-                'short_description' => 'Kondisi 9.5/10. Tag Holoubek / Harley Davidson Made in USA. Grafis elang 3D emblem gagah, pudar washed black.',
-                'description' => '<p>Kaos Harley Davidson legendaris dengan cetakan grafis 3D Emblem Fort Worth Texas. Efek pudar washed black alami dengan fitting boxy santai yang sangat disukai para pecinta vintage biker look.</p>',
+                'short_description' => 'Kondisi 9.5/10. Tag Holoubek / Harley Davidson Made in USA. Grafis elang 3D emblem gagah, pudar washed black (PxL: 71 x 57 cm).',
+                'description' => '<p>Kaos Harley Davidson legendaris dengan cetakan grafis 3D Emblem Fort Worth Texas. Efek pudar washed black alami dengan fitting boxy santai.</p>',
                 'material_info' => '100% Pre-Shrunk Heavy Cotton.',
                 'sustainability_note' => 'Autentik 100% tanpa bahan sintetis plastik mikro.',
                 'base_price' => 1100000,
@@ -297,7 +287,7 @@ class ProductSeeder extends Seeder
                     [
                         'color_name' => 'Washed Acid Black',
                         'color_hex' => '#383634',
-                        'sizes' => ['L (PxL 71x57)' => 1],
+                        'sizes' => ['L' => 1],
                     ],
                 ],
                 'images' => [
@@ -308,8 +298,8 @@ class ProductSeeder extends Seeder
                 'category_id' => $menGraphicTees?->id ?? 2,
                 'name' => "Kaos Vintage Stussy 8-Ball World Tour Heavyweight Streetwear Tee",
                 'slug' => 'vintage-stussy-8ball-world-tour-tee',
-                'short_description' => 'Kondisi 9.5/10. Tag Stussy Made in USA era awal 2000-an. Grafis bola 8 ikonik di punggung dan dada kiri.',
-                'description' => '<p>Kaos grafis streetwear paling ikonik dari Shawn Stussy. Menampilkan artwork bola 8 legendaris dengan daftar kota dunia (London, Paris, Los Angeles, New York, Tokyo). Kain tebal kokoh dengan kerah rib lebar.</p>',
+                'short_description' => 'Kondisi 9.5/10. Tag Stussy Made in USA era awal 2000-an. Grafis bola 8 ikonik di punggung dan dada kiri (PxL: 72 x 56 cm).',
+                'description' => '<p>Kaos grafis streetwear paling ikonik dari Shawn Stussy. Menampilkan artwork bola 8 legendaris dengan daftar kota dunia (London, Paris, Los Angeles, New York, Tokyo).</p>',
                 'material_info' => '100% Heavyweight Cotton 220 GSM.',
                 'sustainability_note' => 'Pre-loved authentic piece.',
                 'base_price' => 850000,
@@ -322,12 +312,12 @@ class ProductSeeder extends Seeder
                     [
                         'color_name' => 'Off-White Cream',
                         'color_hex' => '#f2ece1',
-                        'sizes' => ['L (PxL 72x56)' => 1],
+                        'sizes' => ['L' => 1],
                     ],
                     [
                         'color_name' => 'Pitch Black',
                         'color_hex' => '#1a1a1a',
-                        'sizes' => ['XL (PxL 75x61)' => 1],
+                        'sizes' => ['XL' => 1],
                     ],
                 ],
                 'images' => [
@@ -339,8 +329,8 @@ class ProductSeeder extends Seeder
                 'category_id' => $menFlannel?->id ?? 2,
                 'name' => "Kemeja Vintage Heavy Flannel Plaid Overshirt Green/Navy",
                 'slug' => 'vintage-flannel-shirt-green-navy',
-                'short_description' => 'Kondisi 9.5/10. Tag Five Brother / Big Mac Made in USA. Katun flannel tebal berbulu lembut, kancing mutiara.',
-                'description' => '<p>Kemeja flannel tebal vintage era 80-90an dari brand workwear Amerika Serikat. Jahitan double needle super kuat dengan dua kantong dada berkancing. Sangat cocok dipakai sebagai luaran (overshirt) dengan kaos polos di dalam.</p>',
+                'short_description' => 'Kondisi 9.5/10. Tag Five Brother / Big Mac Made in USA. Katun flannel tebal berbulu lembut, kancing mutiara (PxL: 73 x 58 cm).',
+                'description' => '<p>Kemeja flannel tebal vintage era 80-90an dari brand workwear Amerika Serikat. Jahitan double needle super kuat dengan dua kantong dada berkancing.</p>',
                 'material_info' => '100% Heavy Brushed Cotton Flannel.',
                 'sustainability_note' => 'Daya tahan bahan katun murni yang awet hingga puluhan tahun.',
                 'base_price' => 480000,
@@ -353,12 +343,12 @@ class ProductSeeder extends Seeder
                     [
                         'color_name' => 'Forest Hunter Plaid',
                         'color_hex' => '#2e473b',
-                        'sizes' => ['L (PxL 73x58)' => 1],
+                        'sizes' => ['L' => 1],
                     ],
                     [
-                        'color_name' => 'Rustic Red & Black Check',
+                        'color_name' => 'Rustic Red Check',
                         'color_hex' => '#8b263e',
-                        'sizes' => ['M (PxL 70x54)' => 1],
+                        'sizes' => ['M' => 1],
                     ],
                 ],
                 'images' => [
@@ -374,7 +364,7 @@ class ProductSeeder extends Seeder
                 'category_id' => $menDenim?->id ?? 3,
                 'name' => "Celana Jeans Vintage 90s Levi's 501 Made in USA Light Wash",
                 'slug' => 'vintage-levis-501-usa-light-wash',
-                'short_description' => 'Kondisi 9.5/10. Tag Red Tab Batwing Made in USA 1994, Button Fly 553, pudar kumis (whiskers) alami.',
+                'short_description' => 'Kondisi 9.5/10. Tag Red Tab Batwing Made in USA 1994, Button Fly 553, pudar kumis alami (LP: 82 cm, Panjang 104 cm).',
                 'description' => '<p>Celana jeans paling ikonik dalam sejarah busana dunia: Levi\'s 501 original buatan Amerika Serikat pabrik nomor 553 tahun 1994. Menggunakan denim 100% katun kaku non-stretch yang menghasilkan potongan lurus klasik sempurna.</p><p><strong>Detail Spesifikasi:</strong><br>&bull; Tag: Care tag putih Levi Strauss & Co San Francisco Made in USA<br>&bull; Kancing: 5-Button Fly stamp 553<br>&bull; Ukuran di Tag: W32 L32 (Lingkar Pinggang 82 cm x Panjang 104 cm x Leg Opening 20 cm)<br>&bull; Kondisi: 9.5/10 (Hem rapi, selangkangan aman no sobek).</p>',
                 'material_info' => '100% Rigid Heavy Cotton Denim (14.5oz Cone Mills Denim).',
                 'sustainability_note' => 'Menghemat 10.000 liter air yang biasanya dihabiskan untuk pewarnaan celana denim baru.',
@@ -388,12 +378,12 @@ class ProductSeeder extends Seeder
                     [
                         'color_name' => 'Vintage Light Stonewash',
                         'color_hex' => '#7b9bb6',
-                        'sizes' => ['W32 L32 (LP 82cm)' => 1],
+                        'sizes' => ['32' => 1],
                     ],
                     [
                         'color_name' => 'Medium Indigo Wash',
                         'color_hex' => '#415e78',
-                        'sizes' => ['W34 L32 (LP 86cm)' => 1],
+                        'sizes' => ['34' => 1],
                     ],
                 ],
                 'images' => [
@@ -405,8 +395,8 @@ class ProductSeeder extends Seeder
                 'category_id' => $menCargo?->id ?? 3,
                 'name' => "Celana Cargo Vintage Y2K Woodland Camo Multi-Pocket Baggy Pants",
                 'slug' => 'vintage-camo-cargo-pants-woodland',
-                'short_description' => 'Kondisi 9.5/10. Tag Propper Military Specification. 6 saku kancing ekspansi, tali serut ankle bawah.',
-                'description' => '<p>Celana kargo motif loreng militer Woodland US Army dengan siluet potongan baggy santai yang sangat populer di kultur streetwear Y2K dan skater. Dilengkapi pengatur pinggang samping dan tali serut di ujung kaki.</p>',
+                'short_description' => 'Kondisi 9.5/10. Tag Propper Military Specification. 6 saku kancing ekspansi, tali serut ankle bawah (LP: 83 cm).',
+                'description' => '<p>Celana kargo motif loreng militer Woodland US Army dengan siluet potongan baggy santai yang sangat populer di kultur streetwear Y2K dan skater.</p>',
                 'material_info' => '50% Cotton / 50% Nylon Ripstop Tahan Robek Mil-Spec.',
                 'sustainability_note' => 'Material ripstop militer autentik yang dirancang tahan puluhan tahun.',
                 'base_price' => 650000,
@@ -419,12 +409,12 @@ class ProductSeeder extends Seeder
                     [
                         'color_name' => 'Woodland Green Camo',
                         'color_hex' => '#4f583e',
-                        'sizes' => ['Size 32 (LP 83cm)' => 1],
+                        'sizes' => ['32' => 1],
                     ],
                     [
                         'color_name' => 'Desert Sand Camo',
                         'color_hex' => '#bda27e',
-                        'sizes' => ['Size 34 (LP 87cm)' => 1],
+                        'sizes' => ['34' => 1],
                     ],
                 ],
                 'images' => [
@@ -436,8 +426,8 @@ class ProductSeeder extends Seeder
                 'category_id' => $menCorduroy?->id ?? 3,
                 'name' => "Celana Vintage Wide-Wale Corduroy Loose Trousers Chocolate Brown",
                 'slug' => 'vintage-corduroy-trousers-brown',
-                'short_description' => 'Kondisi 9.5/10. Tag L.L. Bean Vintage. Bahan korduroi garis tebal lembut warna cokelat moka, potongan loose fit.',
-                'description' => '<p>Celana panjang bahan corduroy tebal dengan tekstur garis lebar (wide wale). Sangat nyaman, lembut, dan memberikan aksen retro 70-80s yang hangat saat dipadukan dengan hoodie atau jaket denim.</p>',
+                'short_description' => 'Kondisi 9.5/10. Tag L.L. Bean Vintage. Bahan korduroi garis tebal lembut warna cokelat moka (LP: 82 cm).',
+                'description' => '<p>Celana panjang bahan corduroy tebal dengan tekstur garis lebar (wide wale). Sangat nyaman, lembut, dan memberikan aksen retro yang hangat.</p>',
                 'material_info' => '100% Cotton Wide-Wale Corduroy.',
                 'sustainability_note' => 'Serat katun alami yang nyaman tanpa plastik poliester murah.',
                 'base_price' => 550000,
@@ -450,7 +440,7 @@ class ProductSeeder extends Seeder
                     [
                         'color_name' => 'Chocolate Espresso',
                         'color_hex' => '#4a3528',
-                        'sizes' => ['Size 32 (LP 82cm)' => 1],
+                        'sizes' => ['32' => 1],
                     ],
                 ],
                 'images' => [
@@ -461,8 +451,8 @@ class ProductSeeder extends Seeder
                 'category_id' => $menWorkPants?->id ?? 3,
                 'name' => "Celana Vintage Dickies 874 Original Fit Work Pants Olive Green",
                 'slug' => 'vintage-dickies-874-olive-green',
-                'short_description' => 'Kondisi 9.5/10. Tag Dickies Made in USA / Mexico. Bahan twill tahan noda dan kerut, potongan lurus kokoh.',
-                'description' => '<p>Celana kerja skate klasik paling terkenal di dunia. Dikenal karena kekuatannya yang tak tertandingi dan lipatan garis tengah celana yang permanen. Pilihan wajib para pekerja kreatif, musisi, dan skater.</p>',
+                'short_description' => 'Kondisi 9.5/10. Tag Dickies Made in USA / Mexico. Bahan twill tahan noda dan kerut, potongan lurus kokoh (LP: 82 cm).',
+                'description' => '<p>Celana kerja skate klasik paling terkenal di dunia. Dikenal karena kekuatannya yang tak tertandingi dan lipatan garis tengah celana yang permanen.</p>',
                 'material_info' => '65% Polyester / 35% Cotton Twill Heavy 8.5oz.',
                 'sustainability_note' => 'Konstruksi tangguh tahan bertahun-tahun.',
                 'base_price' => 450000,
@@ -475,7 +465,7 @@ class ProductSeeder extends Seeder
                     [
                         'color_name' => 'Olive Military Green',
                         'color_hex' => '#4b5338',
-                        'sizes' => ['Size 32 (LP 82cm)' => 1],
+                        'sizes' => ['32' => 1],
                     ],
                 ],
                 'images' => [
@@ -490,8 +480,8 @@ class ProductSeeder extends Seeder
                 'category_id' => $menSnapback?->id ?? 4,
                 'name' => "Topi Vintage 90s New York Yankees MLB Pro-Model Snapback Cap",
                 'slug' => 'vintage-yankees-90s-snapback-cap',
-                'short_description' => 'Kondisi 9.5/10. Tag The Game / Sports Specialties Made in USA. Lidah hijau (green underbrim) klasik 90-an.',
-                'description' => '<p>Topi snapback baseball original era 1990-an dengan logo NY Yankees bordir timbul 3D tebal. Menggunakan lidah bagian bawah berwarna hijau zamrud (green underbrim) yang menjadi ciri khas topi pro model vintage sejati.</p><p><strong>Detail Spesifikasi:</strong><br>&bull; Tag: Official Major League Baseball Genuine Merchandise<br>&bull; Pengatur: Snapback plastik 7-lubang utuh fleksibel<br>&bull; Bahan: 100% Wool Twill tebal berkualitas tinggi<br>&bull; Kondisi: 9.5/10 (Crown tegak kokoh, no minus keringat).</p>',
+                'short_description' => 'Kondisi 9.5/10. Tag The Game / Sports Specialties Made in USA. Lidah hijau (green underbrim) klasik 90-an (One Size Adjustable).',
+                'description' => '<p>Topi snapback baseball original era 1990-an dengan logo NY Yankees bordir timbul 3D tebal. Menggunakan lidah bagian bawah berwarna hijau zamrud (green underbrim).</p><p><strong>Detail Spesifikasi:</strong><br>&bull; Tag: Official Major League Baseball Genuine Merchandise<br>&bull; Pengatur: Snapback plastik 7-lubang utuh fleksibel<br>&bull; Bahan: 100% Wool Twill tebal berkualitas tinggi<br>&bull; Kondisi: 9.5/10 (Crown tegak kokoh, no minus keringat).</p>',
                 'material_info' => '100% Wool Twill dengan bordir timbul benang rayon dan lidah green underbrim.',
                 'sustainability_note' => 'Koleksi headwear vintage langka yang tidak diproduksi lagi dengan spek yang sama.',
                 'base_price' => 650000,
@@ -502,14 +492,14 @@ class ProductSeeder extends Seeder
                 'collections' => array_filter([$newArrivalsCol?->id, $bestSellersCol?->id, $vintage90sCol?->id]),
                 'variants' => [
                     [
-                        'color_name' => 'Navy Blue & White Logo',
+                        'color_name' => 'Navy Blue & White',
                         'color_hex' => '#1d273c',
-                        'sizes' => ['One Size Fits All (Adjustable)' => 1],
+                        'sizes' => ['All Size' => 1],
                     ],
                     [
                         'color_name' => 'Forest Green & Gold',
                         'color_hex' => '#21402e',
-                        'sizes' => ['One Size Fits All (Adjustable)' => 1],
+                        'sizes' => ['All Size' => 1],
                     ],
                 ],
                 'images' => [
@@ -521,8 +511,8 @@ class ProductSeeder extends Seeder
                 'category_id' => $menBeanie?->id ?? 4,
                 'name' => "Topi Kupluk Vintage Ribbed Knit Fisherman Beanie Mustard Yellow",
                 'slug' => 'vintage-ribbed-knit-fisherman-beanie',
-                'short_description' => 'Kondisi 10/10. Rajutan benang wol akrilik tebal elastis dengan lipatan brim ganda, warna mustard hangat.',
-                'description' => '<p>Beanie rajut model nelayan klasik dengan kedalaman sedang yang pas di atas daun telinga. Sangat hangat, tidak gatal, dan memberikan sentuhan warna pop cerah untuk outfit streetwear monokrom.</p>',
+                'short_description' => 'Kondisi 10/10. Rajutan benang wol akrilik tebal elastis dengan lipatan brim ganda, warna mustard hangat (All Size Stretch).',
+                'description' => '<p>Beanie rajut model nelayan klasik dengan kedalaman sedang yang pas di atas daun telinga. Sangat hangat, tidak gatal, dan memberikan sentuhan warna pop cerah.</p>',
                 'material_info' => '100% High-Grade Soft Acrylic Ribbed Knit.',
                 'sustainability_note' => 'Serat awet yang tidak mudah melar.',
                 'base_price' => 185000,
@@ -535,7 +525,7 @@ class ProductSeeder extends Seeder
                     [
                         'color_name' => 'Mustard Ochre',
                         'color_hex' => '#d99b26',
-                        'sizes' => ['One Size (Stretch)' => 1],
+                        'sizes' => ['All Size' => 1],
                     ],
                 ],
                 'images' => [
@@ -551,7 +541,7 @@ class ProductSeeder extends Seeder
                 'name' => "Sepatu Vintage 90s Low-Top Retro Skate Sneakers Navy/White",
                 'slug' => 'vintage-retro-skate-sneakers-dunk',
                 'short_description' => 'Kondisi 9/10. Upper kombinasi kulit suede & leather asli, midsole kuning vintage alami, sol karet tebal.',
-                'description' => '<p>Sneaker siluet skate 90-an dengan perpaduan suede lembut dan kulit asli warna biru navy kontras putih. Midsole telah mengalami penuaan warna kuning alami (vintage yellowing) yang sangat dicari para penggemar retro style.</p>',
+                'description' => '<p>Sneaker siluet skate 90-an dengan perpaduan suede lembut dan kulit asli warna biru navy kontras putih. Midsole telah mengalami penuaan warna kuning alami (vintage yellowing).</p>',
                 'material_info' => 'Upper: Genuine Suede & Cowhide Leather. Sol: Vulkanisir Karet Alam Mentah.',
                 'sustainability_note' => 'Sepatu pre-loved yang sudah dibersihkan dan disanitasi menyeluruh menggunakan formula anti-bakteri.',
                 'base_price' => 1350000,
@@ -562,9 +552,9 @@ class ProductSeeder extends Seeder
                 'collections' => array_filter([$newArrivalsCol?->id, $bestSellersCol?->id]),
                 'variants' => [
                     [
-                        'color_name' => 'Midnight Navy & Vintage White',
+                        'color_name' => 'Midnight Navy & White',
                         'color_hex' => '#1e2b3c',
-                        'sizes' => ['41 (Insole 26.5cm)' => 1, '42 (Insole 27cm)' => 1, '43 (Insole 28cm)' => 1],
+                        'sizes' => ['41' => 1, '42' => 1, '43' => 1],
                     ],
                 ],
                 'images' => [
@@ -590,7 +580,7 @@ class ProductSeeder extends Seeder
                     [
                         'color_name' => 'Polished Jet Black',
                         'color_hex' => '#181818',
-                        'sizes' => ['41 (Insole 26.5cm)' => 1, '42 (Insole 27cm)' => 1],
+                        'sizes' => ['41' => 1, '42' => 1],
                     ],
                 ],
                 'images' => [
@@ -605,8 +595,8 @@ class ProductSeeder extends Seeder
                 'category_id' => $menBags?->id ?? 6,
                 'name' => "Tas Vintage Distressed Leather Crossbody Messenger Bag Brown",
                 'slug' => 'vintage-leather-crossbody-messenger-bag',
-                'short_description' => 'Kondisi 9.5/10. Kulit asli bertekstur patina alami dengan gesper kuningan vintage dan tali selempang kokoh.',
-                'description' => '<p>Tas selempang kulit vintage serbaguna untuk membawa tablet, buku catatan, dompet, dan kamera saku. Semakin lama dipakai, karakter kulitnya akan semakin berkilau dan mewah.</p>',
+                'short_description' => 'Kondisi 9.5/10. Kulit asli bertekstur patina alami dengan gesper kuningan vintage dan tali selempang kokoh (Dimensi 28x22x8 cm).',
+                'description' => '<p>Tas selempang kulit vintage serbaguna untuk membawa tablet, buku catatan, dompet, dan kamera saku.</p>',
                 'material_info' => '100% Genuine Full-Grain Leather & Solid Brass Hardware.',
                 'sustainability_note' => 'Menghindari pembelian tas sintetis berbahan kulit PU plastik yang cepat terkelupas.',
                 'base_price' => 750000,
@@ -619,7 +609,7 @@ class ProductSeeder extends Seeder
                     [
                         'color_name' => 'Rustic Saddle Brown',
                         'color_hex' => '#6e4529',
-                        'sizes' => ['One Size (28 x 22 x 8 cm)' => 1],
+                        'sizes' => ['All Size' => 1],
                     ],
                 ],
                 'images' => [
@@ -631,7 +621,7 @@ class ProductSeeder extends Seeder
                 'name' => "Kacamata Vintage 90s Oval Wire Frame Sunglasses Dark Tint",
                 'slug' => 'vintage-oval-wire-sunglasses-90s',
                 'short_description' => 'Kondisi 10/10 (Deadstock). Bingkai kawat metal tipis warna gunmetal dengan lensa UV400 gelap.',
-                'description' => '<p>Kacamata hitam vintage model oval wire frame khas musisi britpop dan aktor film 90-an. Sangat ringan, elegan, dan melindungi mata 100% dari radiasi sinar UV.</p>',
+                'description' => '<p>Kacamata hitam vintage model oval wire frame khas musisi britpop dan aktor film 90-an.</p>',
                 'material_info' => 'Stainless Steel Wire Alloy Frame & Polycarbonate UV400 Lenses.',
                 'sustainability_note' => 'Item deadstock terawat dalam kondisi prima.',
                 'base_price' => 290000,
@@ -642,9 +632,9 @@ class ProductSeeder extends Seeder
                 'collections' => array_filter([$saleCol?->id]),
                 'variants' => [
                     [
-                        'color_name' => 'Gunmetal Silver & Dark Smoke',
+                        'color_name' => 'Gunmetal & Dark Smoke',
                         'color_hex' => '#444444',
-                        'sizes' => ['One Size' => 1],
+                        'sizes' => ['All Size' => 1],
                     ],
                 ],
                 'images' => [
@@ -693,7 +683,7 @@ class ProductSeeder extends Seeder
             $varIndex = 1;
             foreach ($data['variants'] as $varGroup) {
                 foreach ($varGroup['sizes'] as $size => $stock) {
-                    $sku = 'FIF-THF-' . str_pad($product->id, 3, '0', STR_PAD_LEFT) . '-' . strtoupper(substr(Str::slug($varGroup['color_name']), 0, 4)) . '-' . $varIndex;
+                    $sku = 'FIF-' . str_pad($product->id, 3, '0', STR_PAD_LEFT) . '-' . strtoupper(substr(Str::slug($varGroup['color_name']), 0, 4)) . '-' . $size . '-' . $varIndex;
                     ProductVariant::create([
                         'product_id' => $product->id,
                         'sku' => $sku,
@@ -730,6 +720,6 @@ class ProductSeeder extends Seeder
             }
         }
 
-        echo "ProductSeeder completed: " . count($productsData) . " rich curated thrift products with transparent PNGs and variants seeded.\n";
+        echo "ProductSeeder completed with clean standard sizes.\n";
     }
 }

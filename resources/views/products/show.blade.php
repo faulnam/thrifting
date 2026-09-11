@@ -201,25 +201,25 @@
             <div class="space-y-3 pt-2" x-show="currentColor.sizes.length > 0">
                 <div class="flex items-center justify-between">
                     <span class="text-caption font-bold uppercase tracking-wide10 text-charcoal">
-                        Pilih Ukuran (EU)
+                        Pilih Ukuran
                     </span>
-                    <button type="button" class="text-caption text-iron hover:text-charcoal underline">
-                        Panduan Ukuran
-                    </button>
+                    <a href="{{ route('pages.show', 'size-guide') }}" class="text-caption text-iron hover:text-charcoal underline">
+                        Panduan Ukuran PxL
+                    </a>
                 </div>
 
-                <!-- Size Grid Buttons -->
-                <div class="grid grid-cols-4 sm:grid-cols-6 gap-2">
+                <!-- Size Grid Buttons (Clean Standard Pills) -->
+                <div class="flex flex-wrap gap-2.5">
                     <template x-for="v in currentColor.sizes" :key="v.id">
                         <button type="button" 
                                 @click="selectSize(v)"
                                 :disabled="v.stock <= 0"
                                 :class="{
-                                    'bg-charcoal text-canvas border-charcoal font-bold': selectedVariantId === v.id,
+                                    'bg-charcoal text-canvas border-charcoal font-bold shadow-xs': selectedVariantId === v.id,
                                     'bg-canvas text-charcoal border-sand hover:border-charcoal': selectedVariantId !== v.id && v.stock > 0,
                                     'bg-sand/40 text-stone border-sand/40 cursor-not-allowed line-through opacity-50': v.stock <= 0
                                 }"
-                                class="min-h-[44px] flex items-center justify-center border rounded-input text-body-sm transition duration-150 relative">
+                                class="min-w-[54px] px-4 py-2.5 min-h-[44px] flex items-center justify-center border rounded-xl text-body-sm font-semibold transition duration-150 relative cursor-pointer">
                             <span x-text="v.size"></span>
                         </button>
                     </template>
@@ -228,7 +228,7 @@
                 <!-- Stock info message -->
                 <div class="text-caption text-iron min-h-[20px]">
                     <template x-if="selectedVariantId && selectedStock <= 5 && selectedStock > 0">
-                        <span class="text-amber-700 font-medium">Stok terbatas: Tersisa <span x-text="selectedStock"></span> pasang!</span>
+                        <span class="text-amber-700 font-medium">Stok vintage 1-of-1: Tersisa <span x-text="selectedStock"></span> item!</span>
                     </template>
                     <template x-if="!selectedVariantId">
                         <span>Pilih ukuran untuk melanjutkan pembelian.</span>
