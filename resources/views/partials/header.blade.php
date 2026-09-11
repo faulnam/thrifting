@@ -52,10 +52,10 @@
     @open-search.window="searchOpen = true; $nextTick(() => { $refs.searchInput?.focus(); })"
     class="sticky top-0 z-40 transition-all duration-200 px-3 sm:px-6 pt-2 pb-2 bg-transparent select-none">
 
-    <div class="max-w-[1400px] mx-auto bg-white/95 backdrop-blur-md rounded-2xl border border-sand/70 shadow-xs px-4 sm:px-6 h-14 sm:h-16 flex items-center justify-between relative">
+    <div class="max-w-[1400px] mx-auto bg-white/95 backdrop-blur-md rounded-2xl border border-sand/70 shadow-xs px-4 sm:px-6 h-14 sm:h-16 flex items-center justify-between">
         
-        <!-- Left: Mobile Hamburger & Brand Logo -->
-        <div class="flex items-center gap-1 sm:gap-2 flex-shrink-0 z-10">
+        <!-- Left Zone: Mobile Hamburger & Brand Logo -->
+        <div class="header-zone-left">
             <!-- Mobile Hamburger Button -->
             <button type="button" 
                     @click="mobileMenuOpen = true"
@@ -72,12 +72,12 @@
             </a>
         </div>
 
-        <!-- Center: Desktop Navigation (Perfect Absolute Center) -->
-        <nav class="hidden lg:flex items-center space-x-8 absolute left-1/2 -translate-x-1/2" @mouseleave="activeMenu = null">
+        <!-- Center Zone: Desktop Navigation (True Center) -->
+        <nav class="hidden lg:flex header-nav-center" @mouseleave="activeMenu = null">
             <!-- DROP TERBARU -->
             <div>
                 <a href="{{ route('collections.show', 'new-arrivals') }}" 
-                   class="nav-label py-2 inline-block font-bold tracking-widest text-[12px] uppercase {{ request()->is('*new-arrivals*') ? 'border-b-2 border-charcoal' : '' }}">
+                   class="nav-label py-2 inline-block font-bold tracking-widest text-[12px] uppercase whitespace-nowrap {{ request()->is('*new-arrivals*') ? 'border-b-2 border-charcoal' : '' }}">
                     DROP TERBARU
                 </a>
             </div>
@@ -85,7 +85,7 @@
             <!-- SEMUA ITEM -->
             <div>
                 <a href="{{ route('search.index') }}" 
-                   class="nav-label py-2 inline-block font-bold tracking-widest text-[12px] uppercase {{ request()->is('search*') ? 'border-b-2 border-charcoal' : '' }}">
+                   class="nav-label py-2 inline-block font-bold tracking-widest text-[12px] uppercase whitespace-nowrap {{ request()->is('search*') ? 'border-b-2 border-charcoal' : '' }}">
                     SEMUA ITEM
                 </a>
             </div>
@@ -93,7 +93,7 @@
             <!-- MEN Dropdown -->
             <div class="relative" @mouseenter="activeMenu = 'men'">
                 <a href="{{ route('categories.men') }}" 
-                   class="nav-label py-2 inline-block font-bold tracking-widest text-[12px] uppercase {{ request()->is('men*') ? 'border-b-2 border-charcoal' : '' }}">
+                   class="nav-label py-2 inline-block font-bold tracking-widest text-[12px] uppercase whitespace-nowrap {{ request()->is('men*') ? 'border-b-2 border-charcoal' : '' }}">
                     PRIA
                 </a>
             </div>
@@ -101,7 +101,7 @@
             <!-- WOMEN Dropdown -->
             <div class="relative" @mouseenter="activeMenu = 'women'">
                 <a href="{{ route('categories.women') }}" 
-                   class="nav-label py-2 inline-block font-bold tracking-widest text-[12px] uppercase {{ request()->is('women*') ? 'border-b-2 border-charcoal' : '' }}">
+                   class="nav-label py-2 inline-block font-bold tracking-widest text-[12px] uppercase whitespace-nowrap {{ request()->is('women*') ? 'border-b-2 border-charcoal' : '' }}">
                     WANITA
                 </a>
             </div>
@@ -109,14 +109,14 @@
             <!-- PALING DIBURU -->
             <div>
                 <a href="{{ route('collections.show', 'best-sellers') }}" 
-                   class="nav-label py-2 inline-block font-bold tracking-widest text-[12px] uppercase {{ request()->is('*best-sellers*') ? 'border-b-2 border-charcoal' : '' }}">
+                   class="nav-label py-2 inline-block font-bold tracking-widest text-[12px] uppercase whitespace-nowrap {{ request()->is('*best-sellers*') ? 'border-b-2 border-charcoal' : '' }}">
                     PALING DIBURU
                 </a>
             </div>
         </nav>
 
-        <!-- Right: Utility Icons & Actions -->
-        <div class="flex items-center space-x-1 sm:space-x-2 z-10">
+        <!-- Right Zone: Utility Icons & Actions -->
+        <div class="header-zone-right">
             <!-- Search Button (Opens Live Search Modal) -->
             <button type="button" 
                     @click="searchOpen = true; $nextTick(() => { $refs.searchInput?.focus(); })"
