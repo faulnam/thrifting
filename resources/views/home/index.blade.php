@@ -319,247 +319,56 @@
 
             <!-- Product Cards Carousel Container -->
             <div x-ref="carousel" class="flex gap-4 sm:gap-5 overflow-x-auto scrollbar-none pb-2 scroll-smooth snap-x snap-mandatory select-none">
-                
-                <!-- Card 1: CARHARTT DETROIT JACKET J97 -->
-                <a href="{{ route('products.show', 'vintage-carhartt-detroit-j97-tan') }}" 
-                   class="group flex-none w-[270px] sm:w-[290px] lg:w-[305px] block bg-white rounded-[20px] p-4 sm:p-5 flex flex-col justify-between h-[390px] sm:h-[420px] shadow-2xs hover:shadow-md transition duration-300 relative select-none snap-start">
-                    <!-- Top Badge -->
-                    <div class="flex items-center justify-between">
-                        <span class="inline-flex items-center bg-[#252220] text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full">
-                            KONDISI 9.5/10
-                        </span>
-                        <span class="text-[10px] font-bold text-stone uppercase tracking-wider">
-                            SIZE L (USA)
-                        </span>
-                    </div>
+                @foreach ($newArrivals as $prod)
+                    @php
+                        $primaryImg = $prod->images->firstWhere('is_primary', true) ?? $prod->images->first();
+                        $firstVariant = $prod->variants->first();
+                    @endphp
+                    <a href="{{ route('products.show', $prod->slug) }}" 
+                       class="group flex-none w-[270px] sm:w-[290px] lg:w-[305px] block bg-white rounded-[20px] p-4 sm:p-5 flex flex-col justify-between h-[390px] sm:h-[420px] shadow-2xs hover:shadow-md transition duration-300 relative select-none snap-start">
+                        <!-- Top Badge -->
+                        <div class="flex items-center justify-between">
+                            <span class="inline-flex items-center bg-[#252220] text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full">
+                                KONDISI 9.5/10
+                            </span>
+                            <span class="text-[10px] font-bold text-stone uppercase tracking-wider">
+                                SIZE {{ $firstVariant?->size ?? 'L' }}
+                            </span>
+                        </div>
 
-                    <!-- Centered Product Photography -->
-                    <div class="flex-1 flex items-center justify-center my-2 overflow-hidden">
-                        <img src="{{ asset('images/products/vintage-carhartt-tan.png') }}" 
-                             alt="Jaket Vintage Carhartt Detroit J97" 
-                             class="max-w-[95%] max-h-[170px] sm:max-h-[190px] object-contain drop-shadow-md group-hover:scale-105 transition-transform duration-300">
-                    </div>
+                        <!-- Centered Product Photography -->
+                        <div class="flex-1 flex items-center justify-center my-2 overflow-hidden">
+                            @if ($primaryImg)
+                                <img src="{{ asset($primaryImg->image_path) }}" 
+                                     alt="{{ $prod->name }}" 
+                                     class="max-w-[95%] max-h-[170px] sm:max-h-[190px] object-contain drop-shadow-md group-hover:scale-105 transition-transform duration-300">
+                            @endif
+                        </div>
 
-                    <!-- Bottom Details & Price Row -->
-                    <div class="pt-2">
-                        <h3 class="font-sans font-bold text-[11px] sm:text-[12px] uppercase tracking-wider text-black leading-snug group-hover:underline">
-                            CARHARTT DETROIT J97 TAN CANVAS
-                        </h3>
-                        <p class="text-[12px] sm:text-[13px] text-[#5c554e] font-normal mt-0.5 truncate">
-                            Blanket Lined & Corduroy Collar
-                        </p>
-                        <!-- Price Row -->
-                        <div class="mt-3 pt-0.5 flex items-center justify-between">
-                            <span class="text-[11px] text-stone line-through">Rp 2.400.000</span>
-                            <div class="text-right">
-                                <span class="font-sans font-bold text-[13px] sm:text-[14px] text-black">
-                                    Rp 1.850.000
-                                </span>
+                        <!-- Bottom Details & Price Row -->
+                        <div class="pt-2">
+                            <h3 class="font-sans font-bold text-[11px] sm:text-[12px] uppercase tracking-wider text-black leading-snug group-hover:underline truncate">
+                                {{ $prod->name }}
+                            </h3>
+                            <p class="text-[12px] sm:text-[13px] text-[#5c554e] font-normal mt-0.5 truncate">
+                                {{ $prod->short_description }}
+                            </p>
+                            <!-- Price Row -->
+                            <div class="mt-3 pt-0.5 flex items-center justify-between">
+                                @if ($prod->compare_at_price && $prod->compare_at_price > $prod->base_price)
+                                    <span class="text-[11px] text-stone line-through">Rp {{ number_format($prod->compare_at_price, 0, ',', '.') }}</span>
+                                @else
+                                    <span></span>
+                                @endif
+                                <div class="text-right">
+                                    <span class="font-sans font-bold text-[13px] sm:text-[14px] text-black">
+                                        Rp {{ number_format($prod->base_price, 0, ',', '.') }}
+                                    </span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </a>
-
-                <!-- Card 2: NIRVANA IN UTERO 1993 SINGLE STITCH -->
-                <a href="{{ route('products.show', 'vintage-nirvana-in-utero-tee-1993') }}" 
-                   class="group flex-none w-[270px] sm:w-[290px] lg:w-[305px] block bg-white rounded-[20px] p-4 sm:p-5 flex flex-col justify-between h-[390px] sm:h-[420px] shadow-2xs hover:shadow-md transition duration-300 relative select-none snap-start">
-                    <!-- Top Badge -->
-                    <div class="flex items-center justify-between">
-                        <span class="inline-flex items-center bg-[#b83b3b] text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full">
-                            SINGLE STITCH
-                        </span>
-                        <span class="text-[10px] font-bold text-stone uppercase tracking-wider">
-                            TAG GIANT 1993
-                        </span>
-                    </div>
-
-                    <!-- Centered Product Photography -->
-                    <div class="flex-1 flex items-center justify-center my-2 overflow-hidden">
-                        <img src="{{ asset('images/products/vintage-band-tee-nirvana.png') }}" 
-                             alt="Kaos Vintage Nirvana In Utero 1993" 
-                             class="max-w-[95%] max-h-[170px] sm:max-h-[190px] object-contain drop-shadow-md group-hover:scale-105 transition-transform duration-300">
-                    </div>
-
-                    <!-- Bottom Details & Price Row -->
-                    <div class="pt-2">
-                        <h3 class="font-sans font-bold text-[11px] sm:text-[12px] uppercase tracking-wider text-black leading-snug group-hover:underline">
-                            NIRVANA IN UTERO 1993 BAND TEE
-                        </h3>
-                        <p class="text-[12px] sm:text-[13px] text-[#5c554e] font-normal mt-0.5 truncate">
-                            Faded Charcoal (PxL 74x58)
-                        </p>
-                        <!-- Price Row -->
-                        <div class="mt-3 pt-0.5 flex items-center justify-between">
-                            <span class="text-[11px] text-stone line-through">Rp 3.200.000</span>
-                            <div class="text-right">
-                                <span class="font-sans font-bold text-[13px] sm:text-[14px] text-black">
-                                    Rp 2.250.000
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Card 3: NIKE CENTER SWOOSH HOODIE 90S -->
-                <a href="{{ route('products.show', 'vintage-nike-center-swoosh-hoodie') }}" 
-                   class="group flex-none w-[270px] sm:w-[290px] lg:w-[305px] block bg-white rounded-[20px] p-4 sm:p-5 flex flex-col justify-between h-[390px] sm:h-[420px] shadow-2xs hover:shadow-md transition duration-300 relative select-none snap-start">
-                    <!-- Top Badge -->
-                    <div class="flex items-center justify-between">
-                        <span class="inline-flex items-center bg-[#252220] text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full">
-                            KONDISI 9.5/10
-                        </span>
-                        <span class="text-[10px] font-bold text-stone uppercase tracking-wider">
-                            SILVER TAG 90S
-                        </span>
-                    </div>
-
-                    <!-- Centered Product Photography -->
-                    <div class="flex-1 flex items-center justify-center my-2 overflow-hidden">
-                        <img src="{{ asset('images/products/vintage-nike-hoodie-grey.png') }}" 
-                             alt="Hoodie Vintage Nike Center Swoosh" 
-                             class="max-w-[95%] max-h-[170px] sm:max-h-[190px] object-contain drop-shadow-md group-hover:scale-105 transition-transform duration-300">
-                    </div>
-
-                    <!-- Bottom Details & Price Row -->
-                    <div class="pt-2">
-                        <h3 class="font-sans font-bold text-[11px] sm:text-[12px] uppercase tracking-wider text-black leading-snug group-hover:underline">
-                            NIKE CENTER SWOOSH HOODIE
-                        </h3>
-                        <p class="text-[12px] sm:text-[13px] text-[#5c554e] font-normal mt-0.5 truncate">
-                            Heather Grey Boxy Fit (PxL 72x66)
-                        </p>
-                        <!-- Price Row -->
-                        <div class="mt-3 pt-0.5 flex items-center justify-between">
-                            <span class="text-[11px] text-stone line-through">Rp 1.650.000</span>
-                            <div class="text-right">
-                                <span class="font-sans font-bold text-[13px] sm:text-[14px] text-black">
-                                    Rp 1.250.000
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Card 4: LEVIS 501 MADE IN USA -->
-                <a href="{{ route('products.show', 'vintage-levis-501-usa-light-wash') }}" 
-                   class="group flex-none w-[270px] sm:w-[290px] lg:w-[305px] block bg-white rounded-[20px] p-4 sm:p-5 flex flex-col justify-between h-[390px] sm:h-[420px] shadow-2xs hover:shadow-md transition duration-300 relative select-none snap-start">
-                    <!-- Top Badge -->
-                    <div class="flex items-center justify-between">
-                        <span class="inline-flex items-center bg-[#252220] text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full">
-                            MADE IN USA 1994
-                        </span>
-                        <span class="text-[10px] font-bold text-stone uppercase tracking-wider">
-                            W32 L32
-                        </span>
-                    </div>
-
-                    <!-- Centered Product Photography -->
-                    <div class="flex-1 flex items-center justify-center my-2 overflow-hidden">
-                        <img src="{{ asset('images/products/vintage-levis-501-stonewash.png') }}" 
-                             alt="Celana Jeans Levi's 501 Vintage Made in USA" 
-                             class="max-w-[95%] max-h-[170px] sm:max-h-[190px] object-contain drop-shadow-md group-hover:scale-105 transition-transform duration-300">
-                    </div>
-
-                    <!-- Bottom Details & Price Row -->
-                    <div class="pt-2">
-                        <h3 class="font-sans font-bold text-[11px] sm:text-[12px] uppercase tracking-wider text-black leading-snug group-hover:underline">
-                            LEVI'S 501 USA 1994 STONEWASH
-                        </h3>
-                        <p class="text-[12px] sm:text-[13px] text-[#5c554e] font-normal mt-0.5 truncate">
-                            Button Fly 553 Rigid Cone Denim
-                        </p>
-                        <!-- Price Row -->
-                        <div class="mt-3 pt-0.5 flex items-center justify-between">
-                            <span class="text-[11px] text-stone line-through">Rp 1.650.000</span>
-                            <div class="text-right">
-                                <span class="font-sans font-bold text-[13px] sm:text-[14px] text-black">
-                                    Rp 1.150.000
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Card 5: NY YANKEES 90S SNAPBACK -->
-                <a href="{{ route('products.show', 'vintage-yankees-90s-snapback-cap') }}" 
-                   class="group flex-none w-[270px] sm:w-[290px] lg:w-[305px] block bg-white rounded-[20px] p-4 sm:p-5 flex flex-col justify-between h-[390px] sm:h-[420px] shadow-2xs hover:shadow-md transition duration-300 relative select-none snap-start">
-                    <!-- Top Badge -->
-                    <div class="flex items-center justify-between">
-                        <span class="inline-flex items-center bg-[#252220] text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full">
-                            GREEN UNDERBRIM
-                        </span>
-                        <span class="text-[10px] font-bold text-stone uppercase tracking-wider">
-                            MADE IN USA
-                        </span>
-                    </div>
-
-                    <!-- Centered Product Photography -->
-                    <div class="flex-1 flex items-center justify-center my-2 overflow-hidden">
-                        <img src="{{ asset('images/products/vintage-yankees-snapback-navy.png') }}" 
-                             alt="Topi Vintage 90s NY Yankees Snapback" 
-                             class="max-w-[95%] max-h-[170px] sm:max-h-[190px] object-contain drop-shadow-md group-hover:scale-105 transition-transform duration-300">
-                    </div>
-
-                    <!-- Bottom Details & Price Row -->
-                    <div class="pt-2">
-                        <h3 class="font-sans font-bold text-[11px] sm:text-[12px] uppercase tracking-wider text-black leading-snug group-hover:underline">
-                            NY YANKEES 90S PRO SNAPBACK
-                        </h3>
-                        <p class="text-[12px] sm:text-[13px] text-[#5c554e] font-normal mt-0.5 truncate">
-                            Wool Twill & Raised 3D Embroidery
-                        </p>
-                        <!-- Price Row -->
-                        <div class="mt-3 pt-0.5 flex items-center justify-between">
-                            <span class="text-[11px] text-stone line-through">Rp 900.000</span>
-                            <div class="text-right">
-                                <span class="font-sans font-bold text-[13px] sm:text-[14px] text-black">
-                                    Rp 650.000
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Card 6: STUSSY 8-BALL TEE -->
-                <a href="{{ route('products.show', 'vintage-stussy-8ball-world-tour-tee') }}" 
-                   class="group flex-none w-[270px] sm:w-[290px] lg:w-[305px] block bg-white rounded-[20px] p-4 sm:p-5 flex flex-col justify-between h-[390px] sm:h-[420px] shadow-2xs hover:shadow-md transition duration-300 relative select-none snap-start">
-                    <!-- Top Badge -->
-                    <div class="flex items-center justify-between">
-                        <span class="inline-flex items-center bg-[#252220] text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full">
-                            KONDISI 9.5/10
-                        </span>
-                        <span class="text-[10px] font-bold text-stone uppercase tracking-wider">
-                            HEAVY 220 GSM
-                        </span>
-                    </div>
-
-                    <!-- Centered Product Photography -->
-                    <div class="flex-1 flex items-center justify-center my-2 overflow-hidden">
-                        <img src="{{ asset('images/products/vintage-stussy-8ball-white.png') }}" 
-                             alt="Kaos Vintage Stussy 8-Ball" 
-                             class="max-w-[95%] max-h-[170px] sm:max-h-[190px] object-contain drop-shadow-md group-hover:scale-105 transition-transform duration-300">
-                    </div>
-
-                    <!-- Bottom Details & Price Row -->
-                    <div class="pt-2">
-                        <h3 class="font-sans font-bold text-[11px] sm:text-[12px] uppercase tracking-wider text-black leading-snug group-hover:underline">
-                            STUSSY 8-BALL WORLD TOUR TEE
-                        </h3>
-                        <p class="text-[12px] sm:text-[13px] text-[#5c554e] font-normal mt-0.5 truncate">
-                            Off-White Cream (PxL 72x56)
-                        </p>
-                        <!-- Price Row -->
-                        <div class="mt-3 pt-0.5 flex items-center justify-between">
-                            <span class="text-[11px] text-stone line-through">Rp 1.200.000</span>
-                            <div class="text-right">
-                                <span class="font-sans font-bold text-[13px] sm:text-[14px] text-black">
-                                    Rp 850.000
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-
+                    </a>
+                @endforeach
             </div>
         </div>
     </section>

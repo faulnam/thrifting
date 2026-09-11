@@ -271,25 +271,25 @@
                     </span>
                 </a>
 
-                <!-- Mega Menu Card 2: Nirvana Band Tee -->
-                <a href="{{ route('products.show', 'vintage-nirvana-in-utero-tee-1993') }}" 
+                <!-- Mega Menu Card 2: Varsity Jacket -->
+                <a href="{{ route('products.show', 'vintage-varsity-jacket-green') }}" 
                    class="group relative rounded-[20px] bg-[#8a7466]/15 hover:bg-[#8a7466]/25 p-5 flex flex-col justify-between overflow-hidden min-h-[220px] border border-[#8a7466]/30 transition duration-300">
                     <div class="z-10">
                         <span class="inline-block bg-white text-charcoal rounded-full px-3 py-0.5 text-[10px] font-bold uppercase tracking-wider shadow-2xs">
-                            Single Stitch 1993
+                            Wool & Leather 90s
                         </span>
-                        <p class="text-[12px] text-charcoal/80 font-medium mt-1.5 leading-snug">Nirvana In Utero Giant Tag USA.</p>
+                        <p class="text-[12px] text-charcoal/80 font-medium mt-1.5 leading-snug">Varsity Letterman Golden Bear USA.</p>
                     </div>
 
                     <!-- Product Image -->
                     <div class="my-auto py-1 flex items-center justify-center">
-                        <img src="{{ asset('images/products/vintage-band-tee-nirvana.png') }}" 
-                             alt="Nirvana Tee" 
+                        <img src="{{ asset('images/products/vintage-varsity-jacket-green.png') }}" 
+                             alt="Varsity Letterman" 
                              class="h-24 w-auto object-contain drop-shadow-md group-hover:scale-110 transition-transform duration-300">
                     </div>
 
                     <span class="text-[11px] uppercase tracking-wider font-bold text-charcoal underline underline-offset-4 group-hover:opacity-80 transition inline-block">
-                        Lihat Detail Kaos →
+                        Lihat Detail Varsity →
                     </span>
                 </a>
             </div>
@@ -310,22 +310,18 @@
                 <div>
                     <h3 class="nav-label font-bold text-charcoal border-b border-sand pb-2 mb-4">Jaket & Atasan</h3>
                     <ul class="space-y-3">
-                        <li><a href="{{ route('collections.show', 'women-oversized-bomber') }}" class="text-body-sm text-iron hover:text-charcoal transition">Oversized Bomber & Varsity</a></li>
-                        <li><a href="{{ route('collections.show', 'women-denim-jackets') }}" class="text-body-sm text-iron hover:text-charcoal transition">Jaket Denim Vintage</a></li>
-                        <li><a href="{{ route('collections.show', 'women-baby-tees') }}" class="text-body-sm text-iron hover:text-charcoal transition">Graphic Baby Tees Y2K</a></li>
-                        <li><a href="{{ route('collections.show', 'women-oversized-tees') }}" class="text-body-sm text-iron hover:text-charcoal transition">Oversized Vintage Tees</a></li>
-                        <li><a href="{{ route('collections.show', 'women-knit-sweaters') }}" class="text-body-sm text-iron hover:text-charcoal transition">Knit Sweater & Cardigan</a></li>
+                        <li><a href="{{ route('collections.show', 'men-workwear-jackets') }}" class="text-body-sm text-iron hover:text-charcoal transition">Oversized Bomber & Varsity</a></li>
+                        <li><a href="{{ route('collections.show', 'men-workwear-jackets') }}" class="text-body-sm text-iron hover:text-charcoal transition">Jaket Workwear Vintage</a></li>
+                        <li><a href="{{ route('collections.show', 'men-sweats-hoodies') }}" class="text-body-sm text-iron hover:text-charcoal transition">Hoodie & Sweats 90s</a></li>
                     </ul>
                 </div>
 
                 <div>
-                    <h3 class="nav-label font-bold text-charcoal border-b border-sand pb-2 mb-4">Celana, Topi & Aksesoris</h3>
+                    <h3 class="nav-label font-bold text-charcoal border-b border-sand pb-2 mb-4">Outerwear & Kulit</h3>
                     <ul class="space-y-3">
-                        <li><a href="{{ route('collections.show', 'women-high-waist-denim') }}" class="text-body-sm text-iron hover:text-charcoal transition">High-Waist Mom Jeans</a></li>
-                        <li><a href="{{ route('collections.show', 'women-cargo-skirts') }}" class="text-body-sm text-iron hover:text-charcoal transition">Cargo Skirt & Baggy Pants</a></li>
-                        <li><a href="{{ route('collections.show', 'women-corduroy-pants') }}" class="text-body-sm text-iron hover:text-charcoal transition">Corduroy Trousers</a></li>
-                        <li><a href="{{ route('collections.show', 'women-vintage-caps') }}" class="text-body-sm text-iron hover:text-charcoal transition">Vintage Caps & Headwear</a></li>
-                        <li><a href="{{ route('collections.show', 'women-vintage-totes') }}" class="text-body-sm text-iron hover:text-charcoal transition">Vintage Tote & Tas Kulit</a></li>
+                        <li><a href="{{ route('collections.show', 'men-leather-jackets') }}" class="text-body-sm text-iron hover:text-charcoal transition">Jaket Motor Balap Kulit</a></li>
+                        <li><a href="{{ route('collections.show', 'men-leather-jackets') }}" class="text-body-sm text-iron hover:text-charcoal transition">A-2 Distressed Bomber</a></li>
+                        <li><a href="{{ route('collections.show', 'men-workwear-jackets') }}" class="text-body-sm text-iron hover:text-charcoal transition">Retro-X Sherpa Fleece</a></li>
                     </ul>
                 </div>
 
@@ -351,25 +347,25 @@
                     </span>
                 </a>
 
-                <!-- Mega Menu Card 2: Levi's 501 Stonewash -->
-                <a href="{{ route('products.show', 'vintage-levis-501-usa-light-wash') }}" 
+                <!-- Mega Menu Card 2: Patagonia Fleece -->
+                <a href="{{ route('products.show', 'vintage-patagonia-retro-x-fleece') }}" 
                    class="group relative rounded-[20px] bg-[#8a9a8c]/20 hover:bg-[#8a9a8c]/30 p-5 flex flex-col justify-between overflow-hidden min-h-[220px] border border-[#8a9a8c]/35 transition duration-300">
                     <div class="z-10">
                         <span class="inline-block bg-white text-charcoal rounded-full px-3 py-0.5 text-[10px] font-bold uppercase tracking-wider shadow-2xs">
-                            Denim Ikonik
+                            Sherpa Fleece
                         </span>
-                        <p class="text-[12px] text-charcoal/80 font-medium mt-1.5 leading-snug">Levi's 501 Made in USA W32.</p>
+                        <p class="text-[12px] text-charcoal/80 font-medium mt-1.5 leading-snug">Patagonia Retro-X Oatmeal 90s.</p>
                     </div>
 
                     <!-- Product Image -->
                     <div class="my-auto py-1 flex items-center justify-center">
-                        <img src="{{ asset('images/products/vintage-levis-501-stonewash.png') }}" 
-                             alt="Levi's 501" 
+                        <img src="{{ asset('images/products/vintage-patagonia-fleece-cream.png') }}" 
+                             alt="Patagonia Retro-X" 
                              class="h-24 w-auto object-contain drop-shadow-md group-hover:scale-110 transition-transform duration-300">
                     </div>
 
                     <span class="text-[11px] uppercase tracking-wider font-bold text-charcoal underline underline-offset-4 group-hover:opacity-80 transition inline-block">
-                        Lihat Detail Jeans →
+                        Lihat Detail Fleece →
                     </span>
                 </a>
             </div>
