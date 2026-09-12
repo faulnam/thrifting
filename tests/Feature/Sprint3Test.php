@@ -3,8 +3,6 @@
 namespace Tests\Feature;
 
 use App\Models\Cart;
-use App\Models\CartItem;
-use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductVariant;
 use App\Models\User;
@@ -18,9 +16,13 @@ class Sprint3Test extends TestCase
     use DatabaseTransactions;
 
     protected User $customer;
+
     protected Product $product;
+
     protected ProductVariant $inStockVariant;
+
     protected ProductVariant $lowStockVariant;
+
     protected ProductVariant $outOfStockVariant;
 
     protected function setUp(): void
@@ -29,11 +31,12 @@ class Sprint3Test extends TestCase
         $this->seed();
         $this->withSession(['test_session' => true]);
 
-        $this->customer = User::where('role', 'customer')->first() ?? User::factory()->create([
+        $this->customer = User::where('email', 'demo.customer@fifa.test')->first() ?? User::where('role', 'customer')->first() ?? User::factory()->create([
             'role' => 'customer',
             'email' => 'customer_sprint3@fifa.test',
             'password' => bcrypt('password'),
         ]);
+        $this->customer->update(['password' => bcrypt('password')]);
 
         $this->product = Product::with('variants')->where('is_active', true)->first();
 
@@ -251,15 +254,15 @@ class Sprint3Test extends TestCase
     public function test_guest_toggling_wishlist_redirects_to_login_with_context(): void
     {
         // Web request
-        $response = $this->from('/products/' . $this->product->slug)
-            ->post('/wishlist/toggle/' . $this->product->id);
+        $response = $this->from('/products/'.$this->product->slug)
+            ->post('/wishlist/toggle/'.$this->product->id);
 
         $response->assertRedirect(route('login'));
         $response->assertSessionHas('warning');
-        $this->assertEquals(url('/products/' . $this->product->slug), session('url.intended'));
+        $this->assertEquals(url('/products/'.$this->product->slug), session('url.intended'));
 
         // JSON AJAX request
-        $jsonRes = $this->postJson('/wishlist/toggle/' . $this->product->id);
+        $jsonRes = $this->postJson('/wishlist/toggle/'.$this->product->id);
         $jsonRes->assertStatus(401);
         $jsonRes->assertJson([
             'success' => false,
@@ -272,7 +275,7 @@ class Sprint3Test extends TestCase
         $this->actingAs($this->customer);
 
         // 1. Add to wishlist
-        $addRes = $this->postJson('/wishlist/toggle/' . $this->product->id);
+        $addRes = $this->postJson('/wishlist/toggle/'.$this->product->id);
         $addRes->assertStatus(200);
         $addRes->assertJson([
             'success' => true,
@@ -284,7 +287,7 @@ class Sprint3Test extends TestCase
         ]);
 
         // 2. Remove from wishlist
-        $removeRes = $this->postJson('/wishlist/toggle/' . $this->product->id);
+        $removeRes = $this->postJson('/wishlist/toggle/'.$this->product->id);
         $removeRes->assertStatus(200);
         $removeRes->assertJson([
             'success' => true,

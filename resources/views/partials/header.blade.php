@@ -159,7 +159,7 @@
                             <a href="{{ route('account.wishlist') }}" class="block px-4 py-2 text-body-sm text-charcoal hover:bg-sand/30">
                                 Wishlist Saya
                             </a>
-                            <a href="{{ route('account.orders') }}" class="block px-4 py-2 text-body-sm text-charcoal hover:bg-sand/30">
+                            <a href="{{ route('account.orders.index') }}" class="block px-4 py-2 text-body-sm text-charcoal hover:bg-sand/30">
                                 Pesanan Saya
                             </a>
                         @endif

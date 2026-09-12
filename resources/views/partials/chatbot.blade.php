@@ -297,7 +297,7 @@ function fifaChatbot() {
                           '&bull; Estimasi pengiriman reguler: 1-3 hari kerja dengan nomor resi otomatis tercatat di akun.',
                     links: [
                         { label: 'Keranjang Belanja', url: '{{ route('cart.index') }}' },
-                        { label: 'Status Pesanan Saya', url: '{{ auth()->check() ? route('account.orders') : route('login') }}' }
+                        { label: 'Status Pesanan Saya', url: '{{ auth()->check() ? route('account.orders.index') : route('login') }}' }
                     ]
                 };
             }

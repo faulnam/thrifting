@@ -3,10 +3,8 @@
 namespace Tests\Feature;
 
 use App\Models\Address;
-use App\Models\Category;
 use App\Models\Order;
 use App\Models\OrderItem;
-use App\Models\Payment;
 use App\Models\Product;
 use App\Models\ProductVariant;
 use App\Models\Review;
@@ -22,8 +20,11 @@ class Sprint8Test extends TestCase
     use DatabaseTransactions;
 
     protected User $customer;
+
     protected User $otherCustomer;
+
     protected Product $product;
+
     protected ProductVariant $variant;
 
     protected function setUp(): void
@@ -33,7 +34,7 @@ class Sprint8Test extends TestCase
 
         $this->customer = User::create([
             'name' => 'Budi Customer',
-            'email' => 'budi_sprint8_' . uniqid() . '@test.com',
+            'email' => 'budi_sprint8_'.uniqid().'@test.com',
             'password' => bcrypt('Secret123!'),
             'role' => 'customer',
             'phone' => '081234567890',
@@ -41,7 +42,7 @@ class Sprint8Test extends TestCase
 
         $this->otherCustomer = User::create([
             'name' => 'Siti Customer',
-            'email' => 'siti_sprint8_' . uniqid() . '@test.com',
+            'email' => 'siti_sprint8_'.uniqid().'@test.com',
             'password' => bcrypt('Secret123!'),
             'role' => 'customer',
             'phone' => '089876543210',
@@ -58,7 +59,7 @@ class Sprint8Test extends TestCase
     {
         $order = Order::create([
             'user_id' => $user->id,
-            'order_number' => 'ORD-' . strtoupper(uniqid()),
+            'order_number' => 'ORD-'.strtoupper(uniqid()),
             'status' => $status,
             'subtotal' => 1850000,
             'shipping_cost' => 12000,
@@ -98,9 +99,9 @@ class Sprint8Test extends TestCase
             'order_id' => $order->id,
             'courier_company' => 'jne',
             'courier_type' => 'reg',
-            'biteship_order_id' => 'bs_test_' . uniqid(),
-            'tracking_id' => 'TRK_TEST_' . rand(1000, 9999),
-            'waybill_id' => 'JNE' . rand(100000, 999999),
+            'biteship_order_id' => 'bs_test_'.uniqid(),
+            'tracking_id' => 'TRK_TEST_'.rand(1000, 9999),
+            'waybill_id' => 'JNE'.rand(100000, 999999),
             'status' => 'requested',
         ]);
 
@@ -273,7 +274,7 @@ class Sprint8Test extends TestCase
 
         $response = $this->get(route('account.reviews.index'));
         $response->assertStatus(200);
-        $response->assertSee('Daftar Ulasan Saya');
+        $response->assertSee('Ulasan Produk');
         $response->assertSee('Kenyamanan luar biasa');
         $response->assertSee('Disetujui');
         $response->assertSee($this->product->name);

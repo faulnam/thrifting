@@ -2,17 +2,14 @@
 
 namespace Tests\Feature;
 
-use App\Models\BlogPost;
 use App\Models\Category;
 use App\Models\Coupon;
 use App\Models\HeroSlide;
-use App\Models\NewsletterSubscriber;
 use App\Models\Page;
 use App\Models\Product;
 use App\Models\ProductVariant;
 use App\Models\Review;
 use App\Models\SiteSetting;
-use App\Models\StoreLocation;
 use App\Models\User;
 use App\Services\HtmlSanitizer;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -23,9 +20,13 @@ class Sprint7Test extends TestCase
     use DatabaseTransactions;
 
     protected User $adminUser;
+
     protected User $customerUser;
+
     protected Category $category;
+
     protected Product $product;
+
     protected ProductVariant $variant;
 
     protected function setUp(): void
@@ -95,7 +96,7 @@ class Sprint7Test extends TestCase
 
         // Invalid date range: expires_at before starts_at
         $response = $this->post(route('admin.coupons.store'), [
-            'code' => 'INVALIDDATE' . rand(100, 999),
+            'code' => 'INVALIDDATE'.rand(100, 999),
             'type' => 'percent',
             'value' => 20,
             'starts_at' => '2026-10-10',
@@ -105,7 +106,7 @@ class Sprint7Test extends TestCase
         $response->assertSessionHasErrors('expires_at');
 
         // Valid date range
-        $code = 'VALIDDATE' . rand(100, 999);
+        $code = 'VALIDDATE'.rand(100, 999);
         $validResponse = $this->post(route('admin.coupons.store'), [
             'code' => $code,
             'type' => 'percent',
@@ -125,7 +126,7 @@ class Sprint7Test extends TestCase
     {
         $this->actingAs($this->adminUser);
 
-        $code = 'PROMO' . rand(100, 999);
+        $code = 'PROMO'.rand(100, 999);
         $coupon = Coupon::create([
             'code' => $code,
             'type' => 'percent',
@@ -141,7 +142,7 @@ class Sprint7Test extends TestCase
         $this->assertFalse($coupon->fresh()->is_active);
 
         // Update coupon
-        $updateCode = 'PROMOUP' . rand(100, 999);
+        $updateCode = 'PROMOUP'.rand(100, 999);
         $updateRes = $this->put(route('admin.coupons.update', $coupon->id), [
             'code' => $updateCode,
             'type' => 'fixed',
@@ -161,7 +162,7 @@ class Sprint7Test extends TestCase
     {
         $this->actingAs($this->adminUser);
 
-        $title = 'Comfort Step ' . rand(100, 999);
+        $title = 'Comfort Step '.rand(100, 999);
         $storeRes = $this->post(route('admin.hero-slides.store'), [
             'page' => 'home',
             'title' => $title,
@@ -179,7 +180,7 @@ class Sprint7Test extends TestCase
         $slide = HeroSlide::where('title', $title)->first();
 
         // Update
-        $newTitle = 'Updated ' . $title;
+        $newTitle = 'Updated '.$title;
         $updateRes = $this->put(route('admin.hero-slides.update', $slide->id), [
             'page' => 'home',
             'title' => $newTitle,
@@ -200,7 +201,7 @@ class Sprint7Test extends TestCase
     {
         $this->actingAs($this->adminUser);
 
-        $slug = 'tentang-kami-' . rand(100, 999);
+        $slug = 'tentang-kami-'.rand(100, 999);
         $response = $this->post(route('admin.pages.store'), [
             'title' => 'Tentang Kami',
             'slug' => $slug,
@@ -224,9 +225,9 @@ class Sprint7Test extends TestCase
     {
         $this->actingAs($this->adminUser);
 
-        $slug = 'inovasi-wol-zq-' . rand(100, 999);
+        $slug = 'inovasi-wol-zq-'.rand(100, 999);
         $storeRes = $this->post(route('admin.blog.store'), [
-            'title' => 'Inovasi Wol ZQ ' . $slug,
+            'title' => 'Inovasi Wol ZQ '.$slug,
             'slug' => $slug,
             'excerpt' => 'Kisah wol alami yang nyaman dan lembut.',
             'content' => '<p>Wol Selandia Baru adalah kunci utama kenyamanan kami.</p>',
@@ -251,7 +252,7 @@ class Sprint7Test extends TestCase
     {
         $this->actingAs($this->adminUser);
 
-        $name = 'fifa Senayan ' . rand(100, 999);
+        $name = 'fifa Senayan '.rand(100, 999);
         $storeRes = $this->post(route('admin.stores.store'), [
             'name' => $name,
             'city' => 'Jakarta Pusat',
@@ -275,6 +276,8 @@ class Sprint7Test extends TestCase
 
     public function test_review_moderation_flow_and_pdp_only_displays_approved_reviews(): void
     {
+        Review::where('product_id', $this->product->id)->where('user_id', $this->customerUser->id)->delete();
+
         // 1. Customer submits review
         $this->actingAs($this->customerUser);
 
@@ -342,7 +345,7 @@ class Sprint7Test extends TestCase
     {
         // 1. Customer subscribes
         $subRes = $this->post(route('newsletter.subscribe'), [
-            'email' => 'subscriber_test_' . uniqid() . '@example.com',
+            'email' => 'subscriber_test_'.uniqid().'@example.com',
         ]);
         $subRes->assertRedirect();
 
@@ -360,11 +363,11 @@ class Sprint7Test extends TestCase
         // Create a low stock variant (stock = 2 <= 5)
         $lowVariant = ProductVariant::create([
             'product_id' => $this->product->id,
-            'sku' => 'TD2-M-LOW-' . rand(100, 999),
+            'sku' => 'TD2-M-LOW-'.rand(100, 999),
             'color_name' => 'Natural Black',
             'color_hex' => '#000000',
             'size' => '43',
-            'stock' => 2,
+            'stock' => 0,
             'price' => 1850000,
             'is_active' => true,
         ]);

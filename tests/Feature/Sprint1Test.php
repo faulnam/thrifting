@@ -6,7 +6,6 @@ use App\Models\Category;
 use App\Models\SiteSetting;
 use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Illuminate\Support\Facades\Hash;
 use Tests\TestCase;
 
 class Sprint1Test extends TestCase
@@ -24,8 +23,8 @@ class Sprint1Test extends TestCase
         $response = $this->get('/');
         $response->assertStatus(200);
         $response->assertSee('fifa');
-        $response->assertSee('Shop Men');
-        $response->assertSee('Shop Women');
+        $response->assertSee('Koleksi Pria');
+        $response->assertSee('Koleksi Wanita');
     }
 
     public function test_customer_login_and_register_pages_render(): void
@@ -68,7 +67,7 @@ class Sprint1Test extends TestCase
 
     public function test_admin_can_login_and_access_admin_dashboard(): void
     {
-        $admin = User::where('email', 'admin@fifa.test')->first();
+        $admin = User::where('role', 'admin')->first() ?? User::where('email', 'admin@fifa.com')->first();
         $this->assertNotNull($admin);
         $this->assertTrue($admin->isAdmin());
 
@@ -81,7 +80,7 @@ class Sprint1Test extends TestCase
     public function test_customer_cannot_login_via_admin_portal(): void
     {
         $response = $this->post('/admin/login', [
-            'email' => 'customer@fifa.test',
+            'email' => 'demo.customer@fifa.test',
             'password' => 'password',
         ]);
 
