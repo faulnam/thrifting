@@ -25,6 +25,7 @@ class CategoryController extends Controller
     public function create(): View
     {
         $parentCategories = Category::whereNull('parent_id')->orderBy('name')->get();
+
         return view('admin.categories.create', compact('parentCategories'));
     }
 
@@ -42,11 +43,11 @@ class CategoryController extends Controller
         ]);
 
         $slug = ! empty($validated['slug']) ? Str::slug($validated['slug']) : Str::slug($validated['name']);
-        
+
         // Ensure slug uniqueness
         $count = Category::where('slug', $slug)->count();
         if ($count > 0) {
-            $slug .= '-' . uniqid();
+            $slug .= '-'.uniqid();
         }
 
         $imagePath = null;
@@ -113,6 +114,7 @@ class CategoryController extends Controller
     public function destroy(Category $category): RedirectResponse
     {
         $category->delete();
+
         return redirect()->route('admin.categories.index')->with('success', 'Kategori berhasil dihapus.');
     }
 }

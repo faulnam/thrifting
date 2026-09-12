@@ -25,6 +25,7 @@ class CollectionController extends Controller
     public function create(): View
     {
         $products = Product::where('is_active', true)->orderBy('name')->get();
+
         return view('admin.collections.create', compact('products'));
     }
 

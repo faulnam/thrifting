@@ -70,6 +70,6 @@ class Order extends Model
 
     public static function generateOrderNumber(): string
     {
-        return 'AB-' . date('Ymd') . '-' . strtoupper(substr(uniqid(), -4));
+        return 'AB-'.date('Ymd').'-'.strtoupper(substr(uniqid(), -4));
     }
 }

@@ -50,8 +50,8 @@ class DashboardController extends Controller
 
         // Top 5 selling products
         $topProducts = OrderItem::whereHas('order', function ($q) {
-                $q->whereIn('status', ['paid', 'processing', 'ready_to_ship', 'shipped', 'delivered', 'completed']);
-            })
+            $q->whereIn('status', ['paid', 'processing', 'ready_to_ship', 'shipped', 'delivered', 'completed']);
+        })
             ->select('product_name_snapshot', DB::raw('SUM(qty) as total_qty'), DB::raw('SUM(subtotal) as total_revenue'))
             ->groupBy('product_name_snapshot')
             ->orderByDesc('total_qty')

@@ -70,6 +70,7 @@ class Product extends Model
     public function getAverageRatingAttribute(): float
     {
         $avg = $this->approvedReviews()->avg('rating');
+
         return $avg !== null ? round((float) $avg, 1) : 5.0;
     }
 

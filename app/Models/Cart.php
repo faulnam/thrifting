@@ -30,6 +30,7 @@ class Cart extends Model
     {
         return (float) $this->items->sum(function (CartItem $item) {
             $price = $item->variant->price_override ?? $item->variant->product->base_price ?? 0;
+
             return $price * $item->qty;
         });
     }

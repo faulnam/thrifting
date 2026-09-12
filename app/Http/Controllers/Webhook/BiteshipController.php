@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Webhook;
 
 use App\Http\Controllers\Controller;
 use App\Models\Shipment;
-use App\Models\ShipmentTracking;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -29,11 +28,12 @@ class BiteshipController extends Controller
 
         if (empty($biteshipOrderId) && empty($trackingId) && empty($waybillId)) {
             Log::warning('Biteship webhook received without order/tracking identifier.', ['payload' => $payload]);
+
             return response()->json(['success' => false, 'message' => 'Missing shipment identifier.'], 400);
         }
 
         try {
-            return DB::transaction(function () use ($biteshipOrderId, $trackingId, $waybillId, $status, $note, $occurredAt, $payload) {
+            return DB::transaction(function () use ($biteshipOrderId, $trackingId, $waybillId, $status, $note, $occurredAt) {
                 /** @var Shipment|null $shipment */
                 $shipment = Shipment::where(function ($query) use ($biteshipOrderId, $trackingId, $waybillId) {
                     if ($biteshipOrderId) {
@@ -46,11 +46,12 @@ class BiteshipController extends Controller
                         $query->orWhere('waybill_id', $waybillId);
                     }
                 })
-                ->lockForUpdate()
-                ->first();
+                    ->lockForUpdate()
+                    ->first();
 
                 if (! $shipment) {
                     Log::info("Biteship webhook: No local shipment matched identifier {$biteshipOrderId}.");
+
                     return response()->json(['success' => true, 'message' => 'Shipment not found locally, acknowledged.'], 200);
                 }
 

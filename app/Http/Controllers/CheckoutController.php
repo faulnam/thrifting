@@ -196,7 +196,7 @@ class CheckoutController extends Controller
                 } else {
                     $order->payment()->create([
                         'gateway' => 'midtrans',
-                        'gateway_reference' => 'SIM-' . $order->order_number,
+                        'gateway_reference' => 'SIM-'.$order->order_number,
                         'payment_method' => 'simulation_sandbox',
                         'status' => 'success',
                         'amount' => $order->total,
@@ -225,13 +225,13 @@ class CheckoutController extends Controller
                 'errors' => $e->errors(),
             ], 422);
         } catch (Throwable $e) {
-            Log::error('Checkout process exception: ' . $e->getMessage(), [
+            Log::error('Checkout process exception: '.$e->getMessage(), [
                 'trace' => $e->getTraceAsString(),
             ]);
 
             return response()->json([
                 'success' => false,
-                'message' => 'Terjadi kesalahan saat memproses pesanan Anda: ' . $e->getMessage(),
+                'message' => 'Terjadi kesalahan saat memproses pesanan Anda: '.$e->getMessage(),
             ], 500);
         }
     }
@@ -252,7 +252,7 @@ class CheckoutController extends Controller
         } else {
             $order->payment()->create([
                 'gateway' => 'midtrans',
-                'gateway_reference' => 'SIM-' . $order->order_number,
+                'gateway_reference' => 'SIM-'.$order->order_number,
                 'payment_method' => 'simulation_sandbox',
                 'status' => 'success',
                 'amount' => $order->total,

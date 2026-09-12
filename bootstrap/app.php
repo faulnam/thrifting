@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\DemoCleanupMiddleware;
 use App\Http\Middleware\EnsureAdmin;
 use App\Http\Middleware\EnsureCustomer;
 use Illuminate\Foundation\Application;
@@ -17,7 +18,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->trustProxies(at: '*');
 
         $middleware->web(append: [
-            \App\Http\Middleware\DemoCleanupMiddleware::class,
+            DemoCleanupMiddleware::class,
         ]);
 
         $middleware->alias([

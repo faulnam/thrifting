@@ -7,7 +7,6 @@ use App\Models\HeroSlide;
 use App\Services\ImageOptimizer;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class HeroSlideController extends Controller
@@ -46,7 +45,7 @@ class HeroSlideController extends Controller
 
         $imagePath = 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=1600&q=80';
         if ($request->hasFile('image')) {
-            $imagePath = '/storage/' . ImageOptimizer::optimizeAndStore($request->file('image'), 'hero_slides', 1920, 85);
+            $imagePath = '/storage/'.ImageOptimizer::optimizeAndStore($request->file('image'), 'hero_slides', 1920, 85);
         } elseif ($request->filled('image_url')) {
             $imagePath = trim($request->image_url);
         }
@@ -82,7 +81,7 @@ class HeroSlideController extends Controller
         ]);
 
         if ($request->hasFile('image')) {
-            $validated['image'] = '/storage/' . ImageOptimizer::optimizeAndStore($request->file('image'), 'hero_slides', 1920, 85);
+            $validated['image'] = '/storage/'.ImageOptimizer::optimizeAndStore($request->file('image'), 'hero_slides', 1920, 85);
         } elseif ($request->filled('image_url')) {
             $validated['image'] = trim($request->image_url);
         }

@@ -30,7 +30,6 @@ class DemoCleanupService
     /**
      * Immediately reset all demo data or demo data for a specific user.
      *
-     * @param int|null $userId
      * @return int Number of activities reverted/cleaned
      */
     public function resetAllDemoData(?int $userId = null): int
@@ -68,6 +67,7 @@ class DemoCleanupService
                 if (! class_exists($class)) {
                     $activity->delete();
                     $count++;
+
                     continue;
                 }
 
@@ -117,6 +117,7 @@ class DemoCleanupService
                                     $softDeleted = $class::withTrashed()->find($originalData['id'] ?? null);
                                     if ($softDeleted) {
                                         $softDeleted->restore();
+
                                         return;
                                     }
                                 }

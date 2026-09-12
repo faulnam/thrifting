@@ -24,9 +24,9 @@ class CollectionController extends Controller
         // 1. Check if slug matches special gender route /men or /women
         if ($slug === 'men' || $slug === 'women') {
             $gender = $slug;
-            $pageTitle = ucfirst($gender) . "'s Collection";
-            $pageDescription = "Koleksi sepatu dan pakaian nyaman ramah lingkungan untuk " . ($gender === 'men' ? 'Pria' : 'Wanita') . ".";
-            
+            $pageTitle = ucfirst($gender)."'s Collection";
+            $pageDescription = 'Koleksi sepatu dan pakaian nyaman ramah lingkungan untuk '.($gender === 'men' ? 'Pria' : 'Wanita').'.';
+
             $categoryIds = Category::where('gender', $gender)->pluck('id');
             $query->whereIn('category_id', $categoryIds);
         } elseif ($slug === 'sale') {
@@ -34,7 +34,7 @@ class CollectionController extends Controller
             $pageDescription = 'Penawaran terbatas untuk produk-produk pilihan fifa.';
             $query->where(function ($q) {
                 $q->whereNotNull('compare_at_price')
-                  ->orWhereHas('collections', fn ($c) => $c->where('slug', 'sale'));
+                    ->orWhereHas('collections', fn ($c) => $c->where('slug', 'sale'));
             });
         } elseif ($slug !== 'all') {
             // Check if collection exists
@@ -49,7 +49,7 @@ class CollectionController extends Controller
                 if ($category) {
                     $pageTitle = $category->name;
                     $pageDescription = $category->description ?? $pageDescription;
-                    
+
                     // Include child categories if parent
                     $childIds = $category->children()->pluck('id')->toArray();
                     $allCategoryIds = array_merge([$category->id], $childIds);

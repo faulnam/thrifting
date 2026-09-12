@@ -12,16 +12,15 @@ class ImageOptimizer
      * Optimize and store an uploaded image to the public disk.
      * Resizes if larger than max width, strips metadata, and compresses.
      *
-     * @param UploadedFile $file
-     * @param string $folder Directory inside public disk (e.g. 'products', 'blog', 'hero_slides')
-     * @param int $maxWidth Maximum allowable width in pixels
-     * @param int $quality JPEG/WebP compression quality (1-100)
+     * @param  string  $folder  Directory inside public disk (e.g. 'products', 'blog', 'hero_slides')
+     * @param  int  $maxWidth  Maximum allowable width in pixels
+     * @param  int  $quality  JPEG/WebP compression quality (1-100)
      * @return string Stored file relative path on public disk
      */
     public static function optimizeAndStore(UploadedFile $file, string $folder = 'products', int $maxWidth = 1600, int $quality = 85): string
     {
         $extension = strtolower($file->getClientOriginalExtension());
-        $filename = Str::random(40) . '.' . ($extension === 'png' ? 'png' : ($extension === 'webp' ? 'webp' : 'jpg'));
+        $filename = Str::random(40).'.'.($extension === 'png' ? 'png' : ($extension === 'webp' ? 'webp' : 'jpg'));
         $relativeFolder = trim($folder, '/');
         $storagePath = Storage::disk('public')->path($relativeFolder);
 
@@ -29,7 +28,7 @@ class ImageOptimizer
             mkdir($storagePath, 0755, true);
         }
 
-        $targetFullPath = $storagePath . DIRECTORY_SEPARATOR . $filename;
+        $targetFullPath = $storagePath.DIRECTORY_SEPARATOR.$filename;
 
         // If GD extension is available, optimize and resize
         if (extension_loaded('gd') && function_exists('imagecreatefromstring')) {
@@ -69,7 +68,7 @@ class ImageOptimizer
 
                     imagedestroy($srcImage);
 
-                    return $relativeFolder . '/' . $filename;
+                    return $relativeFolder.'/'.$filename;
                 }
             } catch (\Throwable $e) {
                 // Fallback to standard Laravel store if GD error occurs

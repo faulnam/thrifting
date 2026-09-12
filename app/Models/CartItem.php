@@ -33,6 +33,7 @@ class CartItem extends Model
     public function getSubtotalAttribute(): float
     {
         $price = $this->variant->price_override ?? $this->variant->product->base_price ?? 0;
+
         return (float) ($price * $this->qty);
     }
 }

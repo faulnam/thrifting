@@ -113,6 +113,7 @@ class CouponController extends Controller
         $coupon->update(['is_active' => ! $coupon->is_active]);
 
         $status = $coupon->is_active ? 'diaktifkan' : 'dinonaktifkan';
+
         return redirect()->back()
             ->with('success', "Kupon '{$coupon->code}' berhasil {$status}.");
     }

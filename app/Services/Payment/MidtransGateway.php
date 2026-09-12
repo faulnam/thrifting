@@ -10,8 +10,11 @@ use Throwable;
 class MidtransGateway implements PaymentGatewayContract
 {
     protected string $serverKey;
+
     protected string $clientKey;
+
     protected bool $isProduction;
+
     protected string $snapUrl;
 
     public function __construct()
@@ -66,7 +69,7 @@ class MidtransGateway implements PaymentGatewayContract
                 'id' => 'SHIPPING',
                 'price' => (int) round($order->shipping_cost),
                 'quantity' => 1,
-                'name' => mb_substr('Ongkir (' . ($order->courier_company ?: 'Kurir') . ' - ' . ($order->courier_type ?: 'Reguler') . ')', 0, 50),
+                'name' => mb_substr('Ongkir ('.($order->courier_company ?: 'Kurir').' - '.($order->courier_type ?: 'Reguler').')', 0, 50),
             ];
         }
 
@@ -115,29 +118,31 @@ class MidtransGateway implements PaymentGatewayContract
         if (! empty($this->serverKey)) {
             try {
                 $response = Http::withHeaders([
-                    'Authorization' => 'Basic ' . base64_encode($this->serverKey . ':'),
+                    'Authorization' => 'Basic '.base64_encode($this->serverKey.':'),
                     'Content-Type' => 'application/json',
                     'Accept' => 'application/json',
                 ])
-                ->timeout(10)
-                ->post($this->snapUrl, $payload);
+                    ->timeout(10)
+                    ->post($this->snapUrl, $payload);
 
                 if ($response->successful()) {
                     $json = $response->json();
+
                     return [
                         'token' => $json['token'] ?? '',
                         'redirect_url' => $json['redirect_url'] ?? '',
                     ];
                 }
 
-                Log::warning('Midtrans Snap API error: ' . $response->body());
+                Log::warning('Midtrans Snap API error: '.$response->body());
             } catch (Throwable $e) {
-                Log::error('Midtrans Snap exception: ' . $e->getMessage());
+                Log::error('Midtrans Snap exception: '.$e->getMessage());
             }
         }
 
         // Mock token fallback for local dev & automated testing without live credentials
-        $mockToken = 'snap_mock_' . md5($order->order_number . '_' . $grossAmount);
+        $mockToken = 'snap_mock_'.md5($order->order_number.'_'.$grossAmount);
+
         return [
             'token' => $mockToken,
             'redirect_url' => "https://app.sandbox.midtrans.com/snap/v2/vtweb/{$mockToken}",
@@ -159,7 +164,7 @@ class MidtransGateway implements PaymentGatewayContract
             return false;
         }
 
-        $expectedSignature = hash('sha512', $orderId . $statusCode . $grossAmount . $this->serverKey);
+        $expectedSignature = hash('sha512', $orderId.$statusCode.$grossAmount.$this->serverKey);
 
         return hash_equals($expectedSignature, $signatureKey);
     }

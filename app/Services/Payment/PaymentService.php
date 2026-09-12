@@ -35,6 +35,7 @@ class PaymentService
     public function setGateway(PaymentGatewayContract $gateway): self
     {
         $this->gateway = $gateway;
+
         return $this;
     }
 

@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\Shipment;
-use App\Models\ShipmentTracking;
 use App\Services\BiteshipService;
 use App\Services\OrderService;
 use Illuminate\Http\RedirectResponse;
@@ -35,13 +34,13 @@ class OrderController extends Controller
             $search = trim($request->query('q'));
             $query->where(function ($q) use ($search) {
                 $q->where('order_number', 'like', "%{$search}%")
-                  ->orWhere('guest_name', 'like', "%{$search}%")
-                  ->orWhere('guest_email', 'like', "%{$search}%")
-                  ->orWhere('guest_phone', 'like', "%{$search}%")
-                  ->orWhereHas('user', function ($uq) use ($search) {
-                      $uq->where('name', 'like', "%{$search}%")
-                         ->orWhere('email', 'like', "%{$search}%");
-                  });
+                    ->orWhere('guest_name', 'like', "%{$search}%")
+                    ->orWhere('guest_email', 'like', "%{$search}%")
+                    ->orWhere('guest_phone', 'like', "%{$search}%")
+                    ->orWhereHas('user', function ($uq) use ($search) {
+                        $uq->where('name', 'like', "%{$search}%")
+                            ->orWhere('email', 'like', "%{$search}%");
+                    });
             });
         }
 
@@ -89,7 +88,7 @@ class OrderController extends Controller
             $order->update(['status' => $newStatus]);
         });
 
-        return back()->with('success', "Status pesanan berhasil diperbarui menjadi: " . strtoupper($newStatus));
+        return back()->with('success', 'Status pesanan berhasil diperbarui menjadi: '.strtoupper($newStatus));
     }
 
     /**
@@ -118,7 +117,7 @@ class OrderController extends Controller
         $result = $this->biteshipService->createOrder($order);
 
         if (! $result['success']) {
-            return back()->with('error', 'Gagal memproses pengiriman ke Biteship: ' . ($result['error'] ?? 'Terjadi kesalahan.'));
+            return back()->with('error', 'Gagal memproses pengiriman ke Biteship: '.($result['error'] ?? 'Terjadi kesalahan.'));
         }
 
         DB::transaction(function () use ($order, $result) {
@@ -148,7 +147,7 @@ class OrderController extends Controller
             ]);
         });
 
-        return back()->with('success', 'Order pengiriman berhasil dibuat di Biteship. Nomor Resi/Tracking ID: ' . ($result['tracking_id'] ?? $result['biteship_order_id']));
+        return back()->with('success', 'Order pengiriman berhasil dibuat di Biteship. Nomor Resi/Tracking ID: '.($result['tracking_id'] ?? $result['biteship_order_id']));
     }
 
     /**
@@ -165,7 +164,7 @@ class OrderController extends Controller
         $result = $this->biteshipService->requestPickup($shipment);
 
         if (! $result['success']) {
-            return back()->with('error', 'Gagal request pickup: ' . ($result['error'] ?? 'Kurir tidak tersedia.'));
+            return back()->with('error', 'Gagal request pickup: '.($result['error'] ?? 'Kurir tidak tersedia.'));
         }
 
         DB::transaction(function () use ($order, $shipment, $result) {

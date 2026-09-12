@@ -12,9 +12,13 @@ use Throwable;
 class BiteshipService
 {
     protected string $apiKey;
+
     protected string $baseUrl;
+
     protected string $defaultOriginAreaId;
+
     protected string $defaultCouriers;
+
     protected bool $isActive;
 
     public function __construct()
@@ -29,9 +33,6 @@ class BiteshipService
     /**
      * Search Indonesian administrative areas for address autocomplete.
      * Minimum 3 characters required.
-     *
-     * @param string $query
-     * @return array
      */
     public function searchAreas(string $query): array
     {
@@ -45,12 +46,12 @@ class BiteshipService
                 $response = Http::withHeaders([
                     'Authorization' => $this->apiKey,
                 ])
-                ->timeout(5)
-                ->get("{$this->baseUrl}/v1/maps/areas", [
-                    'countries' => 'ID',
-                    'input' => $query,
-                    'type' => 'single',
-                ]);
+                    ->timeout(5)
+                    ->get("{$this->baseUrl}/v1/maps/areas", [
+                        'countries' => 'ID',
+                        'input' => $query,
+                        'type' => 'single',
+                    ]);
 
                 if ($response->successful()) {
                     $json = $response->json();
@@ -70,9 +71,9 @@ class BiteshipService
                     }
                 }
 
-                Log::warning('Biteship searchAreas API non-200 or empty, falling back to local pool: ' . $response->body());
+                Log::warning('Biteship searchAreas API non-200 or empty, falling back to local pool: '.$response->body());
             } catch (Throwable $e) {
-                Log::warning('Biteship searchAreas exception, falling back to local pool: ' . $e->getMessage());
+                Log::warning('Biteship searchAreas exception, falling back to local pool: '.$e->getMessage());
             }
         }
 
@@ -82,11 +83,6 @@ class BiteshipService
 
     /**
      * Calculate courier shipping rates for destination area and item package.
-     *
-     * @param string|null $destinationAreaId
-     * @param array $items
-     * @param string|null $originAreaId
-     * @return array
      */
     public function getRates(?string $destinationAreaId = null, array $items = [], ?string $originAreaId = null): array
     {
@@ -161,8 +157,8 @@ class BiteshipService
                     'Authorization' => $this->apiKey,
                     'Content-Type' => 'application/json',
                 ])
-                ->timeout(8)
-                ->post("{$this->baseUrl}/v1/rates/couriers", $payload);
+                    ->timeout(8)
+                    ->post("{$this->baseUrl}/v1/rates/couriers", $payload);
 
                 if ($response->successful()) {
                     $json = $response->json();
@@ -171,6 +167,7 @@ class BiteshipService
                     if (! empty($pricing)) {
                         $rates = array_map(function ($rate) {
                             $price = (int) ($rate['price'] ?? 0);
+
                             return [
                                 'courier_company' => $rate['company'] ?? $rate['courier_code'] ?? 'jne',
                                 'courier_name' => $rate['courier_name'] ?? strtoupper($rate['company'] ?? 'JNE'),
@@ -179,7 +176,7 @@ class BiteshipService
                                 'courier_service_code' => $rate['courier_service_code'] ?? 'reg',
                                 'duration' => $rate['duration'] ?? ($rate['shipment_duration_range'] ? "{$rate['shipment_duration_range']} {$rate['shipment_duration_unit']}" : '1 - 3 hari'),
                                 'price' => $price,
-                                'price_formatted' => 'Rp ' . number_format($price, 0, ',', '.'),
+                                'price_formatted' => 'Rp '.number_format($price, 0, ',', '.'),
                                 'type' => strtolower($rate['type'] ?? $rate['service_type'] ?? 'reguler'),
                                 'description' => $rate['description'] ?? '',
                             ];
@@ -198,10 +195,10 @@ class BiteshipService
 
                     Log::info("Biteship getRates returned empty pricing for area {$destinationAreaId}. Falling back to simulated rates.");
                 } else {
-                    Log::warning('Biteship getRates API non-200: ' . $response->body() . '. Falling back to simulated rates.');
+                    Log::warning('Biteship getRates API non-200: '.$response->body().'. Falling back to simulated rates.');
                 }
             } catch (Throwable $e) {
-                Log::warning('Biteship getRates exception: ' . $e->getMessage() . '. Falling back to simulated rates.');
+                Log::warning('Biteship getRates exception: '.$e->getMessage().'. Falling back to simulated rates.');
             }
         }
 
@@ -211,9 +208,6 @@ class BiteshipService
 
     /**
      * Create delivery order in Biteship after customer pays.
-     *
-     * @param Order $order
-     * @return array
      */
     public function createOrder(Order $order): array
     {
@@ -268,11 +262,12 @@ class BiteshipService
                     'Authorization' => $this->apiKey,
                     'Content-Type' => 'application/json',
                 ])
-                ->timeout(10)
-                ->post("{$this->baseUrl}/v1/orders", $payload);
+                    ->timeout(10)
+                    ->post("{$this->baseUrl}/v1/orders", $payload);
 
                 if ($response->successful()) {
                     $json = $response->json();
+
                     return [
                         'success' => true,
                         'biteship_order_id' => $json['id'] ?? null,
@@ -284,16 +279,16 @@ class BiteshipService
                 }
 
                 $errorMessage = $response->json('message') ?? $response->json('error') ?? 'Gagal membuat order pengiriman di Biteship.';
-                Log::warning('Biteship createOrder non-200: ' . $response->body());
+                Log::warning('Biteship createOrder non-200: '.$response->body());
             } catch (Throwable $e) {
-                Log::error('Biteship createOrder exception: ' . $e->getMessage());
+                Log::error('Biteship createOrder exception: '.$e->getMessage());
             }
         }
 
         // Realistic sandbox mock for development & testing
-        $mockBiteshipId = 'bs_ord_' . strtolower(substr(md5($order->order_number), 0, 12));
-        $mockTrackingId = 'TRK' . strtoupper(substr(md5($order->order_number), 0, 8));
-        $mockWaybillId = strtoupper($courierCompany) . rand(10000000, 99999999);
+        $mockBiteshipId = 'bs_ord_'.strtolower(substr(md5($order->order_number), 0, 12));
+        $mockTrackingId = 'TRK'.strtoupper(substr(md5($order->order_number), 0, 8));
+        $mockWaybillId = strtoupper($courierCompany).rand(10000000, 99999999);
 
         return [
             'success' => true,
@@ -307,9 +302,6 @@ class BiteshipService
 
     /**
      * Request courier pickup for an active shipment order in Biteship.
-     *
-     * @param Shipment $shipment
-     * @return array
      */
     public function requestPickup(Shipment $shipment): array
     {
@@ -334,11 +326,12 @@ class BiteshipService
                     'Authorization' => $this->apiKey,
                     'Content-Type' => 'application/json',
                 ])
-                ->timeout(10)
-                ->post("{$this->baseUrl}/v1/orders/{$shipment->biteship_order_id}/pickup");
+                    ->timeout(10)
+                    ->post("{$this->baseUrl}/v1/orders/{$shipment->biteship_order_id}/pickup");
 
                 if ($response->successful()) {
                     $json = $response->json();
+
                     return [
                         'success' => true,
                         'status' => 'requested',
@@ -347,9 +340,9 @@ class BiteshipService
                 }
 
                 $errorMessage = $response->json('message') ?? $response->json('error') ?? 'Gagal me-request pickup ke kurir Biteship.';
-                Log::warning('Biteship requestPickup non-200: ' . $response->body());
+                Log::warning('Biteship requestPickup non-200: '.$response->body());
             } catch (Throwable $e) {
-                Log::error('Biteship requestPickup exception: ' . $e->getMessage());
+                Log::error('Biteship requestPickup exception: '.$e->getMessage());
             }
         }
 
@@ -377,7 +370,7 @@ class BiteshipService
                 'courier_service_code' => 'siuntung',
                 'duration' => '1 - 2 hari',
                 'price' => 11000 * $weightMultiplier,
-                'price_formatted' => 'Rp ' . number_format(11000 * $weightMultiplier, 0, ',', '.'),
+                'price_formatted' => 'Rp '.number_format(11000 * $weightMultiplier, 0, ',', '.'),
                 'type' => 'reguler',
                 'description' => 'Layanan cepat dan ekonomis SiCepat',
             ],
@@ -389,7 +382,7 @@ class BiteshipService
                 'courier_service_code' => 'reg',
                 'duration' => '1 - 2 hari',
                 'price' => 12000 * $weightMultiplier,
-                'price_formatted' => 'Rp ' . number_format(12000 * $weightMultiplier, 0, ',', '.'),
+                'price_formatted' => 'Rp '.number_format(12000 * $weightMultiplier, 0, ',', '.'),
                 'type' => 'reguler',
                 'description' => 'Layanan Reguler JNE ke seluruh Indonesia',
             ],
@@ -401,7 +394,7 @@ class BiteshipService
                 'courier_service_code' => 'ez',
                 'duration' => '1 - 2 hari',
                 'price' => 13000 * $weightMultiplier,
-                'price_formatted' => 'Rp ' . number_format(13000 * $weightMultiplier, 0, ',', '.'),
+                'price_formatted' => 'Rp '.number_format(13000 * $weightMultiplier, 0, ',', '.'),
                 'type' => 'reguler',
                 'description' => 'Layanan reguler standar J&T Express',
             ],
@@ -413,7 +406,7 @@ class BiteshipService
                 'courier_service_code' => 'reguler',
                 'duration' => '1 - 2 hari',
                 'price' => 12500 * $weightMultiplier,
-                'price_formatted' => 'Rp ' . number_format(12500 * $weightMultiplier, 0, ',', '.'),
+                'price_formatted' => 'Rp '.number_format(12500 * $weightMultiplier, 0, ',', '.'),
                 'type' => 'reguler',
                 'description' => 'Layanan pengiriman reguler Anteraja',
             ],
@@ -425,7 +418,7 @@ class BiteshipService
                 'courier_service_code' => 'yes',
                 'duration' => '1 hari',
                 'price' => 24000 * $weightMultiplier,
-                'price_formatted' => 'Rp ' . number_format(24000 * $weightMultiplier, 0, ',', '.'),
+                'price_formatted' => 'Rp '.number_format(24000 * $weightMultiplier, 0, ',', '.'),
                 'type' => 'express',
                 'description' => 'Garansi paket tiba esok hari',
             ],
@@ -437,7 +430,7 @@ class BiteshipService
                 'courier_service_code' => 'instant',
                 'duration' => '2 - 3 jam',
                 'price' => 35000 * $weightMultiplier,
-                'price_formatted' => 'Rp ' . number_format(35000 * $weightMultiplier, 0, ',', '.'),
+                'price_formatted' => 'Rp '.number_format(35000 * $weightMultiplier, 0, ',', '.'),
                 'type' => 'instant',
                 'description' => 'Pengiriman kilat kurir motor tiba dalam hitungan jam',
             ],
@@ -704,8 +697,8 @@ class BiteshipService
 
         if (empty($results)) {
             $results[] = [
-                'id' => 'ID_GEN_' . strtoupper(substr(md5($query), 0, 10)),
-                'name' => ucwords($query) . ', Indonesia',
+                'id' => 'ID_GEN_'.strtoupper(substr(md5($query), 0, 10)),
+                'name' => ucwords($query).', Indonesia',
                 'country_name' => 'Indonesia',
                 'province' => 'DKI Jakarta',
                 'city' => 'Jakarta Selatan',

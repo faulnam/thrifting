@@ -37,7 +37,7 @@ class SubscriberController extends Controller
 
     public function exportCsv(): StreamedResponse
     {
-        $fileName = 'subscribers_' . date('Y-m-d_His') . '.csv';
+        $fileName = 'subscribers_'.date('Y-m-d_His').'.csv';
 
         $headers = [
             'Content-Type' => 'text/csv; charset=UTF-8',
@@ -49,9 +49,9 @@ class SubscriberController extends Controller
 
         $callback = function () {
             $handle = fopen('php://output', 'w');
-            
+
             // Add UTF-8 BOM for Excel compatibility
-            fputs($handle, "\xEF\xBB\xBF");
+            fwrite($handle, "\xEF\xBB\xBF");
 
             // CSV Column Headers
             fputcsv($handle, ['ID', 'Email', 'Tanggal Berlangganan', 'Status']);

@@ -55,7 +55,7 @@
     <div class="max-w-[1400px] mx-auto bg-white/95 backdrop-blur-md rounded-2xl border border-sand/70 shadow-xs px-4 sm:px-6 h-14 sm:h-16 flex items-center justify-between">
         
         <!-- Left Zone: Mobile Hamburger & Brand Logo -->
-        <div class="header-zone-left">
+        <div class="header-zone-left flex items-center gap-1 sm:gap-2">
             <!-- Mobile Hamburger Button -->
             <button type="button" 
                     @click="mobileMenuOpen = true"
@@ -73,7 +73,7 @@
         </div>
 
         <!-- Center Zone: Desktop Navigation (True Center) -->
-        <nav class="hidden lg:flex header-nav-center" @mouseleave="activeMenu = null">
+        <nav class="hidden lg:flex header-nav-center items-center gap-6 xl:gap-8" @mouseleave="activeMenu = null">
             <!-- DROP TERBARU -->
             <div>
                 <a href="{{ route('collections.show', 'new-arrivals') }}" 
@@ -116,7 +116,7 @@
         </nav>
 
         <!-- Right Zone: Utility Icons & Actions -->
-        <div class="header-zone-right">
+        <div class="header-zone-right flex items-center gap-0.5 sm:gap-1">
             <!-- Search Button (Opens Live Search Modal) -->
             <button type="button" 
                     @click="searchOpen = true; $nextTick(() => { $refs.searchInput?.focus(); })"
@@ -216,6 +216,7 @@
     <div class="max-w-[1400px] mx-auto relative">
         <!-- Desktop Mega Menu: MEN -->
         <div x-show="activeMenu === 'men'" 
+             x-cloak
              x-transition:enter="transition ease-out duration-200"
              x-transition:enter-start="opacity-0 -translate-y-2"
              x-transition:enter-end="opacity-100 translate-y-0"
@@ -297,6 +298,7 @@
 
         <!-- Desktop Mega Menu: WOMEN -->
         <div x-show="activeMenu === 'women'" 
+             x-cloak
              x-transition:enter="transition ease-out duration-200"
              x-transition:enter-start="opacity-0 -translate-y-2"
              x-transition:enter-end="opacity-100 translate-y-0"
@@ -374,6 +376,7 @@
 
     <!-- Mobile Navigation Drawer (Full Height Slide-in) -->
     <div x-show="mobileMenuOpen" 
+         x-cloak
          x-transition:enter="transition-opacity ease-linear duration-250"
          x-transition:enter-start="opacity-0"
          x-transition:enter-end="opacity-100"
@@ -386,6 +389,7 @@
     </div>
 
     <div x-show="mobileMenuOpen"
+         x-cloak
          x-transition:enter="transition ease-out duration-300 transform"
          x-transition:enter-start="-translate-x-full"
          x-transition:enter-end="translate-x-0"
@@ -574,6 +578,7 @@
 
     <!-- Live Search Overlay / Modal Dialog -->
     <div x-show="searchOpen" 
+         x-cloak
          x-transition:enter="transition ease-out duration-200"
          x-transition:enter-start="opacity-0"
          x-transition:enter-end="opacity-100"
@@ -586,6 +591,7 @@
         <!-- Search Dialog Card -->
         <div @click.away="searchOpen = false" 
              x-show="searchOpen"
+             x-cloak
              x-transition:enter="transition ease-out duration-250"
              x-transition:enter-start="opacity-0 -translate-y-4 scale-98"
              x-transition:enter-end="opacity-100 translate-y-0 scale-100"

@@ -31,9 +31,6 @@ class HtmlSanitizer
      * Removes dangerous tags (script, iframe, object, embed, etc.),
      * inline event handlers (onload, onerror, onclick, etc.),
      * and dangerous URL schemes (javascript:, vbscript:, data:text/html).
-     *
-     * @param string|null $html
-     * @return string
      */
     public static function clean(?string $html): string
     {
@@ -54,7 +51,7 @@ class HtmlSanitizer
         $cleaned = preg_replace($dangerousBlocks, '', $html);
 
         // 2. Strip disallowed HTML tags
-        $tagList = '<' . implode('><', static::$allowedTags) . '>';
+        $tagList = '<'.implode('><', static::$allowedTags).'>';
         $cleaned = strip_tags($cleaned, $tagList);
 
         // 3. Remove inline event handlers (on* e.g. onclick, onload, onerror, etc.)

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\User;
 use App\Models\Wishlist;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -17,7 +18,7 @@ class WishlistController extends Controller
      */
     public function index(Request $request): View
     {
-        /** @var \App\Models\User $user */
+        /** @var User $user */
         $user = Auth::user();
 
         $wishlists = Wishlist::with(['product.images', 'product.variants', 'product.category'])
@@ -52,7 +53,7 @@ class WishlistController extends Controller
             return redirect()->route('login')->with('warning', 'Silakan masuk terlebih dahulu untuk menyimpan produk ke Wishlist.');
         }
 
-        /** @var \App\Models\User $user */
+        /** @var User $user */
         $user = Auth::user();
 
         $existing = Wishlist::where('user_id', $user->id)

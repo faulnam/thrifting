@@ -22,7 +22,7 @@ return new class extends Migration
                 'picked_up',
                 'on_process',
                 'delivered',
-                'cancelled'
+                'cancelled',
             ])->default('pending');
             $table->json('rate_snapshot')->nullable();
             $table->dateTime('pickup_scheduled_at')->nullable();

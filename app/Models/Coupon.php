@@ -72,6 +72,7 @@ class Coupon extends Model
             if ($this->max_discount !== null && $discount > $this->max_discount) {
                 $discount = (float) $this->max_discount;
             }
+
             return (float) $discount;
         }
 

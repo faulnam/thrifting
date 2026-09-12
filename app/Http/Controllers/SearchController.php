@@ -18,7 +18,7 @@ class SearchController extends Controller
     {
         $q = trim((string) $request->input('q', $request->input('search', '')));
         $pageTitle = $q !== '' ? "Hasil Pencarian: \"{$q}\"" : 'Pencarian Produk';
-        $pageDescription = $q !== '' 
+        $pageDescription = $q !== ''
             ? "Menampilkan produk yang cocok dengan kata kunci \"{$q}\"."
             : 'Jelajahi berbagai pilihan sepatu dan pakaian ramah lingkungan fifa.';
 
@@ -147,8 +147,8 @@ class SearchController extends Controller
                 'slug' => $product->slug,
                 'url' => route('products.show', $product->slug),
                 'category' => $product->category?->name ?? 'Shoes',
-                'price_formatted' => 'Rp ' . number_format((float) $product->base_price, 0, ',', '.'),
-                'compare_at_price_formatted' => $product->compare_at_price ? 'Rp ' . number_format((float) $product->compare_at_price, 0, ',', '.') : null,
+                'price_formatted' => 'Rp '.number_format((float) $product->base_price, 0, ',', '.'),
+                'compare_at_price_formatted' => $product->compare_at_price ? 'Rp '.number_format((float) $product->compare_at_price, 0, ',', '.') : null,
                 'image' => $imageUrl,
             ];
         });

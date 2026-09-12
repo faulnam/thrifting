@@ -24,6 +24,7 @@ class AddressController extends Controller
     public function index(): View
     {
         $addresses = Auth::user()->addresses()->orderByDesc('is_default')->latest()->get();
+
         return view('account.addresses.index', compact('addresses'));
     }
 

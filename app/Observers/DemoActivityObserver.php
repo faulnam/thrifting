@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Models\DemoActivity;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -109,6 +110,7 @@ class DemoActivityObserver
 
             if ($createdLog) {
                 $createdLog->delete();
+
                 return;
             }
 
@@ -133,7 +135,7 @@ class DemoActivityObserver
     protected function shouldTrack(Model $model): bool
     {
         // Don't track DemoActivity or User authentication models
-        if ($model instanceof DemoActivity || $model instanceof \App\Models\User) {
+        if ($model instanceof DemoActivity || $model instanceof User) {
             return false;
         }
 

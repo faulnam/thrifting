@@ -43,7 +43,7 @@ class MidtransController extends Controller
         $orderNumber = $parsed['order_number'];
 
         try {
-            return DB::transaction(function () use ($orderNumber, $parsed, $payload) {
+            return DB::transaction(function () use ($orderNumber, $parsed) {
                 /** @var Order|null $order */
                 $order = Order::where('order_number', $orderNumber)
                     ->lockForUpdate()
@@ -51,6 +51,7 @@ class MidtransController extends Controller
 
                 if (! $order) {
                     Log::warning("Midtrans webhook: Order number {$orderNumber} not found.");
+
                     return response()->json([
                         'success' => false,
                         'message' => "Order {$orderNumber} not found.",
@@ -61,6 +62,7 @@ class MidtransController extends Controller
                 if ($parsed['order_status'] === 'paid') {
                     if ($order->status === 'paid' || $order->isPaid()) {
                         Log::info("Midtrans webhook duplicate: Order {$orderNumber} is already PAID. Skipping side-effects.");
+
                         return response()->json([
                             'success' => true,
                             'message' => 'Order already processed (idempotent).',
@@ -71,6 +73,7 @@ class MidtransController extends Controller
                 } elseif ($parsed['order_status'] === 'cancelled') {
                     if ($order->status === 'cancelled') {
                         Log::info("Midtrans webhook duplicate: Order {$orderNumber} is already CANCELLED. Skipping duplicate stock restore.");
+
                         return response()->json([
                             'success' => true,
                             'message' => 'Order already cancelled (idempotent).',

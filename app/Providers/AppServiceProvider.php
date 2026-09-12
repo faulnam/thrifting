@@ -2,6 +2,24 @@
 
 namespace App\Providers;
 
+use App\Models\Address;
+use App\Models\BlogPost;
+use App\Models\Category;
+use App\Models\Collection;
+use App\Models\Coupon;
+use App\Models\HeroSlide;
+use App\Models\NewsletterSubscriber;
+use App\Models\Order;
+use App\Models\OrderItem;
+use App\Models\Page;
+use App\Models\Product;
+use App\Models\ProductImage;
+use App\Models\ProductVariant;
+use App\Models\Review;
+use App\Models\Shipment;
+use App\Models\SiteSetting;
+use App\Models\StoreLocation;
+use App\Observers\DemoActivityObserver;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 
@@ -30,25 +48,25 @@ class AppServiceProvider extends ServiceProvider
         }
 
         // Register DemoActivityObserver for automatic 10-minute demo rollback
-        $observer = \App\Observers\DemoActivityObserver::class;
+        $observer = DemoActivityObserver::class;
         $trackedModels = [
-            \App\Models\Product::class,
-            \App\Models\ProductVariant::class,
-            \App\Models\ProductImage::class,
-            \App\Models\Category::class,
-            \App\Models\Collection::class,
-            \App\Models\BlogPost::class,
-            \App\Models\HeroSlide::class,
-            \App\Models\Page::class,
-            \App\Models\StoreLocation::class,
-            \App\Models\Coupon::class,
-            \App\Models\Review::class,
-            \App\Models\NewsletterSubscriber::class,
-            \App\Models\SiteSetting::class,
-            \App\Models\Order::class,
-            \App\Models\OrderItem::class,
-            \App\Models\Address::class,
-            \App\Models\Shipment::class,
+            Product::class,
+            ProductVariant::class,
+            ProductImage::class,
+            Category::class,
+            Collection::class,
+            BlogPost::class,
+            HeroSlide::class,
+            Page::class,
+            StoreLocation::class,
+            Coupon::class,
+            Review::class,
+            NewsletterSubscriber::class,
+            SiteSetting::class,
+            Order::class,
+            OrderItem::class,
+            Address::class,
+            Shipment::class,
         ];
 
         foreach ($trackedModels as $modelClass) {

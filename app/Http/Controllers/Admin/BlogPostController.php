@@ -56,7 +56,7 @@ class BlogPostController extends Controller
 
         $imagePath = 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=1200&q=80';
         if ($request->hasFile('cover_image')) {
-            $imagePath = '/storage/' . ImageOptimizer::optimizeAndStore($request->file('cover_image'), 'blog', 1400, 85);
+            $imagePath = '/storage/'.ImageOptimizer::optimizeAndStore($request->file('cover_image'), 'blog', 1400, 85);
         } elseif ($request->filled('cover_image_url')) {
             $imagePath = trim($request->cover_image_url);
         }
@@ -79,6 +79,7 @@ class BlogPostController extends Controller
     public function edit(BlogPost $blog): View
     {
         $post = $blog;
+
         return view('admin.blog.edit', compact('post'));
     }
 
@@ -96,7 +97,7 @@ class BlogPostController extends Controller
         ]);
 
         if ($request->hasFile('cover_image')) {
-            $validated['cover_image'] = '/storage/' . ImageOptimizer::optimizeAndStore($request->file('cover_image'), 'blog', 1400, 85);
+            $validated['cover_image'] = '/storage/'.ImageOptimizer::optimizeAndStore($request->file('cover_image'), 'blog', 1400, 85);
         } elseif ($request->filled('cover_image_url')) {
             $validated['cover_image'] = trim($request->cover_image_url);
         }

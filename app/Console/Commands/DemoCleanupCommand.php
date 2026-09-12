@@ -32,6 +32,7 @@ class DemoCleanupCommand extends Command
             $this->info('Force-cleaning all demo modifications...');
             $count = $service->resetAllDemoData();
             $this->info("Successfully reset and cleaned {$count} demo activities.");
+
             return Command::SUCCESS;
         }
 

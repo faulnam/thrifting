@@ -75,6 +75,7 @@ class CartService
 
         if ($existingItem) {
             $existingItem->update(['qty' => $newTotalQty]);
+
             return $existingItem->fresh();
         }
 
@@ -91,6 +92,7 @@ class CartService
     {
         if ($qty <= 0) {
             $item->delete();
+
             return null;
         }
 
@@ -103,6 +105,7 @@ class CartService
         }
 
         $item->update(['qty' => $qty]);
+
         return $item->fresh();
     }
 
@@ -128,6 +131,7 @@ class CartService
                 if ($guestCart) {
                     $guestCart->delete();
                 }
+
                 return $userCart;
             }
 
@@ -197,10 +201,10 @@ class CartService
                 'size' => $variant->size,
                 'sku' => $variant->sku,
                 'price' => $price,
-                'price_formatted' => 'Rp ' . number_format($price, 0, ',', '.'),
+                'price_formatted' => 'Rp '.number_format($price, 0, ',', '.'),
                 'qty' => $item->qty,
                 'subtotal' => $itemSubtotal,
-                'subtotal_formatted' => 'Rp ' . number_format($itemSubtotal, 0, ',', '.'),
+                'subtotal_formatted' => 'Rp '.number_format($itemSubtotal, 0, ',', '.'),
                 'stock_quantity' => $variant->stock_quantity,
                 'image_url' => $imgPath ?? 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&q=80',
             ];
@@ -215,11 +219,11 @@ class CartService
             'id' => $cart->id,
             'total_qty' => $totalQty,
             'subtotal' => $subtotal,
-            'subtotal_formatted' => 'Rp ' . number_format($subtotal, 0, ',', '.'),
+            'subtotal_formatted' => 'Rp '.number_format($subtotal, 0, ',', '.'),
             'free_shipping_threshold' => $threshold,
-            'free_shipping_threshold_formatted' => 'Rp ' . number_format($threshold, 0, ',', '.'),
+            'free_shipping_threshold_formatted' => 'Rp '.number_format($threshold, 0, ',', '.'),
             'remaining_free_shipping' => $remaining,
-            'remaining_free_shipping_formatted' => 'Rp ' . number_format($remaining, 0, ',', '.'),
+            'remaining_free_shipping_formatted' => 'Rp '.number_format($remaining, 0, ',', '.'),
             'is_free_shipping' => $isFreeShipping,
             'free_shipping_percent' => $percent,
             'items' => $itemsData,

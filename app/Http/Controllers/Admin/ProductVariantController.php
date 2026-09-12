@@ -26,11 +26,11 @@ class ProductVariantController extends Controller
 
         $sku = ! empty($validated['sku'])
             ? strtoupper(trim($validated['sku']))
-            : strtoupper(Str::slug($product->name . '-' . $validated['color_name'] . '-' . $validated['size']));
+            : strtoupper(Str::slug($product->name.'-'.$validated['color_name'].'-'.$validated['size']));
 
         // Check if SKU already exists, if so append random suffix
         if (ProductVariant::where('sku', $sku)->exists()) {
-            $sku .= '-' . strtoupper(substr(uniqid(), -3));
+            $sku .= '-'.strtoupper(substr(uniqid(), -3));
         }
 
         $product->variants()->create([
@@ -74,6 +74,7 @@ class ProductVariantController extends Controller
     public function destroy(Product $product, ProductVariant $variant): RedirectResponse
     {
         $variant->delete();
+
         return redirect()->route('admin.products.edit', $product)->with('success', 'Varian berhasil dihapus.');
     }
 }
